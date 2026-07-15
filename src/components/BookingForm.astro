@@ -6,7 +6,7 @@ import { site } from '../data/site';
   class="booking-form"
   name="booking"
   method="POST"
-  action="/book/"
+  action="/book/thanks/"
   data-netlify="true"
   netlify-honeypot="bot-field"
   data-booking-form
@@ -170,14 +170,9 @@ import { site } from '../data/site';
         body,
       });
       if (!res.ok) throw new Error(`Request failed: ${res.status}`);
-      form.reset();
-      if (status) {
-        status.hidden = false;
-        status.dataset.state = 'success';
-        status.textContent =
-          'Thank you, your request is in. Check your inbox for a confirmation email with next steps.';
-      }
-      form.querySelector<HTMLElement>('.form-grid')?.setAttribute('inert', '');
+      // The thank-you page confirms next steps and records the ad conversion.
+      window.location.assign('/book/thanks/');
+      return;
     } catch {
       if (status) {
         status.hidden = false;

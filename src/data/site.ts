@@ -24,6 +24,14 @@ export const site = {
    */
   bookingUrl: '/book/',
   calendlyUrl: 'https://calendly.com/jwrsimons/30min',
+  /**
+   * Meta (Facebook) Pixel ID for ad conversion tracking. Leave empty to
+   * disable entirely. When set, the pixel loads ONLY after the visitor
+   * accepts the cookie banner (UK GDPR/PECR requirement), and the
+   * /book/thanks/ page fires a Lead event.
+   * Find yours in Meta Events Manager: a 15-16 digit number.
+   */
+  metaPixelId: '',
   // The booking form uses Netlify Forms (form name: "booking").
   // Configure notification emails in Netlify: Site → Forms → Notifications.
   social: {

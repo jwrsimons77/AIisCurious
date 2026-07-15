@@ -1,0 +1,171 @@
+---
+/**
+ * Dedicated landing page for paid traffic (Meta ads).
+ * Deliberately minimal: no navigation, one message, one action.
+ * noindex + excluded from the sitemap; ads link here with UTM tags.
+ */
+import Base from '../layouts/Base.astro';
+import BookingForm from '../components/BookingForm.astro';
+import { site } from '../data/site';
+
+const trustPoints = [
+  'Manchester based',
+  'Independent, no tool commissions',
+  'Plain English, no jargon',
+  'No obligation, ever',
+];
+
+const reportPoints = [
+  'Your top 3–5 AI opportunities, ranked by effort and payoff',
+  'Realistic time savings for your specific business',
+  'Recommended tools with honest costs (most are under £30 a month)',
+  'Security and GDPR notes in plain English',
+  'A simple roadmap, yours to keep whatever you decide',
+];
+---
+
+<Base
+  title="Free AI Opportunity Report for Your Business | AIisCurious"
+  description="One free 15-minute call. One personalised report showing exactly where AI could save your business hours every week. Manchester based, plain English, no obligation."
+  noindex={true}
+  minimal={true}
+>
+  <section class="lp">
+    <div class="container container--narrow">
+      <p class="lp-logo" aria-hidden="true">AI<em>is</em>Curious</p>
+
+      <h1>Find out exactly where AI could save your business hours every week</h1>
+      <p class="lp-lede">
+        One free 15-minute phone call. Then a short, personalised report showing your best AI
+        opportunities, what they'd save you, and what they'd cost. Written for your business, in
+        plain English.
+      </p>
+
+      <ul class="lp-trust" role="list">
+        {trustPoints.map((point) => <li>{point}</li>)}
+      </ul>
+
+      <div class="lp-form">
+        <h2>Get your free report</h2>
+        <BookingForm />
+      </div>
+
+      <div class="lp-detail">
+        <h2>What's in the report</h2>
+        <ul class="checklist">
+          {reportPoints.map((point) => <li>{point}</li>)}
+        </ul>
+      </div>
+
+      <div class="lp-person">
+        <h2>Who you'll be talking to</h2>
+        <p>
+          I'm James, an independent AI consultant based in Manchester with a background in product
+          management, enterprise software and AI implementation. No agency, no call centre, no
+          sales team. The person on the call is the person who writes your report.
+        </p>
+        <p class="lp-honest">
+          And an honest promise: if AI isn't worth it for your business yet, the report will say
+          exactly that.
+        </p>
+      </div>
+
+      <footer class="lp-footer">
+        <p>
+          © {new Date().getFullYear()} {site.name} · Manchester ·
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </p>
+      </footer>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lp {
+    padding-block: clamp(2.5rem, 2rem + 3vw, 5rem);
+  }
+
+  .lp-logo {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: clamp(2rem, 1.5rem + 2vw, 3rem);
+  }
+
+  .lp-logo em {
+    font-style: italic;
+    color: var(--accent-ink);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+    max-width: 24ch;
+  }
+
+  .lp-lede {
+    margin-top: 1.25rem;
+    font-size: var(--text-lg);
+    color: var(--muted);
+    max-width: 52ch;
+  }
+
+  .lp-trust {
+    list-style: none;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .lp-trust li {
+    padding: 0.35rem 0.9rem;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: 600;
+  }
+
+  .lp-form {
+    margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+  }
+
+  .lp-form h2,
+  .lp-detail h2,
+  .lp-person h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 1rem;
+  }
+
+  .lp-detail,
+  .lp-person {
+    margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+  }
+
+  .lp-person p {
+    color: var(--ink-soft);
+    max-width: 56ch;
+  }
+
+  .lp-person p + p {
+    margin-top: 0.75rem;
+  }
+
+  .lp-honest {
+    font-style: italic;
+    color: var(--muted) !important;
+  }
+
+  .lp-footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line-soft);
+    font-size: var(--text-xs);
+    color: var(--muted);
+  }
+
+  .lp-footer a {
+    color: var(--muted);
+  }
+</style>

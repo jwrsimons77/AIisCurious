@@ -1,0 +1,165 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site';
+
+const steps = [
+  {
+    title: 'Check your inbox',
+    text: 'A confirmation email is on its way. If it hasn’t arrived in a few minutes, check your spam folder just in case.',
+  },
+  {
+    title: 'I’ll be in touch to agree a time',
+    text: 'Usually the same working day. The call itself is 15 relaxed minutes about how your business runs. No preparation needed.',
+  },
+  {
+    title: 'Your report arrives within 3 working days',
+    text: 'A short, personalised AI Opportunity Report: your best opportunities, realistic time savings, recommended tools and a simple roadmap.',
+  },
+];
+---
+
+<Base
+  title="Request Received | AIisCurious"
+  description="Your free AI Opportunity Report request has been received. Here's what happens next."
+  noindex={true}
+>
+  <section class="thanks">
+    <div class="container container--narrow">
+      <span class="thanks-check" aria-hidden="true">
+        <svg
+          width="26"
+          height="26"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg
+        >
+      </span>
+      <h1>Request received. Thank you!</h1>
+      <p class="thanks-lede">You’ve just taken the first step. Here’s exactly what happens next:</p>
+
+      <ol class="thanks-steps">
+        {
+          steps.map((step) => (
+            <li>
+              <h2>{step.title}</h2>
+              <p>{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="thanks-meanwhile">
+        <h2>While you wait</h2>
+        <p>
+          Two short reads that pair well with your report:
+          <a href="/blog/how-to-get-started-with-ai-small-business/"
+            >How to get started with AI (without buying anything)</a
+          >
+          and
+          <a href="/blog/ten-tasks-to-automate-this-month/">10 tasks you could automate this month</a
+          >.
+        </p>
+        <p>
+          Rather pick your call time now? <a href={site.calendlyUrl} rel="noopener noreferrer"
+            >Choose a slot in the calendar</a
+          >.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<!-- Fires a Lead conversion for Meta ads, only if the visitor consented to the pixel -->
+<script>
+  const fireLead = () => (window as any).fbq?.('track', 'Lead');
+  if ((window as any).fbq) fireLead();
+  else document.addEventListener('pixel:ready', fireLead, { once: true });
+</script>
+
+<style>
+  .thanks {
+    padding-block: clamp(3.5rem, 2.5rem + 5vw, 7rem);
+  }
+
+  .thanks-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+
+  :global(:root[data-theme='dark']) .thanks-check {
+    color: #10201c;
+  }
+
+  .thanks-lede {
+    margin-top: 1rem;
+    font-size: var(--text-lg);
+    color: var(--muted);
+  }
+
+  .thanks-steps {
+    list-style: none;
+    counter-reset: step;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .thanks-steps li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 3.25rem;
+  }
+
+  .thanks-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+
+  .thanks-steps h2 {
+    font-size: var(--text-lg);
+    margin-bottom: 0.35rem;
+  }
+
+  .thanks-steps p {
+    color: var(--muted);
+  }
+
+  .thanks-meanwhile {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .thanks-meanwhile h2 {
+    font-size: var(--text-lg);
+    margin-bottom: 0.5rem;
+  }
+
+  .thanks-meanwhile p {
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+</style>

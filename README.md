@@ -60,6 +60,25 @@ Netlify detects it automatically on first deploy. To receive submissions by emai
 the visitor an automatic confirmation email, connect the form to your email tool via a
 Netlify Forms webhook or Zapier's Netlify integration.
 
+## Meta (Facebook/Instagram) ads
+
+The site has dedicated ad infrastructure:
+
+- **`/free-ai-report/`** — distraction-free landing page (no nav, one message, one form).
+  Point all Meta ads here, with UTM tags, e.g.
+  `https://www.aiiscurious.co.uk/free-ai-report/?utm_source=meta&utm_medium=paid&utm_campaign=trades-quotes`
+- **`/book/thanks/`** — thank-you page every successful form submission redirects to.
+  This is your conversion page.
+- **Meta Pixel** — set `metaPixelId` in `src/data/site.ts` (from Meta Events Manager).
+  The pixel only loads after the visitor accepts the cookie banner (UK GDPR/PECR),
+  fires PageView site-wide once consented, and fires a **Lead** event on `/book/thanks/`.
+  Leave `metaPixelId` empty and no banner or pixel ever appears.
+- Both ad pages are `noindex` and excluded from the sitemap, so paid pages never
+  compete with organic ones.
+
+**In Ads Manager**: optimise the campaign for the Lead event, target the North West by
+geography, and let broad targeting + pain-led creative do the audience selection.
+
 ## Google Search Console (do this at launch)
 
 1. Add the site as a property in [Google Search Console](https://search.google.com/search-console)

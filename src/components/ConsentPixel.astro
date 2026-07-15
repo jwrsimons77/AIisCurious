@@ -1,0 +1,109 @@
+---
+/**
+ * Consent-gated Meta Pixel.
+ *
+ * Renders nothing unless site.metaPixelId is set. When set, a small cookie
+ * banner asks for consent on first visit; the pixel script only loads after
+ * "Allow" (stored in localStorage, so the banner shows once). Declining is
+ * remembered and nothing is ever loaded.
+ *
+ * When the pixel loads it fires PageView, and dispatches a `pixel:ready`
+ * event so pages can fire their own events (e.g. Lead on /book/thanks/).
+ */
+import { site } from '../data/site';
+---
+
+{
+  site.metaPixelId && (
+    <div class="consent" data-consent-banner data-pixel-id={site.metaPixelId} hidden>
+      <p>
+        We use one cookie (the Meta Pixel) to measure whether our ads work. No consent, no
+        cookie, and the site works exactly the same either way.
+      </p>
+      <div class="consent-actions">
+        <button type="button" class="btn btn--primary btn--sm" data-consent-accept>
+          Allow
+        </button>
+        <button type="button" class="btn btn--secondary btn--sm" data-consent-decline>
+          No thanks
+        </button>
+      </div>
+    </div>
+  )
+}
+
+<style>
+  .consent {
+    position: fixed;
+    z-index: 60;
+    inset-inline: 1rem;
+    bottom: 1rem;
+    max-width: 26rem;
+    margin-inline: auto;
+    padding: 1.1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    font-size: var(--text-sm);
+    color: var(--ink-soft);
+  }
+
+  @media (min-width: 900px) {
+    .consent {
+      inset-inline: auto 1.5rem;
+      bottom: 1.5rem;
+    }
+  }
+
+  .consent-actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.85rem;
+  }
+</style>
+
+<script>
+  const banner = document.querySelector<HTMLElement>('[data-consent-banner]');
+
+  if (banner) {
+    const pixelId = banner.dataset.pixelId!;
+    const KEY = 'consent-ads';
+
+    const loadPixel = () => {
+      const w = window as any;
+      if (w.fbq) return;
+      const fbq: any = (w.fbq = (...args: unknown[]) => {
+        fbq.callMethod ? fbq.callMethod(...args) : fbq.queue.push(args);
+      });
+      w._fbq = fbq;
+      fbq.push = fbq;
+      fbq.loaded = true;
+      fbq.version = '2.0';
+      fbq.queue = [];
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://connect.facebook.net/en_US/fbevents.js';
+      document.head.appendChild(s);
+      w.fbq('init', pixelId);
+      w.fbq('track', 'PageView');
+      document.dispatchEvent(new CustomEvent('pixel:ready'));
+    };
+
+    const choice = localStorage.getItem(KEY);
+    if (choice === 'granted') {
+      loadPixel();
+    } else if (choice === null) {
+      banner.hidden = false;
+      banner.querySelector('[data-consent-accept]')?.addEventListener('click', () => {
+        localStorage.setItem(KEY, 'granted');
+        banner.hidden = true;
+        loadPixel();
+      });
+      banner.querySelector('[data-consent-decline]')?.addEventListener('click', () => {
+        localStorage.setItem(KEY, 'denied');
+        banner.hidden = true;
+      });
+    }
+  }
+</script>
