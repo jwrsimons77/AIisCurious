@@ -1,0 +1,115 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTASection from '../../components/CTASection.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+/**
+ * Topic clusters for the knowledge centre. Clusters with published posts
+ * show them; the rest signal what's coming as the content plan grows.
+ */
+const clusters = [
+  'Getting Started with AI',
+  'AI Security',
+  'AI Policies',
+  'AI Automation',
+  'Prompt Engineering',
+  'ChatGPT Guides',
+  'Claude Guides',
+  'Microsoft Copilot',
+  'AI for Small Business',
+  'Customer Service AI',
+  'Marketing AI',
+  'Operations AI',
+];
+
+const postsByCluster = new Map(
+  clusters.map((cluster) => [cluster, posts.filter((p) => p.data.cluster === cluster)])
+);
+const activeClusters = clusters.filter((c) => (postsByCluster.get(c) ?? []).length > 0);
+const upcomingClusters = clusters.filter((c) => (postsByCluster.get(c) ?? []).length === 0);
+---
+
+<Base
+  title="Knowledge Centre — Free AI Guides for Small Businesses | AIisCurious"
+  description="Free plain-English AI resources for small businesses, organised by topic: getting started, tools, security, policies, automation and prompting. No jargon, no hype."
+>
+  <PageHero
+    eyebrow="Knowledge Centre"
+    title="Understand AI at your own pace"
+    lede="Free, practical guides organised by topic — written for business owners, not technologists. Everything links to everything relevant, so start with whatever question is on your mind."
+    crumbs={[{ label: 'Resources' }]}
+  />
+
+  <section class="section--sm">
+    <div class="container">
+      {
+        activeClusters.map((cluster) => (
+          <div class="cluster reveal">
+            <h2>{cluster}</h2>
+            <div class="grid grid--3">
+              {(postsByCluster.get(cluster) ?? []).map((post) => (
+                <a href={`/blog/${post.id}/`} class="card">
+                  <h3>{post.data.title}</h3>
+                  <p>{post.data.description}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+
+      <div class="upcoming reveal">
+        <h2>More topics on the way</h2>
+        <p>
+          The Knowledge Centre grows every month. Coming next:
+          {upcomingClusters.join(' · ')}
+        </p>
+        <p>
+          Can’t wait for an article? <a href="/book/">Book a free call</a> and ask directly — or
+          browse <a href="/industries/">the industry guides</a> for sector-specific answers now.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Reading is good. A personalised report is better."
+    text="Get the top AI opportunities for your specific business — free, in plain English, within three days of a 15-minute call."
+  />
+</Base>
+
+<style>
+  .cluster {
+    margin-bottom: 3.5rem;
+  }
+
+  .cluster h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .cluster h3 {
+    font-size: var(--text-lg);
+  }
+
+  .upcoming {
+    max-width: 44rem;
+  }
+
+  .upcoming h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 0.75rem;
+  }
+
+  .upcoming p {
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+</style>

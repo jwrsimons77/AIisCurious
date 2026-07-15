@@ -1,0 +1,103 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CTASection from '../components/CTASection.astro';
+import { site } from '../data/site';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.founder,
+  jobTitle: 'Independent AI Consultant',
+  worksFor: { '@id': `${site.url}/#business` },
+  knowsAbout: [
+    'Product management',
+    'Enterprise SaaS',
+    'AI implementation',
+    'Workflow automation',
+    'Cyber security awareness',
+    'AWS',
+  ],
+  address: { '@type': 'PostalAddress', addressLocality: 'Manchester', addressCountry: 'GB' },
+};
+---
+
+<Base
+  title="About — Why AIisCurious Exists | AIisCurious"
+  description="AIisCurious is one experienced product leader helping small businesses across the North West adopt AI with confidence. No agency, no jargon — practical help from a real person."
+  schema={[personSchema]}
+>
+  <PageHero
+    eyebrow="About"
+    title="Hello, I’m James."
+    lede="I help small businesses take their first confident step into AI. Not with strategy decks or buzzwords — with plain English, practical setups and honest advice about what’s worth doing."
+    crumbs={[{ label: 'About' }]}
+  />
+
+  <section class="section--sm">
+    <div class="container container--narrow">
+      <div class="prose">
+        <h2>Why AIisCurious exists</h2>
+        <p>
+          A couple of years ago I started noticing the same conversation happening everywhere —
+          at family gatherings, in pubs, with friends who run trades businesses and shops and small
+          practices. It went like this: <em>“I know we should be doing something with this AI stuff.
+          I just don’t know what, and I don’t know who to ask.”</em>
+        </p>
+        <p>
+          The people asking weren’t behind. They were busy — running real businesses, looking after
+          customers and staff, without a spare afternoon to test tools or decode breathless AI
+          headlines. And the help on offer was all wrong for them: expensive consultancies built for
+          corporates, agencies selling whatever earns commission, and an internet full of hype
+          written for Silicon Valley rather than a twelve-person firm in Stockport.
+        </p>
+        <p>
+          AIisCurious exists to be the missing option: <strong>one experienced person who’ll look
+          at your business, tell you honestly where AI helps (and where it doesn’t), and set it up
+          properly if you want the help.</strong>
+        </p>
+
+        <h2>The background I bring</h2>
+        <p>
+          I’ve spent my career in product management and enterprise software — the job of standing
+          between complicated technology and the people who need it to just work. That’s included
+          implementing AI systems in production, building automation that teams rely on daily,
+          working with AWS and modern cloud tooling, and — importantly for this work — a strong
+          grounding in cyber security awareness.
+        </p>
+        <p>
+          That last part matters more than people expect. The biggest genuine risk for a small
+          business adopting AI isn’t choosing the wrong tool — it’s putting customer data somewhere
+          it shouldn’t go. Every piece of work I do starts with getting that right.
+        </p>
+
+        <h2>How I work</h2>
+        <ul>
+          <li><strong>Plain English, always.</strong> If I can’t explain it simply, I don’t understand it well enough — and you shouldn’t pay for it.</li>
+          <li><strong>Fixed prices.</strong> Scoped and agreed up front. No day rates, no meters running.</li>
+          <li><strong>Honesty over sales.</strong> If AI isn’t worth it for your business yet, your free report will say exactly that.</li>
+          <li><strong>Independence.</strong> I don’t resell tools or take commissions. Recommendations are based on what fits you.</li>
+          <li><strong>You own everything.</strong> Accounts, automations, documentation — all yours, all handed over. Nothing is designed to make you dependent on me.</li>
+        </ul>
+
+        <h2>Why “curious”?</h2>
+        <p>
+          Because that’s the honest starting point — for you and for me. Nobody has AI fully figured
+          out, and anyone who claims to is selling something. What works is curiosity applied
+          practically: try the small thing, measure whether it helped, keep what works, drop what
+          doesn’t. That mindset, more than any tool, is what I try to leave behind in every business
+          I work with.
+        </p>
+        <p>
+          If you’re curious too, the first conversation is free — and it’s a conversation, not a
+          pitch.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Let’s have that first conversation"
+    text="Fifteen minutes about your business. A personalised report within three days. And an honest answer about whether AI is worth your time right now."
+  />
+</Base>

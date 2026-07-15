@@ -1,0 +1,45 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTASection from '../../components/CTASection.astro';
+import { industries } from '../../data/industries';
+---
+
+<Base
+  title="AI by Industry — Practical Guides for Your Sector | AIisCurious"
+  description="How AI actually helps in your industry: accountants, solicitors, recruitment, trades, manufacturing, hospitality, retail and more. Practical examples, tools and realistic ROI."
+>
+  <PageHero
+    eyebrow="Industries"
+    title="AI, explained for your industry"
+    lede="Generic AI advice is nearly useless — the wins in an accountancy practice look nothing like the wins on a building site. Pick your industry for specific pain points, real workflows, recommended tools and honest ROI estimates."
+    crumbs={[{ label: 'Industries' }]}
+  />
+
+  <section class="section--sm">
+    <div class="container">
+      <div class="grid grid--3">
+        {
+          industries.map((industry) => (
+            <a href={`/industries/${industry.slug}/`} class="card reveal">
+              <h2>{industry.title}</h2>
+              <p>{industry.intro.slice(0, industry.intro.indexOf('.') + 1)}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Don’t see your industry?"
+    text="The free AI Opportunity Review works for any business — the report is written for how your company actually operates, whatever the sector."
+  />
+</Base>
+
+<style>
+  .card h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 0.5rem;
+  }
+</style>

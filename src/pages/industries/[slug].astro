@@ -1,0 +1,197 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTASection from '../../components/CTASection.astro';
+import { industries, getIndustry, type Industry } from '../../data/industries';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return industries.map((industry) => ({
+    params: { slug: industry.slug },
+    props: { industry },
+  }));
+}
+
+interface Props {
+  industry: Industry;
+}
+
+const { industry } = Astro.props;
+
+const related = industry.related
+  .map((slug) => getIndustry(slug))
+  .filter((i): i is Industry => i !== undefined);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: industry.title,
+  description: industry.metaDescription,
+  provider: { '@id': `${site.url}/#business` },
+  audience: { '@type': 'BusinessAudience', name: industry.name },
+};
+---
+
+<Base
+  title={`${industry.title} — Practical AI for ${industry.name} | AIisCurious`}
+  description={industry.metaDescription}
+  schema={[schema]}
+>
+  <PageHero
+    eyebrow={`AI for your industry`}
+    title={industry.title}
+    lede={industry.intro}
+    crumbs={[{ label: 'Industries', href: '/industries/' }, { label: industry.name }]}
+  >
+    <div class="hero-cta">
+      <a href="/book/" class="btn btn--primary btn--lg">Get My Free AI Opportunity Report</a>
+    </div>
+  </PageHero>
+
+  <section class="section--sm">
+    <div class="container container--narrow">
+      <div class="reveal">
+        <h2 class="block-title">Where the time goes</h2>
+        <ul class="checklist">
+          {industry.painPoints.map((p) => <li>{p}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">The opportunities</p>
+        <h2>Where AI genuinely helps {industry.name.toLowerCase()}</h2>
+      </div>
+      <div class="grid grid--2">
+        {
+          industry.opportunities.map((op) => (
+            <div class="card reveal">
+              <h3>{op.title}</h3>
+              <p>{op.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="workflow card reveal">
+        <p class="eyebrow">A real workflow</p>
+        <h2>{industry.workflow.title}</h2>
+        <ol class="workflow-steps">
+          {industry.workflow.steps.map((step) => <li>{step}</li>)}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--sm">
+    <div class="container">
+      <div class="tools-roi">
+        <div class="reveal">
+          <h2 class="block-title">Recommended tools</h2>
+          <ul class="checklist">
+            {industry.tools.map((tool) => <li>{tool}</li>)}
+          </ul>
+        </div>
+        <div class="reveal">
+          <h2 class="block-title">What to realistically expect</h2>
+          <p class="roi-text">{industry.roi}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <FAQ items={industry.faqs} heading={`${industry.name} FAQs`} />
+    </div>
+  </section>
+
+  <section class="section--sm">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Related</h2>
+      </div>
+      <div class="grid grid--3">
+        {
+          related.map((rel) => (
+            <a href={`/industries/${rel.slug}/`} class="card reveal">
+              <h3>{rel.title}</h3>
+              <p>{rel.metaDescription.split('.')[0]}.</p>
+            </a>
+          ))
+        }
+      </div>
+      <p class="related-links reveal">
+        Also see: <a href="/services/">all services</a> ·
+        <a href="/resources/">the Knowledge Centre</a> ·
+        <a href="/locations/">areas covered</a>
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    heading={`See what AI could do for your ${industry.name.toLowerCase().replace(/s$/, '')} business`}
+    text="Book a free 15-minute conversation and get a personalised AI Opportunity Report — specific opportunities, tools and time savings for how your business actually works."
+  />
+</Base>
+
+<style>
+  .hero-cta {
+    margin-top: 1.75rem;
+  }
+
+  .block-title {
+    font-size: var(--text-xl);
+    margin-bottom: 1rem;
+  }
+
+  .workflow h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 1.25rem;
+  }
+
+  .workflow-steps {
+    margin: 0;
+    padding-left: 1.4rem;
+    display: grid;
+    gap: 0.75rem;
+    color: var(--ink-soft);
+  }
+
+  .workflow-steps li::marker {
+    color: var(--accent-ink);
+    font-weight: 700;
+  }
+
+  .tools-roi {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 900px) {
+    .tools-roi {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem;
+    }
+  }
+
+  .roi-text {
+    color: var(--ink-soft);
+    font-size: var(--text-lg);
+    line-height: 1.7;
+  }
+
+  .related-links {
+    margin-top: 2rem;
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+</style>

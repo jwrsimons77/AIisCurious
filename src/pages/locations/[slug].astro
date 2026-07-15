@@ -1,0 +1,202 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTASection from '../../components/CTASection.astro';
+import { locations, getLocation, type Location } from '../../data/locations';
+import { services } from '../../data/services';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return locations.map((location) => ({
+    params: { slug: location.slug },
+    props: { location },
+  }));
+}
+
+interface Props {
+  location: Location;
+}
+
+const { location } = Astro.props;
+
+const nearby = location.nearby
+  .map((slug) => getLocation(slug))
+  .filter((l): l is Location => l !== undefined);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: `AI Consulting in ${location.name}`,
+  description: location.metaDescription,
+  provider: { '@id': `${site.url}/#business` },
+  areaServed: {
+    '@type': 'Place',
+    name: location.name,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: location.name,
+      addressRegion: location.county,
+      addressCountry: 'GB',
+    },
+  },
+};
+
+const featuredServices = services.slice(0, 4);
+---
+
+<Base
+  title={`AI Consultant ${location.name} — Practical AI for Small Businesses | AIisCurious`}
+  description={location.metaDescription}
+  schema={[schema]}
+>
+  <PageHero
+    eyebrow={`${location.county} · North West`}
+    title={`AI consulting for ${location.name} businesses`}
+    lede={location.intro}
+    crumbs={[{ label: 'Locations', href: '/locations/' }, { label: location.name }]}
+  >
+    <div class="hero-cta">
+      <a href="/book/" class="btn btn--primary btn--lg">Get My Free AI Opportunity Report</a>
+    </div>
+  </PageHero>
+
+  <section class="section--sm">
+    <div class="container">
+      <div class="loc-grid-2">
+        <div class="loc-block reveal">
+          <h2>Businesses I work with in {location.name}</h2>
+          <ul class="checklist">
+            {location.businesses.map((b) => <li>{b}</li>)}
+          </ul>
+        </div>
+        <div class="loc-block reveal">
+          <h2>Challenges I hear most often</h2>
+          <ul class="checklist">
+            {location.challenges.map((c) => <li>{c}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Real, local examples</p>
+        <h2>What AI looks like for {location.name} businesses</h2>
+      </div>
+      <div class="grid grid--2">
+        {
+          location.aiExamples.map((example) => (
+            <div class="card reveal">
+              <p class="example-text">{example}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Services in {location.name}</p>
+        <h2>How I can help</h2>
+      </div>
+      <div class="grid grid--4">
+        {
+          featuredServices.map((service) => (
+            <a href={`/services/${service.slug}/`} class="card reveal">
+              <h3>{service.name}</h3>
+              <p>{service.tagline}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <FAQ items={location.faqs} heading={`Questions from ${location.name} businesses`} />
+    </div>
+  </section>
+
+  <section class="section--sm">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Nearby areas</h2>
+      </div>
+      <ul class="nearby-list">
+        {
+          nearby.map((loc) => (
+            <li>
+              <a href={`/locations/${loc.slug}/`}>AI consulting in {loc.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CTASection
+    heading={`Curious what AI could do for your ${location.name} business?`}
+    text="Book a free 15-minute conversation and get a personalised AI Opportunity Report — practical recommendations for your business, whether or not we ever work together."
+  />
+</Base>
+
+<style>
+  .hero-cta {
+    margin-top: 1.75rem;
+  }
+
+  .loc-grid-2 {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 900px) {
+    .loc-grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem;
+    }
+  }
+
+  .loc-block h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 1rem;
+  }
+
+  .example-text {
+    color: var(--ink-soft) !important;
+    font-size: var(--text-base);
+  }
+
+  .nearby-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .nearby-list a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-full);
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    transition: border-color 150ms ease, color 150ms ease;
+  }
+
+  .nearby-list a:hover {
+    border-color: var(--accent);
+    color: var(--accent-ink);
+  }
+</style>

@@ -1,0 +1,105 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import BookingForm from '../components/BookingForm.astro';
+import ReportContents from '../components/ReportContents.astro';
+import FAQ from '../components/FAQ.astro';
+
+const bookingFaqs = [
+  {
+    q: 'What happens after I submit the form?',
+    a: 'You’ll get a confirmation email straight away, then a short reply from me (usually the same working day) to agree a time for the 15-minute call. After the call, your written AI Opportunity Report arrives within three working days.',
+  },
+  {
+    q: 'Is this genuinely free, or is there a catch?',
+    a: 'Genuinely free. The review is how most clients start working with me, and plenty simply take the report and act on it themselves — which is a perfectly good outcome. There’s no pressure and no follow-up sales sequence.',
+  },
+  {
+    q: 'Do I need to prepare anything for the call?',
+    a: 'No. Just be ready to chat about a normal week in your business — what eats time, what gets put off, what frustrates you. Fifteen minutes of honest conversation gives me everything I need.',
+  },
+];
+---
+
+<Base
+  title="Book Your Free AI Opportunity Report | AIisCurious"
+  description="Book a free 15-minute conversation and receive a personalised AI Opportunity Report for your small business: top opportunities, time savings, recommended tools and a simple roadmap."
+>
+  <section class="book-hero">
+    <div class="container">
+      <Breadcrumbs crumbs={[{ label: 'Book a Free AI Opportunity Report' }]} />
+      <div class="book-grid">
+        <div class="book-intro">
+          <p class="eyebrow">Free · 15 minutes · No obligation</p>
+          <h1>Book your free AI Opportunity Report</h1>
+          <p class="lede">
+            One short conversation about your business. One personalised written report showing
+            exactly where AI could save you time — and whether it’s worth doing at all.
+          </p>
+          <ul class="checklist book-points">
+            <li>Your top AI opportunities, ranked by effort and payoff</li>
+            <li>Realistic time savings and honest costs</li>
+            <li>Recommended tools for your business and budget</li>
+            <li>Security and GDPR considerations, in plain English</li>
+            <li>A simple roadmap — yours to keep, whatever you decide</li>
+          </ul>
+          <p class="book-reassure">
+            No pressure. No obligation. If AI isn’t right for your business yet, the report will
+            say so honestly.
+          </p>
+        </div>
+        <div class="book-form-wrap">
+          <BookingForm />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ReportContents heading="Everything your report covers" />
+
+  <section class="section">
+    <div class="container container--narrow">
+      <FAQ items={bookingFaqs} heading="Before you book" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .book-hero {
+    padding-block: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+  }
+
+  .book-grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 1024px) {
+    .book-grid {
+      grid-template-columns: 5fr 6fr;
+      gap: 4rem;
+    }
+  }
+
+  .book-intro h1 {
+    font-size: var(--text-3xl);
+  }
+
+  .lede {
+    margin-top: 1rem;
+    font-size: var(--text-lg);
+    color: var(--muted);
+  }
+
+  .book-points {
+    margin-top: 1.75rem;
+  }
+
+  .book-reassure {
+    margin-top: 1.5rem;
+    font-size: var(--text-sm);
+    color: var(--muted);
+    font-style: italic;
+  }
+</style>

@@ -1,0 +1,81 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTASection from '../../components/CTASection.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Base
+  title="Blog — Plain-English AI Guides for Small Businesses | AIisCurious"
+  description="Practical, jargon-free articles about AI for small businesses: getting started, choosing tools, security, policies, automation and prompting."
+>
+  <PageHero
+    eyebrow="Blog"
+    title="Plain-English AI, one article at a time"
+    lede="Everything here is written for busy business owners: practical, honest, and free of hype. Start anywhere — each article stands on its own."
+    crumbs={[{ label: 'Resources', href: '/resources/' }, { label: 'Blog' }]}
+  />
+
+  <section class="section--sm">
+    <div class="container">
+      <div class="post-list">
+        {
+          posts.map((post) => (
+            <a href={`/blog/${post.id}/`} class="card post-card reveal">
+              <p class="post-meta">
+                <span class="post-cluster">{post.data.cluster}</span>
+                <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+              </p>
+              <h2>{post.data.title}</h2>
+              <p>{post.data.description}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Prefer answers about your business, not businesses in general?"
+    text="That’s the free AI Opportunity Review: 15 minutes of conversation, then a written report about your specific opportunities."
+  />
+</Base>
+
+<style>
+  .post-list {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 46rem;
+  }
+
+  .post-card h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 0.5rem;
+  }
+
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+    font-size: var(--text-xs);
+    color: var(--muted) !important;
+  }
+
+  .post-cluster {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: var(--radius-full);
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    font-weight: 600;
+  }
+</style>

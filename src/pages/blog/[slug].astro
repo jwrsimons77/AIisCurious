@@ -1,0 +1,133 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTASection from '../../components/CTASection.astro';
+import { getCollection, render } from 'astro:content';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }: { data: { draft: boolean } }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const related = allPosts.filter((p) => p.id !== post.id).slice(0, 3);
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  ...(post.data.updatedDate ? { dateModified: post.data.updatedDate.toISOString() } : {}),
+  author: {
+    '@type': 'Person',
+    name: site.founder,
+    jobTitle: 'Independent AI Consultant',
+    url: `${site.url}/about/`,
+  },
+  publisher: { '@id': `${site.url}/#business` },
+  mainEntityOfPage: new URL(`/blog/${post.id}/`, site.url).href,
+};
+---
+
+<Base
+  title={`${post.data.title} | AIisCurious`}
+  description={post.data.description}
+  schema={[articleSchema]}
+  ogType="article"
+>
+  <article class="article">
+    <div class="container container--narrow">
+      <Breadcrumbs
+        crumbs={[
+          { label: 'Resources', href: '/resources/' },
+          { label: 'Blog', href: '/blog/' },
+          { label: post.data.title },
+        ]}
+      />
+      <header class="article-header">
+        <p class="article-meta">
+          <span class="article-cluster">{post.data.cluster}</span>
+          <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+          <span>· By {site.founder}</span>
+        </p>
+        <h1>{post.data.title}</h1>
+        <p class="article-lede">{post.data.description}</p>
+      </header>
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <section class="section--sm">
+    <div class="container">
+      <div class="section-head">
+        <h2>Keep reading</h2>
+      </div>
+      <div class="grid grid--3">
+        {
+          related.map((rel) => (
+            <a href={`/blog/${rel.id}/`} class="card">
+              <h3>{rel.data.title}</h3>
+              <p>{rel.data.description}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Base>
+
+<style>
+  .article {
+    padding-block: clamp(2.5rem, 2rem + 3vw, 4.5rem) var(--space-section-sm);
+  }
+
+  .article-header {
+    margin-bottom: clamp(2rem, 1.5rem + 2vw, 3rem);
+  }
+
+  .article-header h1 {
+    font-size: var(--text-3xl);
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: var(--text-xs);
+    color: var(--muted);
+  }
+
+  .article-cluster {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: var(--radius-full);
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    font-weight: 600;
+  }
+
+  .article-lede {
+    margin-top: 1rem;
+    font-size: var(--text-lg);
+    color: var(--muted);
+  }
+</style>

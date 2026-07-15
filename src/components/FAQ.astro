@@ -52,7 +52,7 @@ const schema = withSchema
       ))
     }
   </div>
-  {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+  {schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}
 </div>
 
 <style>

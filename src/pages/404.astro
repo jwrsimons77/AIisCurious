@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Page Not Found | AIisCurious"
+  description="That page doesn't exist — but the help does. Head back to the homepage or book a free AI Opportunity Report."
+  noindex={true}
+>
+  <section class="notfound">
+    <div class="container">
+      <p class="eyebrow">404</p>
+      <h1>That page seems to have wandered off.</h1>
+      <p class="notfound-text">
+        No matter — everything useful is one click away.
+      </p>
+      <div class="notfound-actions">
+        <a href="/" class="btn btn--primary btn--lg">Back to the homepage</a>
+        <a href="/book/" class="btn btn--secondary btn--lg">Book a free call</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .notfound {
+    padding-block: clamp(5rem, 4rem + 8vw, 10rem);
+    text-align: center;
+  }
+
+  .notfound-text {
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: var(--text-lg);
+  }
+
+  .notfound-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.85rem;
+    margin-top: 2rem;
+  }
+</style>

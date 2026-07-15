@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+---
+
+<Base
+  title="Contact — AIisCurious, Manchester"
+  description="Get in touch with AIisCurious — independent AI consultant based in Manchester, working with small businesses across the North West. Email or book a free 15-minute call."
+>
+  <PageHero
+    eyebrow="Contact"
+    title="Get in touch"
+    lede="The quickest route is booking a free 15-minute call — but if you’d rather start with an email, that works too. You’ll always get a reply from me, usually the same working day."
+    crumbs={[{ label: 'Contact' }]}
+  />
+
+  <section class="section--sm">
+    <div class="container">
+      <div class="grid grid--3">
+        <div class="card reveal">
+          <h2>Book a call</h2>
+          <p>
+            Free, 15 minutes, no obligation — and you get a personalised AI Opportunity Report
+            afterwards.
+          </p>
+          <a href="/book/" class="btn btn--primary contact-btn">Book my free call</a>
+        </div>
+        <div class="card reveal">
+          <h2>Email</h2>
+          <p>Prefer writing it down? Tell me a little about your business and what’s on your mind.</p>
+          <a href={`mailto:${site.email}`} class="btn btn--secondary contact-btn">{site.email}</a>
+        </div>
+        <div class="card reveal">
+          <h2>LinkedIn</h2>
+          <p>Connect, follow, or send a message — whichever suits how you like to work.</p>
+          <a
+            href={site.social.linkedin}
+            rel="noopener noreferrer"
+            class="btn btn--secondary contact-btn">Find me on LinkedIn</a
+          >
+        </div>
+      </div>
+
+      <div class="contact-note reveal">
+        <h2>Based in Manchester, working across the North West</h2>
+        <p>
+          Reviews and support happen by call and screen-share wherever you are. Workshops, site
+          visits and implementation days run in person across Greater Manchester, Merseyside,
+          Cheshire and Lancashire — see <a href="/locations/">all areas covered</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .card h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-btn {
+    margin-top: 1.25rem;
+  }
+
+  .contact-note {
+    margin-top: 3rem;
+    max-width: 40rem;
+  }
+
+  .contact-note h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-note p {
+    color: var(--muted);
+  }
+</style>

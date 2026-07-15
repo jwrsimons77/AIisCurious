@@ -1,0 +1,106 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTASection from '../../components/CTASection.astro';
+import { locationsByCounty } from '../../data/locations';
+
+const countyOrder = ['Greater Manchester', 'Merseyside', 'Cheshire', 'Lancashire'];
+---
+
+<Base
+  title="AI Consultant North West — Areas Covered | AIisCurious"
+  description="Independent AI consultant covering Manchester, Liverpool, Cheshire and Lancashire. Practical AI advice, training and implementation for small businesses across the North West."
+>
+  <PageHero
+    eyebrow="Locations"
+    title="AI help across the North West"
+    lede="Based in Manchester, working in person across Greater Manchester, Merseyside, Cheshire and Lancashire — with Cumbria by arrangement. Reviews happen by call wherever you are; workshops and implementation happen at your premises."
+    crumbs={[{ label: 'Locations' }]}
+  />
+
+  <section class="section--sm">
+    <div class="container">
+      {
+        countyOrder.map((county) => (
+          <div class="county reveal">
+            <h2>{county}</h2>
+            <ul class="loc-grid">
+              {(locationsByCounty[county] ?? []).map((loc) => (
+                <li>
+                  <a href={`/locations/${loc.slug}/`}>
+                    <strong>{loc.name}</strong>
+                    <span>AI consulting & implementation</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+      <p class="expansion-note reveal">
+        Somewhere else in the North West — or over the border into Cumbria or Yorkshire? <a
+          href="/contact/">Get in touch</a
+        > — distance is rarely a problem, because most support happens by call and screen-share anyway.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Wherever you are, the first step is the same"
+    text="A free 15-minute call and a personalised AI Opportunity Report for your business — whichever town you call home."
+  />
+</Base>
+
+<style>
+  .county {
+    margin-bottom: 3rem;
+  }
+
+  .county h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .loc-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  }
+
+  .loc-grid a {
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.9rem 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+
+  .loc-grid a:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .loc-grid strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .loc-grid span {
+    font-size: var(--text-xs);
+    color: var(--muted);
+  }
+
+  .expansion-note {
+    color: var(--muted);
+    font-size: var(--text-sm);
+    max-width: 40rem;
+  }
+</style>

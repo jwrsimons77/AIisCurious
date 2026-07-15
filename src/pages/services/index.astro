@@ -1,0 +1,147 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTASection from '../../components/CTASection.astro';
+import { services } from '../../data/services';
+import { serviceAreaPages } from '../../data/serviceAreas';
+---
+
+<Base
+  title="AI Services for Small Businesses — Reviews, Training, Implementation | AIisCurious"
+  description="Productised AI services for small businesses across the North West: free AI Opportunity Review, team workshops, secure setup, workflow automation and ongoing support. Fixed prices."
+>
+  <PageHero
+    eyebrow="Services"
+    title="Practical help, clearly priced"
+    lede="Five productised services, from a free starting point to ongoing support. Every one is fixed price, plainly scoped, and designed for businesses with 5–50 people — no day rates, no jargon, no lock-in."
+    crumbs={[{ label: 'Services' }]}
+  />
+
+  <section class="section--sm">
+    <div class="container">
+      <div class="service-list">
+        {
+          services.map((service, i) => (
+            <a href={`/services/${service.slug}/`} class="card service-row reveal">
+              <div class="service-row-num" aria-hidden="true">
+                0{i + 1}
+              </div>
+              <div>
+                <h2>{service.name}</h2>
+                <p>{service.tagline}</p>
+                <p class="service-row-meta">
+                  {service.timescale}
+                  {service.price && ` · ${service.price.split('—')[0].trim()}`}
+                </p>
+              </div>
+              <span class="service-row-arrow" aria-hidden="true">
+                →
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Local delivery</p>
+        <h2>Services near you</h2>
+        <p>Training, automation and implementation delivered in person across the North West.</p>
+      </div>
+      <ul class="area-links">
+        {
+          serviceAreaPages.map((page) => (
+            <li>
+              <a href={`/services/${page.slug}/`}>{page.h1}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Not sure which service fits?"
+    text="That’s exactly what the free AI Opportunity Review is for — a 15-minute conversation and a personalised report that tells you what’s worth doing, in what order, and what it would cost."
+  />
+</Base>
+
+<style>
+  .service-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .service-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .service-row h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 0.35rem;
+  }
+
+  .service-row-num {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    color: var(--line);
+    font-weight: 600;
+  }
+
+  .service-row-meta {
+    margin-top: 0.5rem;
+    font-size: var(--text-xs);
+    color: var(--accent-ink);
+    font-weight: 600;
+  }
+
+  .service-row-arrow {
+    font-size: var(--text-xl);
+    color: var(--accent-ink);
+  }
+
+  @media (max-width: 639px) {
+    .service-row {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .service-row-num,
+    .service-row-arrow {
+      display: none;
+    }
+  }
+
+  .area-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  }
+
+  .area-links a {
+    display: block;
+    padding: 0.8rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-sm);
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    transition: border-color 150ms ease, color 150ms ease;
+  }
+
+  .area-links a:hover {
+    border-color: var(--accent);
+    color: var(--accent-ink);
+  }
+</style>

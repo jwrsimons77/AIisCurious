@@ -1,0 +1,196 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTASection from '../../components/CTASection.astro';
+import { services, getService, type Service } from '../../data/services';
+import { serviceAreaPages, type ServiceAreaPage } from '../../data/serviceAreas';
+import { getLocation } from '../../data/locations';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return [
+    ...services.map((service) => ({
+      params: { slug: service.slug },
+      props: { service, areaPage: null },
+    })),
+    ...serviceAreaPages.map((areaPage) => ({
+      params: { slug: areaPage.slug },
+      props: { service: getService(areaPage.serviceSlug)!, areaPage },
+    })),
+  ];
+}
+
+interface Props {
+  service: Service;
+  areaPage: ServiceAreaPage | null;
+}
+
+const { service, areaPage } = Astro.props;
+
+const title = areaPage ? areaPage.metaTitle : service.metaTitle;
+const description = areaPage ? areaPage.metaDescription : service.metaDescription;
+const h1 = areaPage ? areaPage.h1 : service.name;
+const lede = areaPage ? areaPage.intro : service.tagline;
+const faqs = areaPage ? [...areaPage.faqs, ...service.faqs] : service.faqs;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: h1,
+  description,
+  provider: { '@id': `${site.url}/#business` },
+  areaServed: {
+    '@type': 'Place',
+    name: areaPage ? areaPage.areaName : 'North West England',
+  },
+  serviceType: service.name,
+};
+
+const nearbyLocations = areaPage
+  ? areaPage.locationSlugs.map((slug) => getLocation(slug)).filter((l) => l !== undefined)
+  : [];
+
+const otherServices = services.filter((s) => s.slug !== service.slug);
+---
+
+<Base title={title} description={description} schema={[serviceSchema]}>
+  <PageHero
+    eyebrow={areaPage ? `${service.name} · ${areaPage.areaName}` : 'Service'}
+    title={h1}
+    lede={lede}
+    crumbs={[{ label: 'Services', href: '/services/' }, { label: areaPage ? areaPage.h1 : service.name }]}
+  >
+    <div class="hero-cta">
+      <a href="/book/" class="btn btn--primary btn--lg">Start with a free 15-minute call</a>
+      {service.price && <p class="price-note">{service.price}</p>}
+    </div>
+  </PageHero>
+
+  {
+    areaPage && (
+      <section class="section--sm">
+        <div class="container container--narrow">
+          <div class="local-angle card reveal">
+            <h2>Why local matters</h2>
+            <p>{areaPage.localAngle}</p>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section--sm">
+    <div class="container">
+      <div class="detail-grid">
+        <div class="detail-block reveal">
+          <h2>Who it’s for</h2>
+          <p>{service.whoFor}</p>
+        </div>
+        <div class="detail-block reveal">
+          <h2>Problems it solves</h2>
+          <ul class="checklist">
+            {service.problems.map((p) => <li>{p}</li>)}
+          </ul>
+        </div>
+        <div class="detail-block reveal">
+          <h2>What you get</h2>
+          <ul class="checklist">
+            {service.deliverables.map((d) => <li>{d}</li>)}
+          </ul>
+        </div>
+        <div class="detail-block reveal">
+          <h2>What changes</h2>
+          <ul class="checklist">
+            {service.outcomes.map((o) => <li>{o}</li>)}
+          </ul>
+          <p class="timescale"><strong>Typical timescale:</strong> {service.timescale}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <FAQ items={faqs} heading="Common questions" />
+    </div>
+  </section>
+
+  <section class="section--sm">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>{areaPage ? `Also useful nearby` : 'Other ways I can help'}</h2>
+      </div>
+      <div class="grid grid--3">
+        {
+          areaPage
+            ? nearbyLocations.map((loc) => (
+                <a href={`/locations/${loc.slug}/`} class="card reveal">
+                  <h3>AI consulting in {loc.name}</h3>
+                  <p>Practical AI help for businesses in {loc.name} and the surrounding area.</p>
+                </a>
+              ))
+            : otherServices.slice(0, 3).map((s) => (
+                <a href={`/services/${s.slug}/`} class="card reveal">
+                  <h3>{s.name}</h3>
+                  <p>{s.tagline}</p>
+                </a>
+              ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    heading={areaPage ? `Ready to get started in ${areaPage.areaName}?` : undefined}
+  />
+</Base>
+
+<style>
+  .hero-cta {
+    margin-top: 1.75rem;
+  }
+
+  .price-note {
+    margin-top: 0.75rem;
+    font-size: var(--text-sm);
+    color: var(--accent-ink);
+    font-weight: 600;
+  }
+
+  .local-angle h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 0.65rem;
+  }
+
+  .local-angle p {
+    color: var(--ink-soft);
+  }
+
+  .detail-grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 900px) {
+    .detail-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem 4rem;
+    }
+  }
+
+  .detail-block h2 {
+    font-size: var(--text-xl);
+    margin-bottom: 1rem;
+  }
+
+  .detail-block > p {
+    color: var(--ink-soft);
+  }
+
+  .timescale {
+    margin-top: 1.25rem;
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+</style>

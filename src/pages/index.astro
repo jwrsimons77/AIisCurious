@@ -1,0 +1,341 @@
+---
+import Base from '../layouts/Base.astro';
+import TrustBar from '../components/TrustBar.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import ReportContents from '../components/ReportContents.astro';
+import FAQ from '../components/FAQ.astro';
+import CTASection from '../components/CTASection.astro';
+import { services } from '../data/services';
+import { siteFaqs } from '../data/faqs';
+
+const homeFaqs = siteFaqs.slice(0, 5);
+---
+
+<Base
+  title="AI Consultant Manchester — Practical AI for Small Businesses | AIisCurious"
+  description="AI doesn't have to be complicated. Independent Manchester-based AI consultant helping small businesses across the North West save time, reduce admin and adopt AI with confidence. Free AI Opportunity Report."
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="blob blob--1"></div>
+      <div class="blob blob--2"></div>
+    </div>
+    <div class="container hero-inner">
+      <p class="eyebrow">For small businesses across the North West</p>
+      <h1>AI doesn’t have to be complicated.</h1>
+      <p class="hero-sub">
+        Helping small businesses save time, reduce admin and confidently adopt AI — with practical
+        advice and hands-on implementation, in plain English.
+      </p>
+      <div class="hero-actions">
+        <a href="/book/" class="btn btn--primary btn--lg">Get My Free AI Opportunity Report</a>
+        <a href="#how-it-works" class="btn btn--secondary btn--lg">See How It Works</a>
+      </div>
+      <p class="hero-note">Free 15-minute conversation · Personalised written report · No obligation</p>
+    </div>
+  </section>
+
+  <TrustBar />
+
+  <!-- Empathy / positioning -->
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div class="reveal">
+          <p class="eyebrow">Sound familiar?</p>
+          <h2>You know AI matters. You just don’t know where to start.</h2>
+        </div>
+        <div class="split-body reveal">
+          <p>
+            Every week there’s a new tool, a new headline, a new person telling you you’re falling
+            behind. Meanwhile you’ve got a business to run — customers to look after, quotes to
+            send, invoices to chase.
+          </p>
+          <p>
+            Here’s the truth nobody selling AI wants to say: <strong>you don’t need to understand
+            AI</strong>. You need someone who understands your business, can point at three or four
+            places where AI would genuinely save you time, and can set it up properly — securely,
+            affordably, without the jargon.
+          </p>
+          <p>That’s what I do. And the first step is free.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <HowItWorks />
+
+  <ReportContents />
+
+  <!-- What could AI actually do -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Real examples, not hype</p>
+        <h2>What AI actually does for businesses like yours</h2>
+        <p>No robots. No “digital transformation”. Just hours back, every week.</p>
+      </div>
+      <div class="grid grid--3">
+        <div class="card reveal">
+          <h3>Quotes from a voice note</h3>
+          <p>
+            A joiner records a two-minute voice note walking a job. A written, professional quote is
+            drafted before he’s back in the van. Evenings returned to the family.
+          </p>
+        </div>
+        <div class="card reveal">
+          <h3>Enquiries answered at 11pm</h3>
+          <p>
+            A guest house answers availability and parking questions instantly, around the clock.
+            The booking goes to them — not the hotel that replied the next morning.
+          </p>
+        </div>
+        <div class="card reveal">
+          <h3>Letters in your own voice</h3>
+          <p>
+            An accountancy practice drafts client letters, reminders and summaries in seconds, each
+            reviewed before sending. January stops being a horror story.
+          </p>
+        </div>
+      </div>
+      <div class="section-more reveal">
+        <a href="/industries/" class="btn btn--secondary">See examples for your industry</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services preview -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">How I can help</p>
+        <h2>Practical services with fixed prices</h2>
+        <p>
+          Productised, clearly scoped and honestly priced — because “consultancy” shouldn’t be a
+          scary word.
+        </p>
+      </div>
+      <div class="grid grid--3">
+        {
+          services.map((service) => (
+            <a href={`/services/${service.slug}/`} class="card reveal">
+              <h3>{service.name}</h3>
+              <p>{service.tagline}</p>
+            </a>
+          ))
+        }
+        <a href="/services/" class="card card--ghost reveal">
+          <h3>All services →</h3>
+          <p>Compare everything side by side, including what’s in each and typical timescales.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- People buy people -->
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div class="reveal">
+          <p class="eyebrow">Who you’ll work with</p>
+          <h2>One experienced person. Not an agency.</h2>
+        </div>
+        <div class="split-body reveal">
+          <p>
+            I’m James — a product leader with a background in enterprise software, AI
+            implementation, automation and cyber security awareness. I’ve spent my career making
+            complicated technology useful for real teams, and now I do it for small businesses
+            across the North West.
+          </p>
+          <p>
+            When you work with AIisCurious, you work with me. The person on the first call is the
+            person who writes your report, builds your setup and answers the phone afterwards.
+          </p>
+          <a href="/about/" class="btn btn--secondary">More about me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    PLACEHOLDER TESTIMONIALS: these quotes are illustrative sample copy and
+    MUST be replaced with genuine client testimonials (with permission)
+    before launch. Do not publish fabricated reviews.
+  -->
+  <section class="section section--alt" aria-label="What clients say">
+    <div class="container">
+      <div class="section-head section-head--center reveal">
+        <p class="eyebrow">What clients say</p>
+        <h2>Trusted by small businesses across the North West</h2>
+      </div>
+      <div class="grid grid--3">
+        <figure class="card testimonial reveal">
+          <blockquote>
+            “The report alone was worth it — three quick wins we set up ourselves, and one bigger
+            project we asked James to build. We save hours every single week.”
+          </blockquote>
+          <figcaption>Owner, professional services firm · Greater Manchester</figcaption>
+        </figure>
+        <figure class="card testimonial reveal">
+          <blockquote>
+            “First person who explained AI without making me feel stupid. No jargon, no pressure —
+            just practical answers about our actual business.”
+          </blockquote>
+          <figcaption>Director, trades business · Cheshire</figcaption>
+        </figure>
+        <figure class="card testimonial reveal">
+          <blockquote>
+            “We were nervous about client data. James sorted the security settings first, put the
+            rules in writing, and then showed the team how to use it properly.”
+          </blockquote>
+          <figcaption>Partner, accountancy practice · Merseyside</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ preview -->
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="section-head reveal">
+        <p class="eyebrow">Honest answers</p>
+        <h2>Questions every owner asks</h2>
+      </div>
+      <FAQ items={homeFaqs} withSchema={false} />
+      <div class="section-more reveal">
+        <a href="/faq/" class="btn btn--secondary">Read all FAQs</a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Base>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(4rem, 3rem + 6vw, 8.5rem);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+  }
+
+  .blob--1 {
+    width: 34rem;
+    height: 34rem;
+    top: -14rem;
+    right: -10rem;
+    background: radial-gradient(circle, var(--accent-soft), transparent 70%);
+  }
+
+  .blob--2 {
+    width: 26rem;
+    height: 26rem;
+    bottom: -12rem;
+    left: -8rem;
+    background: radial-gradient(circle, var(--amber-soft), transparent 70%);
+  }
+
+  .hero-inner {
+    position: relative;
+    max-width: 52rem;
+    text-align: center;
+    margin-inline: auto;
+  }
+
+  .hero h1 {
+    font-size: var(--text-display);
+    letter-spacing: -0.02em;
+  }
+
+  .hero-sub {
+    margin: 1.5rem auto 0;
+    max-width: 38rem;
+    font-size: var(--text-xl);
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.85rem;
+    margin-top: 2.25rem;
+  }
+
+  .hero-note {
+    margin-top: 1.1rem;
+    font-size: var(--text-xs);
+    color: var(--muted);
+  }
+
+  @media (max-width: 639px) {
+    .hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  .split {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .split-body p + p {
+    margin-top: 1em;
+  }
+
+  .split-body .btn {
+    margin-top: 1.5rem;
+  }
+
+  .split-body p {
+    color: var(--ink-soft);
+    font-size: var(--text-lg);
+    line-height: 1.7;
+  }
+
+  @media (min-width: 900px) {
+    .split {
+      grid-template-columns: 5fr 7fr;
+      gap: 4rem;
+    }
+  }
+
+  .section-more {
+    margin-top: 2.25rem;
+    text-align: center;
+  }
+
+  .card--ghost {
+    background: transparent;
+    border-style: dashed;
+    box-shadow: none;
+  }
+
+  .testimonial blockquote {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .testimonial figcaption {
+    margin-top: 1rem;
+    font-size: var(--text-xs);
+    color: var(--muted);
+  }
+</style>
