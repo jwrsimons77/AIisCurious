@@ -23,7 +23,7 @@ export const site = {
    * Google Calendar appointment link. Every "book a call" button uses this.
    */
   bookingUrl: '/book/',
-  calendlyUrl: 'https://calendly.com/aiiscurious/15min',
+  calendlyUrl: 'https://calendly.com/jwrsimons/30min',
   // The booking form uses Netlify Forms (form name: "booking").
   // Configure notification emails in Netlify: Site → Forms → Notifications.
   social: {
