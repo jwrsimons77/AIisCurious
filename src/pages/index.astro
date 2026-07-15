@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import TrustBar from '../components/TrustBar.astro';
 import planningDesk from '../assets/images/planning-desk.jpg';
+import heroShop from '../assets/images/hero-shop.jpg';
 import HowItWorks from '../components/HowItWorks.astro';
 import ReportContents from '../components/ReportContents.astro';
 import FAQ from '../components/FAQ.astro';
@@ -24,17 +25,32 @@ const homeFaqs = siteFaqs.slice(0, 5);
       <div class="blob blob--2"></div>
     </div>
     <div class="container hero-inner">
-      <p class="eyebrow">For small businesses across the North West</p>
-      <h1>AI doesn’t have to be complicated.</h1>
-      <p class="hero-sub">
-        Helping small businesses save time, reduce admin and confidently adopt AI, with practical
-        advice and hands-on implementation, in plain English.
-      </p>
-      <div class="hero-actions">
-        <a href="/book/" class="btn btn--primary btn--lg">Get My Free AI Opportunity Report</a>
-        <a href="#how-it-works" class="btn btn--secondary btn--lg">See How It Works</a>
+      <div class="hero-copy">
+        <p class="eyebrow">For small businesses across the North West</p>
+        <h1>AI doesn’t have to be complicated.</h1>
+        <p class="hero-sub">
+          Helping small businesses save time, reduce admin and confidently adopt AI, with practical
+          advice and hands-on implementation, in plain English.
+        </p>
+        <div class="hero-actions">
+          <a href="/book/" class="btn btn--primary btn--lg">Get My Free AI Opportunity Report</a>
+          <a href="#how-it-works" class="btn btn--secondary btn--lg">See How It Works</a>
+        </div>
+        <p class="hero-note">
+          Free 15-minute conversation · Personalised written report · No obligation
+        </p>
       </div>
-      <p class="hero-note">Free 15-minute conversation · Personalised written report · No obligation</p>
+      <div class="hero-media">
+        <Image
+          src={heroShop}
+          alt="A small business owner serving a customer at the counter of her salon"
+          widths={[480, 720, 1080]}
+          sizes="(min-width: 900px) 44vw, 92vw"
+          loading="eager"
+          fetchpriority="high"
+          class="hero-photo"
+        />
+      </div>
     </div>
   </section>
 
@@ -259,9 +275,9 @@ const homeFaqs = siteFaqs.slice(0, 5);
 
   .hero-inner {
     position: relative;
-    max-width: 52rem;
-    text-align: center;
-    margin-inline: auto;
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
   }
 
   .hero h1 {
@@ -270,7 +286,7 @@ const homeFaqs = siteFaqs.slice(0, 5);
   }
 
   .hero-sub {
-    margin: 1.5rem auto 0;
+    margin: 1.5rem 0 0;
     max-width: 38rem;
     font-size: var(--text-xl);
     color: var(--muted);
@@ -280,7 +296,6 @@ const homeFaqs = siteFaqs.slice(0, 5);
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 0.85rem;
     margin-top: 2.25rem;
   }
@@ -289,6 +304,43 @@ const homeFaqs = siteFaqs.slice(0, 5);
     margin-top: 1.1rem;
     font-size: var(--text-xs);
     color: var(--muted);
+  }
+
+  .hero-media {
+    position: relative;
+  }
+
+  .hero-media::before {
+    content: '';
+    position: absolute;
+    inset: 1.25rem -1.25rem -1.25rem 1.25rem;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--accent-soft), var(--amber-soft));
+    z-index: -1;
+  }
+
+  .hero :global(.hero-photo) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  @media (min-width: 900px) {
+    .hero-inner {
+      grid-template-columns: 11fr 9fr;
+      gap: 4rem;
+    }
+  }
+
+  @media (max-width: 899px) {
+    .hero {
+      padding-block: clamp(3rem, 2rem + 4vw, 5rem);
+    }
+
+    .hero-media {
+      margin-inline: 0.5rem;
+    }
   }
 
   @media (max-width: 639px) {
