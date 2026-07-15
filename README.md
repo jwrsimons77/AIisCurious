@@ -87,7 +87,7 @@ Netlify Forms webhook or Zapier's Netlify integration.
 
 Photos live in `src/assets/images/` and are optimised to responsive WebP at build time.
 
-- `meeting-table.jpg`, `planning-desk.jpg`, `team-workshop.jpg`, `writing-laptop.jpg` —
+- `hero-consult.jpg`, `meeting-table.jpg`, `planning-desk.jpg`, `team-workshop.jpg`, `writing-laptop.jpg` —
   [Unsplash](https://unsplash.com) (Unsplash License: free for commercial use, no
   attribution required).
 - `manchester-skyline.jpg` — ["Manchester skyline" by palomoduarte on Flickr](https://www.flickr.com/photos/31044991@N04/11149492264),

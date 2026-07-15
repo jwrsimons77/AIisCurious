@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import TrustBar from '../components/TrustBar.astro';
 import planningDesk from '../assets/images/planning-desk.jpg';
-import heroShop from '../assets/images/hero-shop.jpg';
+import heroConsult from '../assets/images/hero-consult.jpg';
 import HowItWorks from '../components/HowItWorks.astro';
 import ReportContents from '../components/ReportContents.astro';
 import FAQ from '../components/FAQ.astro';
@@ -42,14 +42,34 @@ const homeFaqs = siteFaqs.slice(0, 5);
       </div>
       <div class="hero-media">
         <Image
-          src={heroShop}
-          alt="A small business owner serving a customer at the counter of her salon"
+          src={heroConsult}
+          alt="An AI consultant and a business owner talking one-to-one at a table"
           widths={[480, 720, 1080]}
           sizes="(min-width: 900px) 44vw, 92vw"
           loading="eager"
           fetchpriority="high"
           class="hero-photo"
         />
+        <!-- Decorative chat cards: make "AI consulting" instantly legible -->
+        <div class="hero-chat hero-chat--q" aria-hidden="true">
+          <span class="hero-chat-avatar">You</span>
+          <p>“Could AI draft our quotes for us?”</p>
+        </div>
+        <div class="hero-chat hero-chat--a" aria-hidden="true">
+          <span class="hero-chat-check">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg
+            >
+          </span>
+          <p>Yes. Set up in a week.<strong>Saves about 6 hours a week.</strong></p>
+        </div>
       </div>
     </div>
   </section>
@@ -326,6 +346,74 @@ const homeFaqs = siteFaqs.slice(0, 5);
     box-shadow: var(--shadow-lg);
   }
 
+  .hero-chat {
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    max-width: 15rem;
+    padding: 0.75rem 0.95rem;
+    background: color-mix(in srgb, var(--surface) 94%, transparent);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    font-size: var(--text-xs);
+    line-height: 1.45;
+  }
+
+  .hero-chat p {
+    margin: 0;
+    color: var(--ink-soft);
+  }
+
+  .hero-chat strong {
+    display: block;
+    margin-top: 0.2rem;
+    color: var(--accent-ink);
+  }
+
+  .hero-chat--q {
+    top: 1.5rem;
+    left: -1.5rem;
+  }
+
+  .hero-chat--a {
+    bottom: 2rem;
+    right: -1rem;
+  }
+
+  .hero-chat-avatar {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: var(--amber-soft);
+    color: var(--ink);
+    font-size: 0.6rem;
+    font-weight: 700;
+  }
+
+  .hero-chat-check {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+  }
+
+  :root[data-theme='dark'] .hero-chat-check {
+    color: #10201c;
+  }
+
   @media (min-width: 900px) {
     .hero-inner {
       grid-template-columns: 11fr 9fr;
@@ -340,6 +428,17 @@ const homeFaqs = siteFaqs.slice(0, 5);
 
     .hero-media {
       margin-inline: 0.5rem;
+    }
+
+    /* Keep the chat cards inside the photo on small screens */
+    .hero-chat--q {
+      top: 0.75rem;
+      left: 0.75rem;
+    }
+
+    .hero-chat--a {
+      bottom: 0.75rem;
+      right: 0.75rem;
     }
   }
 
