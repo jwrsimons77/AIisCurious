@@ -1,0 +1,78 @@
+---
+interface Props {
+  heading?: string;
+  id?: string;
+}
+
+const { heading = 'How it works', id = 'how-it-works' } = Astro.props;
+
+const steps = [
+  {
+    title: 'Book a 15-minute conversation',
+    text: 'A relaxed chat about your business — what takes up your time, what frustrates you, what you’d love to spend less time doing. No preparation needed.',
+  },
+  {
+    title: 'Receive your AI Opportunity Report',
+    text: 'A short, personalised report showing where AI could genuinely help: which tasks to start with, which tools to use, and roughly how much time you could save.',
+  },
+  {
+    title: 'Implement — only if you’d like help',
+    text: 'Many people action the report themselves, and that’s great. If you’d like hands-on help, we’ll agree a simple, fixed-price plan. No pressure either way.',
+  },
+];
+---
+
+<section class="section" {id}>
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">Simple by design</p>
+      <h2>{heading}</h2>
+      <p>Three steps. No obligation. You keep the report either way.</p>
+    </div>
+    <ol class="steps">
+      {
+        steps.map((step, i) => (
+          <li class="step card reveal">
+            <span class="step-num" aria-hidden="true">
+              {i + 1}
+            </span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+    counter-reset: step;
+  }
+
+  @media (min-width: 900px) {
+    .steps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: 1rem;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+  }
+</style>

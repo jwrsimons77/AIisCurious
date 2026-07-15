@@ -1,0 +1,68 @@
+---
+const points = [
+  'Manchester based',
+  'Independent AI specialist',
+  'Practical implementation, not theory',
+  'Security-conscious approach',
+  'No technical knowledge required',
+];
+---
+
+<section class="trust-bar" aria-label="Why trust AIisCurious">
+  <div class="container">
+    <ul>
+      {
+        points.map((point) => (
+          <li>
+            <svg
+              aria-hidden="true"
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+            {point}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .trust-bar {
+    border-block: 1px solid var(--line-soft);
+    background: var(--bg-alt);
+    padding-block: 1.1rem;
+  }
+
+  .trust-bar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem 2rem;
+  }
+
+  .trust-bar li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+
+  .trust-bar svg {
+    color: var(--accent-ink);
+    flex-shrink: 0;
+  }
+</style>

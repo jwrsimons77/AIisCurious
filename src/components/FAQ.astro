@@ -1,0 +1,104 @@
+---
+export interface FAQItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  items: FAQItem[];
+  heading?: string;
+  /** Emit FAQPage JSON-LD (use once per page) */
+  withSchema?: boolean;
+}
+
+const { items, heading, withSchema = true } = Astro.props;
+
+const schema = withSchema
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: items.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    }
+  : null;
+---
+
+<div class="faq">
+  {heading && <h2 class="faq-heading">{heading}</h2>}
+  <div class="faq-list">
+    {
+      items.map((item) => (
+        <details class="faq-item">
+          <summary>
+            <span>{item.q}</span>
+            <svg
+              aria-hidden="true"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </summary>
+          <p>{item.a}</p>
+        </details>
+      ))
+    }
+  </div>
+  {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+</div>
+
+<style>
+  .faq-heading {
+    margin-bottom: var(--space-5);
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .faq-item {
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary svg {
+    flex-shrink: 0;
+    color: var(--accent-ink);
+    transition: transform 200ms ease;
+  }
+
+  .faq-item[open] summary svg {
+    transform: rotate(45deg);
+  }
+
+  .faq-item p {
+    padding: 0 1.25rem 1.25rem;
+    color: var(--muted);
+  }
+</style>

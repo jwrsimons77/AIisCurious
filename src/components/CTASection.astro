@@ -1,0 +1,85 @@
+---
+interface Props {
+  heading?: string;
+  text?: string;
+  buttonLabel?: string;
+  compact?: boolean;
+}
+
+const {
+  heading = 'Ready to see what AI could do for your business?',
+  text = 'Book a free 15-minute conversation. You’ll get a personalised AI Opportunity Report — whether or not we ever work together.',
+  buttonLabel = 'Get My Free AI Opportunity Report',
+  compact = false,
+} = Astro.props;
+---
+
+<section class:list={['cta-section', { 'cta-section--compact': compact }]}>
+  <div class="container">
+    <div class="cta-card reveal">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <h2>{heading}</h2>
+      <p>{text}</p>
+      <div class="cta-actions">
+        <a href="/book/" class="btn btn--primary btn--lg">{buttonLabel}</a>
+        <p class="cta-reassure">Free · 15 minutes · No obligation</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    padding-block: var(--space-section-sm);
+  }
+
+  .cta-section--compact {
+    padding-block: var(--space-6);
+  }
+
+  .cta-card {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-lg);
+    padding: clamp(2.5rem, 2rem + 3vw, 4.5rem) clamp(1.5rem, 1rem + 3vw, 4rem);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .cta-glow {
+    position: absolute;
+    inset: auto -20% -60% -20%;
+    height: 70%;
+    background: radial-gradient(
+      ellipse at center,
+      color-mix(in srgb, var(--accent) 14%, transparent),
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  .cta-card h2 {
+    font-size: var(--text-2xl);
+    max-width: 30ch;
+    margin-inline: auto;
+  }
+
+  .cta-card p {
+    color: var(--muted);
+    max-width: 46ch;
+    margin: 0.85rem auto 0;
+  }
+
+  .cta-actions {
+    position: relative;
+    margin-top: 1.75rem;
+  }
+
+  .cta-reassure {
+    font-size: var(--text-xs);
+    color: var(--muted);
+    margin-top: 0.85rem;
+  }
+</style>

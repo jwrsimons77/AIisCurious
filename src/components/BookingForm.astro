@@ -1,0 +1,188 @@
+---
+import { site } from '../data/site';
+---
+
+<form
+  class="booking-form"
+  method="POST"
+  action={site.formEndpoint}
+  data-booking-form
+  novalidate
+>
+  <div class="form-grid">
+    <div class="field">
+      <label for="bf-name">Your name</label>
+      <input id="bf-name" name="name" type="text" autocomplete="name" required />
+    </div>
+    <div class="field">
+      <label for="bf-business">Business name</label>
+      <input id="bf-business" name="business" type="text" autocomplete="organization" required />
+    </div>
+    <div class="field">
+      <label for="bf-email">Email address</label>
+      <input id="bf-email" name="email" type="email" autocomplete="email" required />
+    </div>
+    <div class="field">
+      <label for="bf-employees">Number of employees</label>
+      <select id="bf-employees" name="employees" required>
+        <option value="">Please choose…</option>
+        <option>Just me</option>
+        <option>2–5</option>
+        <option>6–15</option>
+        <option>16–50</option>
+        <option>50+</option>
+      </select>
+    </div>
+    <div class="field field--full">
+      <label for="bf-challenge">What takes up too much of your time right now?</label>
+      <span class="hint">A sentence or two is perfect — admin, quoting, emails, anything.</span>
+      <textarea id="bf-challenge" name="challenge" required></textarea>
+    </div>
+    <div class="field field--full">
+      <label for="bf-time">Preferred time for a call</label>
+      <select id="bf-time" name="preferred_time" required>
+        <option value="">Please choose…</option>
+        <option>Morning (9am–12pm)</option>
+        <option>Lunchtime (12pm–2pm)</option>
+        <option>Afternoon (2pm–5pm)</option>
+        <option>Early evening (5pm–7pm)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Honeypot field to deter spam bots -->
+  <p class="hp" aria-hidden="true">
+    <label>Leave this field empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+  </p>
+
+  <button type="submit" class="btn btn--primary btn--lg form-submit">
+    Book my free 15-minute call
+  </button>
+  <p class="form-reassure">
+    You’ll receive a confirmation email straight away. Your details are never shared or added to a
+    mailing list.
+  </p>
+
+  <p class="form-status" role="status" aria-live="polite" data-form-status hidden></p>
+</form>
+
+<p class="calendly-alt">
+  Prefer to pick a time yourself? <a href={site.calendlyUrl} rel="noopener noreferrer">Choose a slot in the calendar</a>.
+</p>
+
+<style>
+  .booking-form {
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 1.2rem + 2vw, 2.5rem);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .form-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .form-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .field--full {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .form-submit {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .form-reassure {
+    margin-top: 0.85rem;
+    font-size: var(--text-xs);
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .form-status {
+    margin-top: 1rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--radius-sm);
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .form-status[data-state='error'] {
+    background: var(--amber-soft);
+    color: var(--ink);
+  }
+
+  .calendly-alt {
+    margin-top: 1.25rem;
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-booking-form]');
+  const status = document.querySelector<HTMLElement>('[data-form-status]');
+
+  form?.addEventListener('submit', async (event) => {
+    if (!form.checkValidity()) {
+      // Let the browser surface native validation messages.
+      form.reportValidity();
+      event.preventDefault();
+      return;
+    }
+
+    event.preventDefault();
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'Sending…';
+    }
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+      form.reset();
+      if (status) {
+        status.hidden = false;
+        status.dataset.state = 'success';
+        status.textContent =
+          'Thank you — your request is in. Check your inbox for a confirmation email with next steps.';
+      }
+      form.querySelector<HTMLElement>('.form-grid')?.setAttribute('inert', '');
+    } catch {
+      if (status) {
+        status.hidden = false;
+        status.dataset.state = 'error';
+        status.textContent =
+          'Something went wrong sending the form. Please email hello@aiiscurious.co.uk instead — you’ll get a reply the same day.';
+      }
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = 'Book my free 15-minute call';
+      }
+    }
+  });
+</script>

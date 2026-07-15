@@ -1,0 +1,47 @@
+---
+import Breadcrumbs, { type Crumb } from './Breadcrumbs.astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lede?: string;
+  crumbs?: Crumb[];
+  centered?: boolean;
+}
+
+const { eyebrow, title, lede, crumbs, centered = false } = Astro.props;
+---
+
+<section class:list={['page-hero', { 'page-hero--centered': centered }]}>
+  <div class="container">
+    {crumbs && <Breadcrumbs crumbs={crumbs} />}
+    <div class="page-hero-body">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1>{title}</h1>
+      {lede && <p class="lede">{lede}</p>}
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    padding-block: clamp(2.5rem, 2rem + 3vw, 5rem) clamp(1.5rem, 1rem + 2vw, 3rem);
+  }
+
+  .page-hero-body {
+    max-width: 46rem;
+  }
+
+  .page-hero--centered .page-hero-body {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .lede {
+    margin-top: var(--space-4);
+    font-size: var(--text-lg);
+    color: var(--muted);
+    line-height: 1.7;
+  }
+</style>

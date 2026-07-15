@@ -1,0 +1,58 @@
+---
+/**
+ * Mobile-only sticky booking bar. Appears after the visitor scrolls past
+ * the hero, stays out of the way otherwise.
+ */
+---
+
+<div class="sticky-cta" data-sticky-cta hidden>
+  <a href="/book/" class="btn btn--primary sticky-cta-btn">Get My Free AI Opportunity Report</a>
+</div>
+
+<style>
+  .sticky-cta {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 40;
+    padding: 0.75rem var(--gutter) calc(0.75rem + env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--line-soft);
+    transform: translateY(100%);
+    transition: transform 250ms ease;
+  }
+
+  .sticky-cta.is-shown {
+    transform: none;
+  }
+
+  .sticky-cta-btn {
+    width: 100%;
+  }
+
+  @media (min-width: 900px) {
+    .sticky-cta {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const bar = document.querySelector<HTMLElement>('[data-sticky-cta]');
+  // Don't show the sticky bar on the booking page itself.
+  if (bar && !location.pathname.startsWith('/book')) {
+    bar.hidden = false;
+    let shown = false;
+    const onScroll = () => {
+      const next = window.scrollY > window.innerHeight * 0.7;
+      if (next !== shown) {
+        shown = next;
+        bar.classList.toggle('is-shown', shown);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>

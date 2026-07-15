@@ -1,0 +1,229 @@
+---
+import { site } from '../data/site';
+
+const year = new Date().getFullYear();
+
+const serviceLinks = [
+  { href: '/services/ai-opportunity-review/', label: 'AI Opportunity Review' },
+  { href: '/services/ai-essentials-workshop/', label: 'AI Essentials Workshop' },
+  { href: '/services/ai-setup-implementation/', label: 'AI Setup & Implementation' },
+  { href: '/services/workflow-automation/', label: 'Workflow Automation' },
+  { href: '/services/ongoing-ai-support/', label: 'Ongoing AI Support' },
+];
+
+const industryLinks = [
+  { href: '/industries/accountants/', label: 'AI for Accountants' },
+  { href: '/industries/recruitment/', label: 'AI for Recruitment' },
+  { href: '/industries/trades/', label: 'AI for Trades' },
+  { href: '/industries/marketing-agencies/', label: 'AI for Marketing Agencies' },
+  { href: '/industries/', label: 'All industries →' },
+];
+
+const locationLinks = [
+  { href: '/locations/manchester/', label: 'Manchester' },
+  { href: '/locations/liverpool/', label: 'Liverpool' },
+  { href: '/locations/chester/', label: 'Chester' },
+  { href: '/locations/warrington/', label: 'Warrington' },
+  { href: '/locations/', label: 'All locations →' },
+];
+
+const companyLinks = [
+  { href: '/about/', label: 'About' },
+  { href: '/resources/', label: 'Knowledge Centre' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/faq/', label: 'FAQ' },
+  { href: '/contact/', label: 'Contact' },
+];
+---
+
+<footer class="site-footer">
+  <div class="footer-cta">
+    <div class="container footer-cta-inner">
+      <div>
+        <h2>Curious where AI could save you time?</h2>
+        <p>
+          Book a free 15-minute conversation and get a personalised AI Opportunity Report for your
+          business. No jargon, no pressure, no obligation.
+        </p>
+      </div>
+      <a href="/book/" class="btn btn--primary btn--lg">Get My Free AI Opportunity Report</a>
+    </div>
+  </div>
+
+  <div class="container footer-main">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">AI<em>is</em>Curious</a>
+      <p>{site.tagline}</p>
+      <p class="footer-contact">
+        Based in Manchester, working across the North West.<br />
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </div>
+
+    <nav class="footer-cols" aria-label="Footer">
+      <div>
+        <h3>Services</h3>
+        <ul>
+          {serviceLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h3>Industries</h3>
+        <ul>
+          {industryLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h3>Locations</h3>
+        <ul>
+          {locationLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h3>Company</h3>
+        <ul>
+          {companyLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© {year} {site.name}. Independent AI consultant, Manchester.</p>
+    <p>
+      <a href={site.social.linkedin} rel="noopener noreferrer">LinkedIn</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-section);
+    border-top: 1px solid var(--line-soft);
+    background: var(--bg-alt);
+  }
+
+  .footer-cta {
+    border-bottom: 1px solid var(--line-soft);
+    padding-block: var(--space-section-sm);
+  }
+
+  .footer-cta-inner {
+    display: grid;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .footer-cta h2 {
+    font-size: var(--text-2xl);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-cta p {
+    color: var(--muted);
+    max-width: 34rem;
+  }
+
+  @media (min-width: 900px) {
+    .footer-cta-inner {
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+    }
+  }
+
+  .footer-main {
+    display: grid;
+    gap: 3rem;
+    padding-block: var(--space-7);
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .footer-logo em {
+    font-style: italic;
+    color: var(--accent-ink);
+  }
+
+  .footer-brand p {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: var(--text-sm);
+    max-width: 22rem;
+  }
+
+  .footer-contact a {
+    color: var(--accent-ink);
+  }
+
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .footer-cols h3 {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 0.85rem;
+  }
+
+  .footer-cols ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .footer-cols a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: var(--text-sm);
+  }
+
+  .footer-cols a:hover {
+    color: var(--accent-ink);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 900px) {
+    .footer-main {
+      grid-template-columns: 1.2fr 2fr;
+    }
+
+    .footer-cols {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    justify-content: space-between;
+    padding-block: 1.5rem calc(1.5rem + 4.5rem);
+    border-top: 1px solid var(--line-soft);
+    color: var(--muted);
+    font-size: var(--text-xs);
+  }
+
+  @media (min-width: 900px) {
+    .footer-bottom {
+      padding-bottom: 1.5rem;
+    }
+  }
+
+  .footer-bottom a {
+    color: var(--muted);
+  }
+</style>

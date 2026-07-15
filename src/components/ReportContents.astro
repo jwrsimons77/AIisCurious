@@ -1,0 +1,57 @@
+---
+interface Props {
+  heading?: string;
+}
+
+const { heading = 'What’s inside your free AI Opportunity Report' } = Astro.props;
+
+const contents = [
+  {
+    title: 'Your top AI opportunities',
+    text: 'The three to five places in your business where AI would make the biggest difference — specific to how you actually work.',
+  },
+  {
+    title: 'Estimated time savings',
+    text: 'A realistic estimate of hours saved per week, so you can judge whether it’s worth doing before spending a penny.',
+  },
+  {
+    title: 'Recommended tools',
+    text: 'Which tools fit your business and budget — ChatGPT, Claude, Microsoft Copilot or others — and which to avoid.',
+  },
+  {
+    title: 'Quick wins for this month',
+    text: 'Two or three things you could set up in an afternoon, with plain-English instructions.',
+  },
+  {
+    title: 'A suggested roadmap',
+    text: 'What to do first, second and third — so you build confidence step by step instead of trying everything at once.',
+  },
+  {
+    title: 'Security & GDPR considerations',
+    text: 'What to check before putting business data into any AI tool, written for owners, not IT departments.',
+  },
+];
+---
+
+<section class="section section--alt" id="report">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">Your free report</p>
+      <h2>{heading}</h2>
+      <p>
+        Not a sales brochure — a genuinely useful document you can act on yourself, written
+        specifically for your business after our conversation.
+      </p>
+    </div>
+    <div class="grid grid--3">
+      {
+        contents.map((item) => (
+          <div class="card reveal">
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
