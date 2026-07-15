@@ -65,7 +65,18 @@ const localBusiness = {
   ],
 };
 
-const allSchema = [localBusiness, ...schema];
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${site.url}/#website`,
+  name: site.name,
+  url: site.url,
+  description: site.tagline,
+  publisher: { '@id': `${site.url}/#business` },
+  inLanguage: 'en-GB',
+};
+
+const allSchema = [localBusiness, website, ...schema];
 ---
 
 <!doctype html>

@@ -1,23 +1,32 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import CTASection from '../../components/CTASection.astro';
 import { industries } from '../../data/industries';
+import teamWorkshop from '../../assets/images/team-workshop.jpg';
 ---
 
 <Base
-  title="AI by Industry — Practical Guides for Your Sector | AIisCurious"
+  title="AI by Industry - Practical Guides for Your Sector | AIisCurious"
   description="How AI actually helps in your industry: accountants, solicitors, recruitment, trades, manufacturing, hospitality, retail and more. Practical examples, tools and realistic ROI."
 >
   <PageHero
     eyebrow="Industries"
     title="AI, explained for your industry"
-    lede="Generic AI advice is nearly useless — the wins in an accountancy practice look nothing like the wins on a building site. Pick your industry for specific pain points, real workflows, recommended tools and honest ROI estimates."
+    lede="Generic AI advice is nearly useless, the wins in an accountancy practice look nothing like the wins on a building site. Pick your industry for specific pain points, real workflows, recommended tools and honest ROI estimates."
     crumbs={[{ label: 'Industries' }]}
   />
 
   <section class="section--sm">
     <div class="container">
+      <Image
+        src={teamWorkshop}
+        alt="A small team working together around a wooden table with laptops"
+        widths={[640, 1024]}
+        sizes="(min-width: 1200px) 72rem, 94vw"
+        class="industries-photo"
+      />
       <div class="grid grid--3">
         {
           industries.map((industry) => (
@@ -33,11 +42,19 @@ import { industries } from '../../data/industries';
 
   <CTASection
     heading="Don’t see your industry?"
-    text="The free AI Opportunity Review works for any business — the report is written for how your company actually operates, whatever the sector."
+    text="The free AI Opportunity Review works for any business, the report is written for how your company actually operates, whatever the sector."
   />
 </Base>
 
 <style>
+  :global(.industries-photo) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    margin-bottom: 3rem;
+  }
+
   .card h2 {
     font-size: var(--text-xl);
     margin-bottom: 0.5rem;

@@ -1,8 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import CTASection from '../../components/CTASection.astro';
 import { getCollection } from 'astro:content';
+import writingLaptop from '../../assets/images/writing-laptop.jpg';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -35,18 +37,25 @@ const upcomingClusters = clusters.filter((c) => (postsByCluster.get(c) ?? []).le
 ---
 
 <Base
-  title="Knowledge Centre — Free AI Guides for Small Businesses | AIisCurious"
+  title="Knowledge Centre - Free AI Guides for Small Businesses | AIisCurious"
   description="Free plain-English AI resources for small businesses, organised by topic: getting started, tools, security, policies, automation and prompting. No jargon, no hype."
 >
   <PageHero
     eyebrow="Knowledge Centre"
     title="Understand AI at your own pace"
-    lede="Free, practical guides organised by topic — written for business owners, not technologists. Everything links to everything relevant, so start with whatever question is on your mind."
+    lede="Free, practical guides organised by topic, written for business owners, not technologists. Everything links to everything relevant, so start with whatever question is on your mind."
     crumbs={[{ label: 'Resources' }]}
   />
 
   <section class="section--sm">
     <div class="container">
+      <Image
+        src={writingLaptop}
+        alt="Hands typing on a laptop keyboard at a tidy desk"
+        widths={[640, 1024]}
+        sizes="(min-width: 1200px) 72rem, 94vw"
+        class="resources-photo"
+      />
       {
         activeClusters.map((cluster) => (
           <div class="cluster reveal">
@@ -70,7 +79,7 @@ const upcomingClusters = clusters.filter((c) => (postsByCluster.get(c) ?? []).le
           {upcomingClusters.join(' · ')}
         </p>
         <p>
-          Can’t wait for an article? <a href="/book/">Book a free call</a> and ask directly — or
+          Can’t wait for an article? <a href="/book/">Book a free call</a> and ask directly, or
           browse <a href="/industries/">the industry guides</a> for sector-specific answers now.
         </p>
       </div>
@@ -79,11 +88,19 @@ const upcomingClusters = clusters.filter((c) => (postsByCluster.get(c) ?? []).le
 
   <CTASection
     heading="Reading is good. A personalised report is better."
-    text="Get the top AI opportunities for your specific business — free, in plain English, within three days of a 15-minute call."
+    text="Get the top AI opportunities for your specific business, free, in plain English, within three days of a 15-minute call."
   />
 </Base>
 
 <style>
+  :global(.resources-photo) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    margin-bottom: 3rem;
+  }
+
   .cluster {
     margin-bottom: 3.5rem;
   }

@@ -7,13 +7,13 @@ import { serviceAreaPages } from '../../data/serviceAreas';
 ---
 
 <Base
-  title="AI Services for Small Businesses — Reviews, Training, Implementation | AIisCurious"
+  title="AI Services for Small Businesses - Reviews, Training, Implementation | AIisCurious"
   description="Productised AI services for small businesses across the North West: free AI Opportunity Review, team workshops, secure setup, workflow automation and ongoing support. Fixed prices."
 >
   <PageHero
     eyebrow="Services"
     title="Practical help, clearly priced"
-    lede="Five productised services, from a free starting point to ongoing support. Every one is fixed price, plainly scoped, and designed for businesses with 5–50 people — no day rates, no jargon, no lock-in."
+    lede="Five productised services, from a free starting point to ongoing support. Every one is fixed price, plainly scoped, and designed for businesses with 5–50 people, no day rates, no jargon, no lock-in."
     crumbs={[{ label: 'Services' }]}
   />
 
@@ -31,7 +31,7 @@ import { serviceAreaPages } from '../../data/serviceAreas';
                 <p>{service.tagline}</p>
                 <p class="service-row-meta">
                   {service.timescale}
-                  {service.price && ` · ${service.price.split('—')[0].trim()}`}
+                  {service.price && ` · ${service.price.split(/[,.]/)[0].trim()}`}
                 </p>
               </div>
               <span class="service-row-arrow" aria-hidden="true">
@@ -65,7 +65,7 @@ import { serviceAreaPages } from '../../data/serviceAreas';
 
   <CTASection
     heading="Not sure which service fits?"
-    text="That’s exactly what the free AI Opportunity Review is for — a 15-minute conversation and a personalised report that tells you what’s worth doing, in what order, and what it would cost."
+    text="That’s exactly what the free AI Opportunity Review is for, a 15-minute conversation and a personalised report that tells you what’s worth doing, in what order, and what it would cost."
   />
 </Base>
 

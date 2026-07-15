@@ -4,11 +4,15 @@ import { site } from '../data/site';
 
 <form
   class="booking-form"
+  name="booking"
   method="POST"
-  action={site.formEndpoint}
+  action="/book/"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
   data-booking-form
   novalidate
 >
+  <input type="hidden" name="form-name" value="booking" />
   <div class="form-grid">
     <div class="field">
       <label for="bf-name">Your name</label>
@@ -35,7 +39,7 @@ import { site } from '../data/site';
     </div>
     <div class="field field--full">
       <label for="bf-challenge">What takes up too much of your time right now?</label>
-      <span class="hint">A sentence or two is perfect — admin, quoting, emails, anything.</span>
+      <span class="hint">A sentence or two is perfect: admin, quoting, emails, anything.</span>
       <textarea id="bf-challenge" name="challenge" required></textarea>
     </div>
     <div class="field field--full">
@@ -50,9 +54,9 @@ import { site } from '../data/site';
     </div>
   </div>
 
-  <!-- Honeypot field to deter spam bots -->
+  <!-- Netlify honeypot field to deter spam bots -->
   <p class="hp" aria-hidden="true">
-    <label>Leave this field empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+    <label>Leave this field empty <input type="text" name="bot-field" tabindex="-1" autocomplete="off" /></label>
   </p>
 
   <button type="submit" class="btn btn--primary btn--lg form-submit">
@@ -157,10 +161,13 @@ import { site } from '../data/site';
     }
 
     try {
-      const res = await fetch(form.action, {
+      // Netlify Forms accepts URL-encoded POSTs to any path on the site.
+      const data = new FormData(form);
+      const body = new URLSearchParams(data as unknown as Record<string, string>).toString();
+      const res = await fetch('/', {
         method: 'POST',
-        body: new FormData(form),
-        headers: { Accept: 'application/json' },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body,
       });
       if (!res.ok) throw new Error(`Request failed: ${res.status}`);
       form.reset();
@@ -168,7 +175,7 @@ import { site } from '../data/site';
         status.hidden = false;
         status.dataset.state = 'success';
         status.textContent =
-          'Thank you — your request is in. Check your inbox for a confirmation email with next steps.';
+          'Thank you, your request is in. Check your inbox for a confirmation email with next steps.';
       }
       form.querySelector<HTMLElement>('.form-grid')?.setAttribute('inert', '');
     } catch {
@@ -176,7 +183,7 @@ import { site } from '../data/site';
         status.hidden = false;
         status.dataset.state = 'error';
         status.textContent =
-          'Something went wrong sending the form. Please email hello@aiiscurious.co.uk instead — you’ll get a reply the same day.';
+          'Something went wrong sending the form. Please email hello@aiiscurious.co.uk instead and you’ll get a reply the same day.';
       }
     } finally {
       if (button) {

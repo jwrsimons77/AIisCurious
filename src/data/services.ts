@@ -19,7 +19,7 @@ export const services: Service[] = [
     slug: 'ai-opportunity-review',
     name: 'AI Opportunity Review',
     shortName: 'Opportunity Review',
-    tagline: 'Find out exactly where AI could save your business time — before you spend anything.',
+    tagline: 'Find out exactly where AI could save your business time, before you spend anything.',
     metaTitle: 'AI Opportunity Review for Small Businesses | AIisCurious',
     metaDescription:
       'A free 15-minute conversation and a personalised report showing where AI could genuinely save your small business time. Manchester-based, no jargon, no obligation.',
@@ -42,18 +42,18 @@ export const services: Service[] = [
     outcomes: [
       'Complete clarity on whether AI is worth your time right now',
       'A short list of practical first steps instead of a vague sense you’re falling behind',
-      'Confidence to act — on your own or with help',
+      'Confidence to act, on your own or with help',
     ],
     timescale: 'Report delivered within 3 working days of our conversation.',
-    price: 'Free — genuinely. No card, no trial, no follow-up sales sequence.',
+    price: 'Free, genuinely. No card, no trial, no follow-up sales sequence.',
     faqs: [
       {
         q: 'Is the review really free?',
-        a: 'Yes. It’s how most clients first work with me, and plenty of people take the report and run with it themselves. That’s a good outcome — some come back later when they’re ready for more.',
+        a: 'Yes. It’s how most clients first work with me, and plenty of people take the report and run with it themselves. That’s a good outcome, some come back later when they’re ready for more.',
       },
       {
         q: 'Do I need to prepare anything?',
-        a: 'No. Just be ready to talk about a typical week in your business — what eats your time, what gets put off, what frustrates you. I’ll do the rest.',
+        a: 'No. Just be ready to talk about a typical week in your business, what eats your time, what gets put off, what frustrates you. I’ll do the rest.',
       },
       {
         q: 'Will you try to sell me something on the call?',
@@ -65,8 +65,8 @@ export const services: Service[] = [
     slug: 'ai-essentials-workshop',
     name: 'AI Essentials Workshop',
     shortName: 'Essentials Workshop',
-    tagline: 'Get your whole team confident with AI in half a day — using your real work, not demos.',
-    metaTitle: 'AI Essentials Workshop — Practical AI Training for Teams | AIisCurious',
+    tagline: 'Get your whole team confident with AI in half a day, using your real work, not demos.',
+    metaTitle: 'AI Essentials Workshop - Practical AI Training for Teams | AIisCurious',
     metaDescription:
       'A half-day, hands-on AI workshop for small business teams across Manchester and the North West. Your team leaves using ChatGPT, Claude or Copilot on real work the same day.',
     whoFor:
@@ -94,7 +94,7 @@ export const services: Service[] = [
     faqs: [
       {
         q: 'Our team isn’t technical. Will they keep up?',
-        a: 'Yes — the workshop is designed for people who’ve never used AI. If your team can write an email, they can do everything in the session. The pace is set by the room, not a slide deck.',
+        a: 'Yes, the workshop is designed for people who’ve never used AI. If your team can write an email, they can do everything in the session. The pace is set by the room, not a slide deck.',
       },
       {
         q: 'Which tools do you cover?',
@@ -102,7 +102,7 @@ export const services: Service[] = [
       },
       {
         q: 'Can you run it for a specific team, like sales or admin?',
-        a: 'Absolutely — focused sessions for one team often get the best results, because every exercise uses that team’s real work.',
+        a: 'Absolutely, focused sessions for one team often get the best results, because every exercise uses that team’s real work.',
       },
     ],
   },
@@ -110,12 +110,12 @@ export const services: Service[] = [
     slug: 'ai-setup-implementation',
     name: 'AI Setup & Implementation',
     shortName: 'Setup & Implementation',
-    tagline: 'The right tools, set up properly and securely — with your team actually using them.',
+    tagline: 'The right tools, set up properly and securely, with your team actually using them.',
     metaTitle: 'AI Setup & Implementation for Small Businesses | AIisCurious',
     metaDescription:
       'Hands-on AI setup for small businesses: tool selection, secure configuration, data protection settings and team onboarding. Fixed prices, delivered across the North West.',
     whoFor:
-      'Businesses that know what they want AI to do and want it done properly — accounts configured, data settings locked down, integrations working, team trained on the result.',
+      'Businesses that know what they want AI to do and want it done properly, accounts configured, data settings locked down, integrations working, team trained on the result.',
     problems: [
       'You signed up for AI tools but they’re configured with default (insecure) settings',
       'Nobody connected AI to the systems where your work actually lives',
@@ -128,7 +128,7 @@ export const services: Service[] = [
       'Data-protection review: what can and can’t go into each tool',
       'Custom instructions and templates for your most common tasks',
       'Team onboarding session so the setup gets used',
-      'Handover document your business owns — no lock-in',
+      'Handover document your business owns, no lock-in',
     ],
     outcomes: [
       'AI tools that are safe, consistent and actually adopted',
@@ -139,7 +139,7 @@ export const services: Service[] = [
     faqs: [
       {
         q: 'We already pay for Microsoft 365. Can you work with that?',
-        a: 'Yes — for many businesses, switching on and properly configuring Copilot within Microsoft 365 is the most cost-effective route, because your data already lives there. I’ll tell you honestly if that’s your best option.',
+        a: 'Yes, for many businesses, switching on and properly configuring Copilot within Microsoft 365 is the most cost-effective route, because your data already lives there. I’ll tell you honestly if that’s your best option.',
       },
       {
         q: 'What about our customer data and GDPR?',
@@ -147,7 +147,7 @@ export const services: Service[] = [
       },
       {
         q: 'Do you charge day rates?',
-        a: 'No — fixed prices agreed up front, based on a defined scope. You’ll know the full cost before we start.',
+        a: 'No, fixed prices agreed up front, based on a defined scope. You’ll know the full cost before we start.',
       },
     ],
   },
@@ -158,7 +158,7 @@ export const services: Service[] = [
     tagline: 'Hand your repetitive admin to software that never gets bored.',
     metaTitle: 'Workflow Automation for Small Businesses | AIisCurious',
     metaDescription:
-      'Practical workflow automation for small businesses in the North West: quotes, invoicing, email triage, data entry and reporting — built with tools you already pay for.',
+      'Practical workflow automation for small businesses in the North West: quotes, invoicing, email triage, data entry and reporting, built with tools you already pay for.',
     whoFor:
       'Businesses drowning in repetitive tasks: re-typing data between systems, sending the same emails, chasing the same documents, assembling the same reports every month.',
     problems: [
@@ -176,7 +176,7 @@ export const services: Service[] = [
     ],
     outcomes: [
       'Hours of admin removed every week, permanently',
-      'Faster responses to customers — often the same hour instead of the next day',
+      'Faster responses to customers, often the same hour instead of the next day',
       'Fewer copy-paste errors and missed follow-ups',
     ],
     timescale: 'First automation usually live within 2 weeks.',
@@ -187,11 +187,11 @@ export const services: Service[] = [
       },
       {
         q: 'We use quite niche industry software. Can you still help?',
-        a: 'Usually, yes. Most niche tools have an export, an email trail, or an API somewhere. In the mapping session we’ll find the practical route — and if a workflow genuinely can’t be automated well, I’ll say so.',
+        a: 'Usually, yes. Most niche tools have an export, an email trail, or an API somewhere. In the mapping session we’ll find the practical route, and if a workflow genuinely can’t be automated well, I’ll say so.',
       },
       {
         q: 'Is this the same as AI?',
-        a: 'They overlap. Automation moves information between systems automatically; AI adds judgement — drafting the reply, summarising the document, categorising the enquiry. The best builds combine both, but only where each earns its keep.',
+        a: 'They overlap. Automation moves information between systems automatically; AI adds judgement, drafting the reply, summarising the document, categorising the enquiry. The best builds combine both, but only where each earns its keep.',
       },
     ],
   },
@@ -199,10 +199,10 @@ export const services: Service[] = [
     slug: 'ongoing-ai-support',
     name: 'Ongoing AI Support',
     shortName: 'Ongoing Support',
-    tagline: 'A knowledgeable person to call as AI changes — without hiring anyone.',
+    tagline: 'A knowledgeable person to call as AI changes, without hiring anyone.',
     metaTitle: 'Ongoing AI Support & Advice for Small Businesses | AIisCurious',
     metaDescription:
-      'Monthly AI support for small businesses: a regular check-in, help when tools change, new opportunities spotted, and questions answered — without hiring anyone.',
+      'Monthly AI support for small businesses: a regular check-in, help when tools change, new opportunities spotted, and questions answered, without hiring anyone.',
     whoFor:
       'Businesses already using AI that want to keep improving. AI tools change monthly; this keeps you current without anyone on your team having to follow the news.',
     problems: [
@@ -223,7 +223,7 @@ export const services: Service[] = [
       'Questions answered in hours, not left to fester',
       'One predictable monthly cost instead of surprise consultancy invoices',
     ],
-    timescale: 'Monthly, rolling. Cancel any time — no long contracts.',
+    timescale: 'Monthly, rolling. Cancel any time, no long contracts.',
     faqs: [
       {
         q: 'Is there a minimum contract?',
@@ -235,7 +235,7 @@ export const services: Service[] = [
       },
       {
         q: 'We haven’t started with AI yet. Is this for us?',
-        a: 'Probably not yet — start with the free AI Opportunity Review and get some quick wins in place first. Ongoing support makes sense once there’s something to support.',
+        a: 'Probably not yet, start with the free AI Opportunity Review and get some quick wins in place first. Ongoing support makes sense once there’s something to support.',
       },
     ],
   },

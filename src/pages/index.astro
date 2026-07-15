@@ -1,6 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import TrustBar from '../components/TrustBar.astro';
+import planningDesk from '../assets/images/planning-desk.jpg';
 import HowItWorks from '../components/HowItWorks.astro';
 import ReportContents from '../components/ReportContents.astro';
 import FAQ from '../components/FAQ.astro';
@@ -12,7 +14,7 @@ const homeFaqs = siteFaqs.slice(0, 5);
 ---
 
 <Base
-  title="AI Consultant Manchester — Practical AI for Small Businesses | AIisCurious"
+  title="AI Consultant Manchester - Practical AI for Small Businesses | AIisCurious"
   description="AI doesn't have to be complicated. Independent Manchester-based AI consultant helping small businesses across the North West save time, reduce admin and adopt AI with confidence. Free AI Opportunity Report."
 >
   <!-- Hero -->
@@ -25,7 +27,7 @@ const homeFaqs = siteFaqs.slice(0, 5);
       <p class="eyebrow">For small businesses across the North West</p>
       <h1>AI doesn’t have to be complicated.</h1>
       <p class="hero-sub">
-        Helping small businesses save time, reduce admin and confidently adopt AI — with practical
+        Helping small businesses save time, reduce admin and confidently adopt AI, with practical
         advice and hands-on implementation, in plain English.
       </p>
       <div class="hero-actions">
@@ -49,13 +51,13 @@ const homeFaqs = siteFaqs.slice(0, 5);
         <div class="split-body reveal">
           <p>
             Every week there’s a new tool, a new headline, a new person telling you you’re falling
-            behind. Meanwhile you’ve got a business to run — customers to look after, quotes to
+            behind. Meanwhile you’ve got a business to run, customers to look after, quotes to
             send, invoices to chase.
           </p>
           <p>
             Here’s the truth nobody selling AI wants to say: <strong>you don’t need to understand
             AI</strong>. You need someone who understands your business, can point at three or four
-            places where AI would genuinely save you time, and can set it up properly — securely,
+            places where AI would genuinely save you time, and can set it up properly, securely,
             affordably, without the jargon.
           </p>
           <p>That’s what I do. And the first step is free.</p>
@@ -88,7 +90,7 @@ const homeFaqs = siteFaqs.slice(0, 5);
           <h3>Enquiries answered at 11pm</h3>
           <p>
             A guest house answers availability and parking questions instantly, around the clock.
-            The booking goes to them — not the hotel that replied the next morning.
+            The booking goes to them, not the hotel that replied the next morning.
           </p>
         </div>
         <div class="card reveal">
@@ -112,7 +114,7 @@ const homeFaqs = siteFaqs.slice(0, 5);
         <p class="eyebrow">How I can help</p>
         <h2>Practical services with fixed prices</h2>
         <p>
-          Productised, clearly scoped and honestly priced — because “consultancy” shouldn’t be a
+          Productised, clearly scoped and honestly priced, because “consultancy” shouldn’t be a
           scary word.
         </p>
       </div>
@@ -140,10 +142,17 @@ const homeFaqs = siteFaqs.slice(0, 5);
         <div class="reveal">
           <p class="eyebrow">Who you’ll work with</p>
           <h2>One experienced person. Not an agency.</h2>
+          <Image
+            src={planningDesk}
+            alt="Two people working through a plan together at a desk with laptops and a printed worksheet"
+            widths={[480, 800, 1200]}
+            sizes="(min-width: 900px) 40vw, 90vw"
+            class="split-photo"
+          />
         </div>
         <div class="split-body reveal">
           <p>
-            I’m James — a product leader with a background in enterprise software, AI
+            I’m James, a product leader with a background in enterprise software, AI
             implementation, automation and cyber security awareness. I’ve spent my career making
             complicated technology useful for real teams, and now I do it for small businesses
             across the North West.
@@ -172,14 +181,14 @@ const homeFaqs = siteFaqs.slice(0, 5);
       <div class="grid grid--3">
         <figure class="card testimonial reveal">
           <blockquote>
-            “The report alone was worth it — three quick wins we set up ourselves, and one bigger
+            “The report alone was worth it, three quick wins we set up ourselves, and one bigger
             project we asked James to build. We save hours every single week.”
           </blockquote>
           <figcaption>Owner, professional services firm · Greater Manchester</figcaption>
         </figure>
         <figure class="card testimonial reveal">
           <blockquote>
-            “First person who explained AI without making me feel stupid. No jargon, no pressure —
+            “First person who explained AI without making me feel stupid. No jargon, no pressure,
             just practical answers about our actual business.”
           </blockquote>
           <figcaption>Director, trades business · Cheshire</figcaption>
@@ -296,6 +305,14 @@ const homeFaqs = siteFaqs.slice(0, 5);
 
   .split-body p + p {
     margin-top: 1em;
+  }
+
+  .split :global(.split-photo) {
+    margin-top: 1.75rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    width: 100%;
+    height: auto;
   }
 
   .split-body .btn {

@@ -19,16 +19,13 @@ export const site = {
     longitude: -2.2426,
   },
   /**
-   * Scheduling link — replace with your live Calendly / Microsoft Bookings /
+   * Scheduling link, replace with your live Calendly / Microsoft Bookings /
    * Google Calendar appointment link. Every "book a call" button uses this.
    */
   bookingUrl: '/book/',
   calendlyUrl: 'https://calendly.com/aiiscurious/15min',
-  /**
-   * Form endpoint — replace with your Formspree / Basin / custom endpoint.
-   * The booking form posts here and shows an inline confirmation.
-   */
-  formEndpoint: 'https://formspree.io/f/REPLACE_ME',
+  // The booking form uses Netlify Forms (form name: "booking").
+  // Configure notification emails in Netlify: Site → Forms → Notifications.
   social: {
     linkedin: 'https://www.linkedin.com/company/aiiscurious',
   },

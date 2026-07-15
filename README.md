@@ -48,12 +48,33 @@ BreadcrumbList, Article and Person schema where relevant). Sitemap and robots.tx
 - Fonts (Inter + Fraunces variable) are self-hosted via Fontsource — no third-party requests
   anywhere on the site.
 
+## Deploying on Netlify
+
+`netlify.toml` is included: build command `npm run build`, publish directory `dist`,
+Node 22, immutable caching for hashed assets, and sensible security headers.
+Connect the repo in Netlify and it deploys with no further configuration.
+
+**Booking form**: the form uses **Netlify Forms** (form name `booking`) with a honeypot.
+Netlify detects it automatically on first deploy. To receive submissions by email, go to
+**Site configuration → Forms → Form notifications** and add an email notification. To send
+the visitor an automatic confirmation email, connect the form to your email tool via a
+Netlify Forms webhook or Zapier's Netlify integration.
+
+## Google Search Console (do this at launch)
+
+1. Add the site as a property in [Google Search Console](https://search.google.com/search-console)
+   (domain property is best; verify via DNS).
+2. Submit the sitemap: `https://www.aiiscurious.co.uk/sitemap-index.xml`
+   (also referenced in `robots.txt`, and linked from every page's `<head>`).
+3. Request indexing for the homepage and a handful of key pages to speed up first crawl.
+4. Repeat in [Bing Webmaster Tools](https://www.bing.com/webmasters) - it can import
+   directly from Search Console.
+
 ## Before launch — replace these
 
 1. **Domain** — `src/data/site.ts` and `astro.config.mjs` assume `https://www.aiiscurious.co.uk`.
-2. **Form endpoint** — `site.formEndpoint` in `src/data/site.ts` is a Formspree placeholder.
-   Create a form at formspree.io (or Basin/your own endpoint) and paste the URL. Confirmation
-   emails: enable Formspree's auto-response, or connect the endpoint to your email tool.
+2. **Form notifications** — enable Netlify Forms email notifications (see above) so
+   submissions reach your inbox.
 3. **Scheduling link** — `site.calendlyUrl` is a placeholder Calendly URL. Swap for your live
    Calendly / Microsoft Bookings / Google appointment link.
 4. **Email & LinkedIn** — `site.email` and `site.social.linkedin`.
@@ -61,6 +82,17 @@ BreadcrumbList, Article and Person schema where relevant). Sitemap and robots.tx
    Replace with genuine client quotes (with permission) before launch — never publish
    fabricated reviews.
 6. **OG images** — regenerate after any brand change: `node scripts/generate-images.mjs`.
+
+## Image credits
+
+Photos live in `src/assets/images/` and are optimised to responsive WebP at build time.
+
+- `meeting-table.jpg`, `planning-desk.jpg`, `team-workshop.jpg`, `writing-laptop.jpg` —
+  [Unsplash](https://unsplash.com) (Unsplash License: free for commercial use, no
+  attribution required).
+- `manchester-skyline.jpg` — ["Manchester skyline" by palomoduarte on Flickr](https://www.flickr.com/photos/31044991@N04/11149492264),
+  CC BY 2.0. **Attribution is required** and is displayed in the caption on the Locations
+  page — keep the credit if you move the image.
 
 ## SEO notes
 

@@ -1,11 +1,11 @@
 /* ==========================================================================
-   AIisCurious — Design System
+   AIisCurious, Design System
    Calm, editorial, premium. Mobile-first. Light & dark.
    ========================================================================== */
 
 /* ---------- Design tokens ---------- */
 :root {
-  /* Colour — light */
+  /* Colour, light */
   --bg: #fbfaf7;
   --bg-alt: #f4f1ea;
   --surface: #ffffff;

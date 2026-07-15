@@ -1,12 +1,12 @@
 ---
 title: 'ChatGPT vs Claude vs Microsoft Copilot: Which Should Your Business Use?'
-description: 'An independent, plain-English comparison of ChatGPT, Claude and Microsoft Copilot for small businesses — strengths, costs, data handling, and how to actually choose.'
+description: 'An independent, plain-English comparison of ChatGPT, Claude and Microsoft Copilot for small businesses, strengths, costs, data handling, and how to actually choose.'
 pubDate: 2026-06-09
 cluster: 'Getting Started with AI'
 tags: ['chatgpt', 'claude', 'microsoft copilot', 'tools']
 ---
 
-The most common question I'm asked, by some distance: *"Which one should we use?"* Here's the honest, independent answer — I don't resell any of them, so there's no commission influencing this.
+The most common question I'm asked, by some distance: *"Which one should we use?"* Here's the honest, independent answer, I don't resell any of them, so there's no commission influencing this.
 
 ## The short version
 
@@ -18,15 +18,15 @@ And the secret nobody selling you a licence mentions: **for most small business 
 
 ## What actually differs
 
-**Where they meet your data.** Copilot's superpower is context: it can read the email thread, the document, the meeting transcript — because it's inside your Microsoft tenancy. ChatGPT and Claude are destinations you bring work to (though both now connect to files and apps too, and Claude's Projects feature is genuinely useful for keeping business context around).
+**Where they meet your data.** Copilot's superpower is context: it can read the email thread, the document, the meeting transcript, because it's inside your Microsoft tenancy. ChatGPT and Claude are destinations you bring work to (though both now connect to files and apps too, and Claude's Projects feature is genuinely useful for keeping business context around).
 
 **Writing quality.** Subjective, but a consistent pattern in my client work: Claude tends to produce the most natural British business writing with the least "AI voice"; ChatGPT is a strong all-rounder; Copilot's drafting is improving fast but can be the most generic of the three.
 
 **Long documents.** Claude handles very long documents (contracts, tender packs, reports) especially well, which is why it features heavily in my work with [solicitors](/industries/solicitors/) and [professional services firms](/industries/professional-services/).
 
-**Price.** Broadly similar for business tiers — roughly £15–25 per user per month depending on tool and plan. Copilot needs a qualifying Microsoft 365 subscription underneath it. All three offer meaningful free tiers for testing (see [how to get started for free](/blog/how-to-get-started-with-ai-small-business/)).
+**Price.** Broadly similar for business tiers, roughly £15–25 per user per month depending on tool and plan. Copilot needs a qualifying Microsoft 365 subscription underneath it. All three offer meaningful free tiers for testing (see [how to get started for free](/blog/how-to-get-started-with-ai-small-business/)).
 
-**Data protection.** All three offer business tiers where your data isn't used to train models — but only the business tiers, configured correctly. This is the non-negotiable, and it's the same conversation whichever you pick: read [Is AI Secure?](/blog/is-ai-secure-plain-english-guide/) before rolling anything out to a team.
+**Data protection.** All three offer business tiers where your data isn't used to train models, but only the business tiers, configured correctly. This is the non-negotiable, and it's the same conversation whichever you pick: read [Is AI Secure?](/blog/is-ai-secure-plain-english-guide/) before rolling anything out to a team.
 
 ## How to actually decide
 
@@ -37,4 +37,4 @@ And the secret nobody selling you a licence mentions: **for most small business 
 
 ## The part that matters more than the choice
 
-Whichever tool you choose, the outcomes depend far more on three things: **setup** (business accounts, privacy settings, shared prompts), **skills** (fifteen minutes of prompting technique doubles output quality), and **workflow fit** (using it on the right tasks). That's the gap the [AI Essentials Workshop](/services/ai-essentials-workshop/) and [AI Setup & Implementation](/services/ai-setup-implementation/) close — and if you want a recommendation specific to your business rather than general principles, that's precisely what the [free AI Opportunity Report](/book/) gives you.
+Whichever tool you choose, the outcomes depend far more on three things: **setup** (business accounts, privacy settings, shared prompts), **skills** (fifteen minutes of prompting technique doubles output quality), and **workflow fit** (using it on the right tasks). That's the gap the [AI Essentials Workshop](/services/ai-essentials-workshop/) and [AI Setup & Implementation](/services/ai-setup-implementation/) close, and if you want a recommendation specific to your business rather than general principles, that's precisely what the [free AI Opportunity Report](/book/) gives you.
