@@ -12,10 +12,7 @@ export default defineConfig({
       priority: 0.7,
       lastmod: new Date(),
       // Ad landing + conversion pages are noindex and stay out of the sitemap
-      filter: (page) =>
-        !page.includes('/free-ai-report/') &&
-        !page.includes('/book/thanks/') &&
-        !page.includes('/ai-readiness-checklist/thanks/'),
+      filter: (page) => !page.includes('/free-ai-report/') && !page.includes('/book/thanks/'),
     }),
   ],
   build: {

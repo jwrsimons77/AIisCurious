@@ -23,13 +23,13 @@ Deploy `dist/` to any static host (Netlify, Vercel, Cloudflare Pages, S3+CloudFr
 
 | Area | Pages |
 |---|---|
-| Core | Home, About, FAQ, Contact, Book (lead form), AI Readiness Checklist (lead magnet), 404 |
+| Core | Home, About, FAQ, Contact, Book (lead form), 404 |
 | Services | 5 productised services + 12 service×area landing pages |
 | Locations | 27 unique local pages across Greater Manchester, Merseyside, Cheshire, Lancashire |
 | Industries | 12 industry guides (accountants → trades) |
 | Knowledge Centre | Topic-cluster hub + markdown blog (6 starter articles) |
 
-**77 static pages**, every one with unique H1, title, meta description, canonical URL,
+**73 static pages**, every one with unique H1, title, meta description, canonical URL,
 OpenGraph/Twitter cards, and JSON-LD (LocalBusiness sitewide; Service, FAQPage,
 BreadcrumbList, Article and Person schema where relevant). Sitemap and robots.txt included.
 
@@ -88,7 +88,7 @@ cookie banner (PECR covers analytics cookies, not just ad ones). All three are o
 - **`ga4MeasurementId`** (`G-XXXXXXXXXX`) — from Google Analytics → Admin → Data streams.
 - **`googleAdsId`** (`AW-XXXXXXXXX`) + **`googleAdsConversionLabel`** — from Google Ads →
   Tools → Conversions → your conversion action → "Use Google tag". Fires a `conversion`
-  event on `/book/thanks/` and on the checklist thank-you page.
+  event on `/book/thanks/`.
 - **`metaPixelId`** — unchanged from above.
 
 Once a visitor consents, all configured scripts load together and a `tracking:ready` event
@@ -98,24 +98,9 @@ fires so any page can send its own conversion event.
 
 `src/layouts/Base.astro` captures `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`,
 `utm_term`, `gclid` and `fbclid` from the URL on first landing and stores them in
-`localStorage` (`lead-attribution`, first-touch, kept until a lead converts). Both
-`BookingForm.astro` and `ChecklistForm.astro` inject them as hidden fields, so every Netlify
-Forms submission is tagged with the channel/campaign that produced it.
-
-## Lead capture beyond the call booking
-
-Not every visitor is ready to book a 15-minute call. Two lower-commitment paths exist
-alongside it:
-
-- **`/ai-readiness-checklist/`** — a real, indexable page offering an instant PDF download
-  (`public/ai-readiness-checklist.pdf`, regenerate with
-  `node scripts/generate-checklist-pdf.mjs` after editing its content) in exchange for just
-  an email address. Uses its own Netlify Forms form (`checklist`), separate from `booking`.
-  Linked from the homepage hero and site footer.
-- **Exit-intent / scroll-depth popup** (`src/components/ExitIntentPopup.astro`) — offers the
-  same checklist to visitors who look like they're about to leave (mouse toward the browser
-  chrome on desktop, past 60% scroll on mobile). Shows once per browser
-  (`localStorage: exit-popup-shown`) and never on the checklist, thanks or ad-landing pages.
+`localStorage` (`lead-attribution`, first-touch, kept until a lead converts).
+`BookingForm.astro` injects them as hidden fields, so every Netlify Forms submission is
+tagged with the channel/campaign that produced it.
 
 ## Google Search Console (do this at launch)
 
@@ -133,8 +118,8 @@ alongside it:
    `https://aiiscurious.netlify.app` because `aiiscurious.co.uk` has no DNS configured yet.
    Once the custom domain is connected in Netlify, switch both files (and re-submit the
    sitemap in Search Console) to `https://www.aiiscurious.co.uk`.
-2. **Form notifications** — enable Netlify Forms email notifications (see above) for both
-   the `booking` and `checklist` forms, so submissions reach your inbox.
+2. **Form notifications** — enable Netlify Forms email notifications (see above) so
+   submissions reach your inbox.
 3. **Tracking IDs** — `metaPixelId`, `ga4MeasurementId`, `googleAdsId` and
    `googleAdsConversionLabel` in `src/data/site.ts` are all blank; nothing loads or fires
    until you add the ones you actually use (see Analytics & Google Ads, above).
