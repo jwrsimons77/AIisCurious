@@ -1,0 +1,128 @@
+---
+/**
+ * One-time popup offering the free AI Readiness Checklist to visitors who
+ * look like they're about to leave without converting: exit-intent on
+ * desktop (mouse moves toward the browser chrome), scroll-depth on mobile
+ * (no mouse to read intent from). Shows at most once per browser, and never
+ * on the checklist/thanks/landing pages themselves.
+ */
+import ChecklistForm from './ChecklistForm.astro';
+---
+
+<div class="exit-popup" data-exit-popup hidden>
+  <div class="exit-popup-backdrop" data-exit-popup-dismiss></div>
+  <div class="exit-popup-card" role="dialog" aria-modal="true" aria-labelledby="exit-popup-title">
+    <button type="button" class="exit-popup-close" data-exit-popup-dismiss aria-label="Close">
+      &times;
+    </button>
+    <p class="eyebrow">Before you go</p>
+    <h2 id="exit-popup-title">Grab the free AI Readiness Checklist</h2>
+    <p>12 quick checks before you spend a penny on AI tools. No call needed &mdash; just an instant PDF.</p>
+    <ChecklistForm />
+  </div>
+</div>
+
+<style>
+  .exit-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .exit-popup-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 19, 15, 0.55);
+  }
+
+  .exit-popup-card {
+    position: relative;
+    max-width: 30rem;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+  }
+
+  .exit-popup-card h2 {
+    font-size: var(--text-2xl);
+    margin: 0.35rem 0 0.6rem;
+  }
+
+  .exit-popup-card > p:not(.eyebrow) {
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .exit-popup-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    border: 1px solid var(--line-soft);
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  const EXCLUDED_PATH_PREFIXES = ['/ai-readiness-checklist', '/book/thanks', '/free-ai-report'];
+  const SHOWN_KEY = 'exit-popup-shown';
+
+  const excluded = EXCLUDED_PATH_PREFIXES.some((prefix) => location.pathname.startsWith(prefix));
+  const alreadyShown = localStorage.getItem(SHOWN_KEY) === '1';
+
+  if (!excluded && !alreadyShown) {
+    const popup = document.querySelector<HTMLElement>('[data-exit-popup]');
+
+    const show = () => {
+      if (!popup || popup.hidden === false) return;
+      popup.hidden = false;
+      localStorage.setItem(SHOWN_KEY, '1');
+      popup.querySelector<HTMLElement>('.exit-popup-close')?.focus();
+      document.removeEventListener('mouseout', onMouseOut);
+      window.removeEventListener('scroll', onScroll);
+    };
+
+    const dismiss = () => {
+      if (popup) popup.hidden = true;
+    };
+
+    popup?.querySelectorAll('[data-exit-popup-dismiss]').forEach((el) => {
+      el.addEventListener('click', dismiss);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') dismiss();
+    });
+
+    // Desktop: mouse leaving via the top of the viewport (toward tabs/address bar).
+    const onMouseOut = (event: MouseEvent) => {
+      if (!event.relatedTarget && event.clientY <= 0) show();
+    };
+
+    // Mobile/no-mouse fallback: past halfway down the page.
+    const onScroll = () => {
+      const scrolled = window.scrollY + window.innerHeight;
+      const full = document.documentElement.scrollHeight;
+      if (scrolled / full > 0.6) show();
+    };
+
+    // Give the page a few seconds to settle before arming either trigger.
+    setTimeout(() => {
+      document.addEventListener('mouseout', onMouseOut);
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }, 6000);
+  }
+</script>

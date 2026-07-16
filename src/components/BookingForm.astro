@@ -13,6 +13,15 @@ import { site } from '../data/site';
   novalidate
 >
   <input type="hidden" name="form-name" value="booking" />
+  <!-- Populated from localStorage (see Base.astro) so each lead is tagged with its source. -->
+  <input type="hidden" name="utm_source" data-attr="utm_source" />
+  <input type="hidden" name="utm_medium" data-attr="utm_medium" />
+  <input type="hidden" name="utm_campaign" data-attr="utm_campaign" />
+  <input type="hidden" name="utm_content" data-attr="utm_content" />
+  <input type="hidden" name="utm_term" data-attr="utm_term" />
+  <input type="hidden" name="gclid" data-attr="gclid" />
+  <input type="hidden" name="fbclid" data-attr="fbclid" />
+  <input type="hidden" name="landing_page" data-attr="landing_page" />
   <div class="form-grid">
     <div class="field">
       <label for="bf-name">Your name</label>
@@ -144,6 +153,16 @@ import { site } from '../data/site';
 <script>
   const form = document.querySelector<HTMLFormElement>('[data-booking-form]');
   const status = document.querySelector<HTMLElement>('[data-form-status]');
+
+  try {
+    const attribution = JSON.parse(localStorage.getItem('lead-attribution') ?? '{}');
+    form?.querySelectorAll<HTMLInputElement>('[data-attr]').forEach((input) => {
+      const key = input.dataset.attr!;
+      if (attribution[key]) input.value = attribution[key];
+    });
+  } catch {
+    // Malformed or absent attribution data — leave the hidden fields empty.
+  }
 
   form?.addEventListener('submit', async (event) => {
     if (!form.checkValidity()) {

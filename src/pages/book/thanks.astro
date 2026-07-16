@@ -72,11 +72,23 @@ const steps = [
   </section>
 </Base>
 
-<!-- Fires a Lead conversion for Meta ads, only if the visitor consented to the pixel -->
-<script>
-  const fireLead = () => (window as any).fbq?.('track', 'Lead');
-  if ((window as any).fbq) fireLead();
-  else document.addEventListener('pixel:ready', fireLead, { once: true });
+<!--
+  Fires lead conversion events for Meta, GA4 and Google Ads — only if the
+  visitor consented to tracking (see ConsentPixel.astro).
+-->
+<script define:vars={{ googleAdsId: site.googleAdsId, conversionLabel: site.googleAdsConversionLabel }}>
+  const fireConversions = () => {
+    const w = window;
+    w.fbq?.('track', 'Lead');
+    if (w.gtag) {
+      w.gtag('event', 'generate_lead');
+      if (googleAdsId && conversionLabel) {
+        w.gtag('event', 'conversion', { send_to: `${googleAdsId}/${conversionLabel}` });
+      }
+    }
+  };
+  if (window.fbq || window.gtag) fireConversions();
+  else document.addEventListener('tracking:ready', fireConversions, { once: true });
 </script>
 
 <style>

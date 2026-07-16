@@ -23,13 +23,13 @@ Deploy `dist/` to any static host (Netlify, Vercel, Cloudflare Pages, S3+CloudFr
 
 | Area | Pages |
 |---|---|
-| Core | Home, About, FAQ, Contact, Book (lead form), 404 |
+| Core | Home, About, FAQ, Contact, Book (lead form), AI Readiness Checklist (lead magnet), 404 |
 | Services | 5 productised services + 12 service×area landing pages |
 | Locations | 27 unique local pages across Greater Manchester, Merseyside, Cheshire, Lancashire |
 | Industries | 12 industry guides (accountants → trades) |
 | Knowledge Centre | Topic-cluster hub + markdown blog (6 starter articles) |
 
-**73 static pages**, every one with unique H1, title, meta description, canonical URL,
+**77 static pages**, every one with unique H1, title, meta description, canonical URL,
 OpenGraph/Twitter cards, and JSON-LD (LocalBusiness sitewide; Service, FAQPage,
 BreadcrumbList, Article and Person schema where relevant). Sitemap and robots.txt included.
 
@@ -66,7 +66,7 @@ The site has dedicated ad infrastructure:
 
 - **`/free-ai-report/`** — distraction-free landing page (no nav, one message, one form).
   Point all Meta ads here, with UTM tags, e.g.
-  `https://www.aiiscurious.co.uk/free-ai-report/?utm_source=meta&utm_medium=paid&utm_campaign=trades-quotes`
+  `https://aiiscurious.netlify.app/free-ai-report/?utm_source=meta&utm_medium=paid&utm_campaign=trades-quotes`
 - **`/book/thanks/`** — thank-you page every successful form submission redirects to.
   This is your conversion page.
 - **Meta Pixel** — set `metaPixelId` in `src/data/site.ts` (from Meta Events Manager).
@@ -79,11 +79,49 @@ The site has dedicated ad infrastructure:
 **In Ads Manager**: optimise the campaign for the Lead event, target the North West by
 geography, and let broad targeting + pain-led creative do the audience selection.
 
+## Analytics & Google Ads
+
+`src/components/ConsentPixel.astro` gates Meta Pixel, GA4 and Google Ads behind one shared
+cookie banner (PECR covers analytics cookies, not just ad ones). All three are opt-in via
+`src/data/site.ts` — leave any ID blank to disable it entirely:
+
+- **`ga4MeasurementId`** (`G-XXXXXXXXXX`) — from Google Analytics → Admin → Data streams.
+- **`googleAdsId`** (`AW-XXXXXXXXX`) + **`googleAdsConversionLabel`** — from Google Ads →
+  Tools → Conversions → your conversion action → "Use Google tag". Fires a `conversion`
+  event on `/book/thanks/` and on the checklist thank-you page.
+- **`metaPixelId`** — unchanged from above.
+
+Once a visitor consents, all configured scripts load together and a `tracking:ready` event
+fires so any page can send its own conversion event.
+
+## Lead attribution (UTMs)
+
+`src/layouts/Base.astro` captures `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`,
+`utm_term`, `gclid` and `fbclid` from the URL on first landing and stores them in
+`localStorage` (`lead-attribution`, first-touch, kept until a lead converts). Both
+`BookingForm.astro` and `ChecklistForm.astro` inject them as hidden fields, so every Netlify
+Forms submission is tagged with the channel/campaign that produced it.
+
+## Lead capture beyond the call booking
+
+Not every visitor is ready to book a 15-minute call. Two lower-commitment paths exist
+alongside it:
+
+- **`/ai-readiness-checklist/`** — a real, indexable page offering an instant PDF download
+  (`public/ai-readiness-checklist.pdf`, regenerate with
+  `node scripts/generate-checklist-pdf.mjs` after editing its content) in exchange for just
+  an email address. Uses its own Netlify Forms form (`checklist`), separate from `booking`.
+  Linked from the homepage hero and site footer.
+- **Exit-intent / scroll-depth popup** (`src/components/ExitIntentPopup.astro`) — offers the
+  same checklist to visitors who look like they're about to leave (mouse toward the browser
+  chrome on desktop, past 60% scroll on mobile). Shows once per browser
+  (`localStorage: exit-popup-shown`) and never on the checklist, thanks or ad-landing pages.
+
 ## Google Search Console (do this at launch)
 
 1. Add the site as a property in [Google Search Console](https://search.google.com/search-console)
    (domain property is best; verify via DNS).
-2. Submit the sitemap: `https://www.aiiscurious.co.uk/sitemap-index.xml`
+2. Submit the sitemap: `https://aiiscurious.netlify.app/sitemap-index.xml`
    (also referenced in `robots.txt`, and linked from every page's `<head>`).
 3. Request indexing for the homepage and a handful of key pages to speed up first crawl.
 4. Repeat in [Bing Webmaster Tools](https://www.bing.com/webmasters) - it can import
@@ -91,16 +129,22 @@ geography, and let broad targeting + pain-led creative do the audience selection
 
 ## Before launch — replace these
 
-1. **Domain** — `src/data/site.ts` and `astro.config.mjs` assume `https://www.aiiscurious.co.uk`.
-2. **Form notifications** — enable Netlify Forms email notifications (see above) so
-   submissions reach your inbox.
-3. **Scheduling link** — `site.calendlyUrl` is a placeholder Calendly URL. Swap for your live
+1. **Domain** — `src/data/site.ts` and `astro.config.mjs` currently point at
+   `https://aiiscurious.netlify.app` because `aiiscurious.co.uk` has no DNS configured yet.
+   Once the custom domain is connected in Netlify, switch both files (and re-submit the
+   sitemap in Search Console) to `https://www.aiiscurious.co.uk`.
+2. **Form notifications** — enable Netlify Forms email notifications (see above) for both
+   the `booking` and `checklist` forms, so submissions reach your inbox.
+3. **Tracking IDs** — `metaPixelId`, `ga4MeasurementId`, `googleAdsId` and
+   `googleAdsConversionLabel` in `src/data/site.ts` are all blank; nothing loads or fires
+   until you add the ones you actually use (see Analytics & Google Ads, above).
+4. **Scheduling link** — `site.calendlyUrl` is a placeholder Calendly URL. Swap for your live
    Calendly / Microsoft Bookings / Google appointment link.
-4. **Email & LinkedIn** — `site.email` and `site.social.linkedin`.
-5. **Testimonials** — the homepage testimonials are clearly-marked **placeholder copy**.
+5. **Email & LinkedIn** — `site.email` and `site.social.linkedin`.
+6. **Testimonials** — the homepage testimonials are clearly-marked **placeholder copy**.
    Replace with genuine client quotes (with permission) before launch — never publish
    fabricated reviews.
-6. **OG images** — regenerate after any brand change: `node scripts/generate-images.mjs`.
+7. **OG images** — regenerate after any brand change: `node scripts/generate-images.mjs`.
 
 ## Image credits
 

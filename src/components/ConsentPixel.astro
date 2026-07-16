@@ -1,24 +1,37 @@
 ---
 /**
- * Consent-gated Meta Pixel.
+ * Consent-gated tracking: Meta Pixel, GA4 and Google Ads all share one
+ * cookie banner (UK GDPR/PECR requires consent for analytics cookies too,
+ * not just ads).
  *
- * Renders nothing unless site.metaPixelId is set. When set, a small cookie
- * banner asks for consent on first visit; the pixel script only loads after
- * "Allow" (stored in localStorage, so the banner shows once). Declining is
- * remembered and nothing is ever loaded.
+ * Renders nothing unless at least one ID is set in site.ts. When any are
+ * set, a small cookie banner asks for consent on first visit; scripts only
+ * load after "Allow" (stored in localStorage, so the banner shows once).
+ * Declining is remembered and nothing is ever loaded.
  *
- * When the pixel loads it fires PageView, and dispatches a `pixel:ready`
- * event so pages can fire their own events (e.g. Lead on /book/thanks/).
+ * Once loaded, this fires PageView (Meta) / page_view (gtag), and
+ * dispatches a `tracking:ready` event so pages can fire their own
+ * conversion events (e.g. Lead / conversion on /book/thanks/).
  */
 import { site } from '../data/site';
+
+const { metaPixelId, ga4MeasurementId, googleAdsId } = site;
+const anyTrackingEnabled = Boolean(metaPixelId || ga4MeasurementId || googleAdsId);
 ---
 
 {
-  site.metaPixelId && (
-    <div class="consent" data-consent-banner data-pixel-id={site.metaPixelId} hidden>
+  anyTrackingEnabled && (
+    <div
+      class="consent"
+      data-consent-banner
+      data-meta-pixel-id={metaPixelId}
+      data-ga4-id={ga4MeasurementId}
+      data-google-ads-id={googleAdsId}
+      hidden
+    >
       <p>
-        We use one cookie (the Meta Pixel) to measure whether our ads work. No consent, no
-        cookie, and the site works exactly the same either way.
+        We use a small number of cookies (analytics and ad measurement) to understand what's
+        working. No consent, no cookies, and the site works exactly the same either way.
       </p>
       <div class="consent-actions">
         <button type="button" class="btn btn--primary btn--sm" data-consent-accept>
@@ -67,10 +80,13 @@ import { site } from '../data/site';
   const banner = document.querySelector<HTMLElement>('[data-consent-banner]');
 
   if (banner) {
-    const pixelId = banner.dataset.pixelId!;
+    const metaPixelId = banner.dataset.metaPixelId ?? '';
+    const ga4Id = banner.dataset.ga4Id ?? '';
+    const googleAdsId = banner.dataset.googleAdsId ?? '';
     const KEY = 'consent-ads';
 
-    const loadPixel = () => {
+    const loadMetaPixel = () => {
+      if (!metaPixelId) return;
       const w = window as any;
       if (w.fbq) return;
       const fbq: any = (w.fbq = (...args: unknown[]) => {
@@ -85,20 +101,45 @@ import { site } from '../data/site';
       s.async = true;
       s.src = 'https://connect.facebook.net/en_US/fbevents.js';
       document.head.appendChild(s);
-      w.fbq('init', pixelId);
+      w.fbq('init', metaPixelId);
       w.fbq('track', 'PageView');
+    };
+
+    const loadGoogleTag = () => {
+      const ids = [ga4Id, googleAdsId].filter(Boolean);
+      if (!ids.length) return;
+      const w = window as any;
+      w.dataLayer = w.dataLayer || [];
+      // eslint-disable-next-line
+      function gtag(...args: unknown[]) {
+        w.dataLayer.push(args);
+      }
+      w.gtag = gtag;
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = `https://www.googletagmanager.com/gtag/js?id=${ids[0]}`;
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      for (const id of ids) gtag('config', id);
+    };
+
+    const loadAll = () => {
+      loadMetaPixel();
+      loadGoogleTag();
+      document.dispatchEvent(new CustomEvent('tracking:ready'));
+      // Kept for pages/components written against the old event name.
       document.dispatchEvent(new CustomEvent('pixel:ready'));
     };
 
     const choice = localStorage.getItem(KEY);
     if (choice === 'granted') {
-      loadPixel();
+      loadAll();
     } else if (choice === null) {
       banner.hidden = false;
       banner.querySelector('[data-consent-accept]')?.addEventListener('click', () => {
         localStorage.setItem(KEY, 'granted');
         banner.hidden = true;
-        loadPixel();
+        loadAll();
       });
       banner.querySelector('[data-consent-decline]')?.addEventListener('click', () => {
         localStorage.setItem(KEY, 'denied');

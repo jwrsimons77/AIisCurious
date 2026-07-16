@@ -3,7 +3,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.aiiscurious.co.uk',
+  // Matches src/data/site.ts — see the TODO there re: the co.uk domain.
+  site: 'https://aiiscurious.netlify.app',
   trailingSlash: 'always',
   integrations: [
     sitemap({
@@ -11,7 +12,10 @@ export default defineConfig({
       priority: 0.7,
       lastmod: new Date(),
       // Ad landing + conversion pages are noindex and stay out of the sitemap
-      filter: (page) => !page.includes('/free-ai-report/') && !page.includes('/book/thanks/'),
+      filter: (page) =>
+        !page.includes('/free-ai-report/') &&
+        !page.includes('/book/thanks/') &&
+        !page.includes('/ai-readiness-checklist/thanks/'),
     }),
   ],
   build: {

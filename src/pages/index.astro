@@ -39,6 +39,9 @@ const homeFaqs = siteFaqs.slice(0, 5);
         <p class="hero-note">
           Free 15-minute conversation · Personalised written report · No obligation
         </p>
+        <p class="hero-alt">
+          Not ready for a call? <a href="/ai-readiness-checklist/">Get the free AI Readiness Checklist</a> instead.
+        </p>
       </div>
       <div class="hero-media">
         <Image
@@ -324,6 +327,16 @@ const homeFaqs = siteFaqs.slice(0, 5);
     margin-top: 1.1rem;
     font-size: var(--text-xs);
     color: var(--muted);
+  }
+
+  .hero-alt {
+    margin-top: 0.6rem;
+    font-size: var(--text-xs);
+    color: var(--muted);
+  }
+
+  .hero-alt a {
+    color: var(--accent-ink);
   }
 
   .hero-media {

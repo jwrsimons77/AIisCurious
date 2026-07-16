@@ -1,0 +1,62 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 2033 >>
+stream
+BT
+/F2 22 Tf 56 760 Td (The AI Readiness Checklist) Tj
+/F1 12 Tf 0 -22 Td (12 quick checks before you spend a penny on AI tools) Tj
+/F1 10 Tf 0 -16 Td (AIisCurious - aiiscurious.netlify.app) Tj
+/F1 11 Tf 0 -46 Td ([ ] Write down the 3 tasks that eat the most time each week - AI is only worth it if it) Tj
+/F1 11 Tf 0 -18 Td (   removes real hours.) Tj
+/F1 11 Tf 0 -18 Td ([ ] Check whether the tool ever sends your data to train someone else's model \(read the) Tj
+/F1 11 Tf 0 -18 Td (   privacy page, not the marketing page\).) Tj
+/F1 11 Tf 0 -18 Td ([ ] Confirm the tool has a UK/EU data option or a clear GDPR position before any customer) Tj
+/F1 11 Tf 0 -18 Td (   data goes near it.) Tj
+/F1 11 Tf 0 -18 Td ([ ] Ask "what happens if it is wrong?" for each task - low-stakes tasks \(drafts, summaries\)) Tj
+/F1 11 Tf 0 -18 Td (   are safe first steps; anything customer-facing needs a human check.) Tj
+/F1 11 Tf 0 -18 Td ([ ] Set a monthly budget cap before you start - most useful tools cost under GBP 30/month) Tj
+/F1 11 Tf 0 -18 Td (   per person.) Tj
+/F1 11 Tf 0 -18 Td ([ ] Pick ONE tool and ONE task to start with. Trying five tools at once is how AI projects) Tj
+/F1 11 Tf 0 -18 Td (   stall.) Tj
+/F1 11 Tf 0 -18 Td ([ ] Give it two real weeks before judging it - the first few days are always slower while) Tj
+/F1 11 Tf 0 -18 Td (   you learn the prompts that work.) Tj
+/F1 11 Tf 0 -18 Td ([ ] Write down the prompts that worked well - a shared "prompt library" saves the whole team) Tj
+/F1 11 Tf 0 -18 Td (   relearning it.) Tj
+/F1 11 Tf 0 -18 Td ([ ] Tell your team what it's for \(and what it isn't for\) - unclear AI policies cause more) Tj
+/F1 11 Tf 0 -18 Td (   problems than the tools themselves.) Tj
+/F1 11 Tf 0 -18 Td ([ ] Review after 90 days: did it save the time you hoped? If not, stop paying for it - no) Tj
+/F1 11 Tf 0 -18 Td (   shame in that.) Tj
+/F1 11 Tf 0 -28 Td (Want a second opinion on your specific business? Book a free 15-minute call:) Tj
+/F2 11 Tf 0 -16 Td (aiiscurious.netlify.app/book/) Tj
+ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000321 00000 n 
+0000000396 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+2481
+%%EOF

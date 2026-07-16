@@ -6,6 +6,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyCTA from '../components/StickyCTA.astro';
 import ConsentPixel from '../components/ConsentPixel.astro';
+import ExitIntentPopup from '../components/ExitIntentPopup.astro';
 import { site } from '../data/site';
 
 interface Props {
@@ -132,6 +133,29 @@ const allSchema = [localBusiness, website, ...schema];
         document.documentElement.dataset.theme = preferred;
       })();
     </script>
+
+    <!--
+      Lead attribution: capture UTM/click params on landing, keep the
+      first-touch values in localStorage so the booking form can tag each
+      lead with the channel/campaign that brought them, even if they browse
+      a few pages first. Read by BookingForm.astro.
+    -->
+    <script is:inline>
+      (() => {
+        const KEY = 'lead-attribution';
+        const params = new URLSearchParams(location.search);
+        const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid'];
+        const found = {};
+        for (const key of keys) {
+          const value = params.get(key);
+          if (value) found[key] = value;
+        }
+        if (Object.keys(found).length && !localStorage.getItem(KEY)) {
+          found.landing_page = location.pathname;
+          localStorage.setItem(KEY, JSON.stringify(found));
+        }
+      })();
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -141,6 +165,7 @@ const allSchema = [localBusiness, website, ...schema];
     </main>
     {!minimal && <Footer />}
     {!minimal && <StickyCTA />}
+    {!minimal && <ExitIntentPopup />}
     <ConsentPixel />
 
     <!-- Scroll-reveal: progressively enhances, respects reduced motion -->
