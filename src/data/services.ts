@@ -20,7 +20,7 @@ export const services: Service[] = [
     name: 'AI Opportunity Review',
     shortName: 'Opportunity Review',
     tagline: 'Find out exactly where AI could save your business time, before you spend anything.',
-    metaTitle: 'AI Opportunity Review for Small Businesses | AIisCurious',
+    metaTitle: 'AI Opportunity Review for Small Businesses | Delveinai',
     metaDescription:
       'A free 15-minute conversation and a personalised report showing where AI could genuinely save your small business time. Manchester-based, no jargon, no obligation.',
     whoFor:
@@ -66,7 +66,7 @@ export const services: Service[] = [
     name: 'AI Essentials Workshop',
     shortName: 'Essentials Workshop',
     tagline: 'Get your whole team confident with AI in half a day, using your real work, not demos.',
-    metaTitle: 'AI Essentials Workshop - Practical AI Training for Teams | AIisCurious',
+    metaTitle: 'AI Essentials Workshop - Practical AI Training for Teams | Delveinai',
     metaDescription:
       'A half-day, hands-on AI workshop for small business teams across Manchester and the North West. Your team leaves using ChatGPT, Claude or Copilot on real work the same day.',
     whoFor:
@@ -111,7 +111,7 @@ export const services: Service[] = [
     name: 'AI Setup & Implementation',
     shortName: 'Setup & Implementation',
     tagline: 'The right tools, set up properly and securely, with your team actually using them.',
-    metaTitle: 'AI Setup & Implementation for Small Businesses | AIisCurious',
+    metaTitle: 'AI Setup & Implementation for Small Businesses | Delveinai',
     metaDescription:
       'Hands-on AI setup for small businesses: tool selection, secure configuration, data protection settings and team onboarding. Fixed prices, delivered across the North West.',
     whoFor:
@@ -156,7 +156,7 @@ export const services: Service[] = [
     name: 'Workflow Automation',
     shortName: 'Automation',
     tagline: 'Hand your repetitive admin to software that never gets bored.',
-    metaTitle: 'Workflow Automation for Small Businesses | AIisCurious',
+    metaTitle: 'Workflow Automation for Small Businesses | Delveinai',
     metaDescription:
       'Practical workflow automation for small businesses in the North West: quotes, invoicing, email triage, data entry and reporting, built with tools you already pay for.',
     whoFor:
@@ -200,7 +200,7 @@ export const services: Service[] = [
     name: 'Ongoing AI Support',
     shortName: 'Ongoing Support',
     tagline: 'A knowledgeable person to call as AI changes, without hiring anyone.',
-    metaTitle: 'Ongoing AI Support & Advice for Small Businesses | AIisCurious',
+    metaTitle: 'Ongoing AI Support & Advice for Small Businesses | Delveinai',
     metaDescription:
       'Monthly AI support for small businesses: a regular check-in, help when tools change, new opportunities spotted, and questions answered, without hiring anyone.',
     whoFor:

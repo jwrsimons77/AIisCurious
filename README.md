@@ -1,4 +1,4 @@
-# AIisCurious
+# Delveinai
 
 **Helping small businesses take their first confident step into AI.**
 
@@ -115,9 +115,12 @@ tagged with the channel/campaign that produced it.
 ## Before launch — replace these
 
 1. **Domain** — `src/data/site.ts` and `astro.config.mjs` currently point at
-   `https://aiiscurious.netlify.app` because `aiiscurious.co.uk` has no DNS configured yet.
-   Once the custom domain is connected in Netlify, switch both files (and re-submit the
-   sitemap in Search Console) to `https://www.aiiscurious.co.uk`.
+   `https://aiiscurious.netlify.app` because the new Delveinai custom domain hasn't been
+   registered/connected yet. Once it's connected in Netlify, switch both files, plus the
+   `Sitemap:` line in `public/robots.txt` and the contact email in `src/data/site.ts`,
+   to the new domain (e.g. `https://www.delveinai.co.uk`), re-submit the sitemap in
+   Search Console, and set up 301 redirects from the old netlify.app URL so existing
+   rankings and backlinks carry over.
 2. **Form notifications** — enable Netlify Forms email notifications (see above) so
    submissions reach your inbox.
 3. **Tracking IDs** — `metaPixelId`, `ga4MeasurementId`, `googleAdsId` and
