@@ -2,13 +2,14 @@
 import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import BookingForm from '../../components/BookingForm.astro';
+import CalendlyEmbed from '../../components/CalendlyEmbed.astro';
 import ReportContents from '../../components/ReportContents.astro';
 import FAQ from '../../components/FAQ.astro';
 
 const bookingFaqs = [
   {
-    q: 'What happens after I submit the form?',
-    a: 'You’ll get a confirmation email straight away, then a short reply from me (usually the same working day) to agree a time for the 15-minute call. After the call, your written AI Opportunity Report arrives within three working days.',
+    q: 'What happens after I book?',
+    a: 'If you pick a time in the calendar, the call is confirmed instantly and the invite lands in your inbox. If you request a callback instead, you’ll get a short reply from me (usually the same working day) to agree a time. Either way, after the 15-minute call your written AI Opportunity Report arrives within three working days.',
   },
   {
     q: 'Is this genuinely free, or is there a catch?',
@@ -36,6 +37,49 @@ const bookingFaqs = [
             One short conversation about your business. One personalised written report showing
             exactly where AI could save you time, and whether it’s worth doing at all.
           </p>
+        </div>
+        <div class="book-form-wrap">
+          <div class="book-tabs" role="tablist" aria-label="How would you like to book?">
+            <button
+              type="button"
+              role="tab"
+              id="tab-calendar"
+              aria-selected="true"
+              aria-controls="panel-calendar"
+              data-book-tab="calendar"
+            >
+              Pick a time now
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="tab-form"
+              aria-selected="false"
+              aria-controls="panel-form"
+              data-book-tab="form"
+            >
+              Request a callback
+            </button>
+          </div>
+          <div id="panel-calendar" role="tabpanel" aria-labelledby="tab-calendar" data-book-panel="calendar">
+            <CalendlyEmbed />
+          </div>
+          <div id="panel-form" role="tabpanel" aria-labelledby="tab-form" data-book-panel="form" hidden>
+            <BookingForm showCalendarLink={false} />
+          </div>
+          <noscript>
+            <!-- Without JS the tabs can't switch, so reveal the form as well. -->
+            <style is:inline>
+              [data-book-panel][hidden] {
+                display: block;
+              }
+              .book-tabs {
+                display: none;
+              }
+            </style>
+          </noscript>
+        </div>
+        <div class="book-details">
           <ul class="checklist book-points">
             <li>Your top AI opportunities, ranked by effort and payoff</li>
             <li>Realistic time savings and honest costs</li>
@@ -47,9 +91,6 @@ const bookingFaqs = [
             No pressure. No obligation. If AI isn’t right for your business yet, the report will
             say so honestly.
           </p>
-        </div>
-        <div class="book-form-wrap">
-          <BookingForm />
         </div>
       </div>
     </div>
@@ -71,14 +112,31 @@ const bookingFaqs = [
 
   .book-grid {
     display: grid;
-    gap: 2.5rem;
+    gap: 2rem;
     align-items: start;
   }
 
   @media (min-width: 1024px) {
     .book-grid {
       grid-template-columns: 5fr 6fr;
-      gap: 4rem;
+      grid-template-rows: auto 1fr;
+      grid-template-areas:
+        'intro form'
+        'details form';
+      column-gap: 4rem;
+      row-gap: 2rem;
+    }
+
+    .book-intro {
+      grid-area: intro;
+    }
+
+    .book-details {
+      grid-area: details;
+    }
+
+    .book-form-wrap {
+      grid-area: form;
     }
   }
 
@@ -92,14 +150,57 @@ const bookingFaqs = [
     color: var(--muted);
   }
 
-  .book-points {
-    margin-top: 1.75rem;
-  }
-
   .book-reassure {
     margin-top: 1.5rem;
     font-size: var(--text-sm);
     color: var(--muted);
     font-style: italic;
   }
+
+  .book-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+    padding: 0.4rem;
+    margin-bottom: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .book-tabs [role='tab'] {
+    padding: 0.7rem 1rem;
+    border: 0;
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: background 150ms ease, color 150ms ease;
+  }
+
+  .book-tabs [role='tab'][aria-selected='true'] {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  :global(:root[data-theme='dark']) .book-tabs [role='tab'][aria-selected='true'] {
+    color: #10201c;
+  }
 </style>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('[data-book-tab]');
+  const panels = document.querySelectorAll<HTMLElement>('[data-book-panel]');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => t.setAttribute('aria-selected', String(t === tab)));
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.bookPanel !== tab.dataset.bookTab;
+      });
+    });
+  });
+</script>

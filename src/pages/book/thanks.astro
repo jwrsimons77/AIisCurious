@@ -4,14 +4,17 @@ import { site } from '../../data/site';
 
 const steps = [
   {
+    key: 'inbox',
     title: 'Check your inbox',
     text: 'A confirmation email is on its way. If it hasn’t arrived in a few minutes, check your spam folder just in case.',
   },
   {
+    key: 'time',
     title: 'I’ll be in touch to agree a time',
     text: 'Usually the same working day. The call itself is 15 relaxed minutes about how your business runs. No preparation needed.',
   },
   {
+    key: 'report',
     title: 'Your report arrives within 3 working days',
     text: 'A short, personalised AI Opportunity Report: your best opportunities, realistic time savings, recommended tools and a simple roadmap.',
   },
@@ -37,13 +40,13 @@ const steps = [
           stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg
         >
       </span>
-      <h1>Request received. Thank you!</h1>
+      <h1 data-thanks-heading>Request received. Thank you!</h1>
       <p class="thanks-lede">You’ve just taken the first step. Here’s exactly what happens next:</p>
 
       <ol class="thanks-steps">
         {
           steps.map((step) => (
-            <li>
+            <li data-step={step.key}>
               <h2>{step.title}</h2>
               <p>{step.text}</p>
             </li>
@@ -62,7 +65,7 @@ const steps = [
           <a href="/blog/ten-tasks-to-automate-this-month/">10 tasks you could automate this month</a
           >.
         </p>
-        <p>
+        <p data-pick-time>
           Rather pick your call time now? <a href={site.calendlyUrl} rel="noopener noreferrer"
             >Choose a slot in the calendar</a
           >.
@@ -89,6 +92,24 @@ const steps = [
   };
   if (window.fbq || window.gtag) fireConversions();
   else document.addEventListener('tracking:ready', fireConversions, { once: true });
+</script>
+
+<!-- Visitors who booked via the embedded calendar already have a confirmed slot. -->
+<script>
+  if (new URLSearchParams(window.location.search).get('scheduled') === '1') {
+    const heading = document.querySelector('[data-thanks-heading]');
+    if (heading) heading.textContent = 'Your call is booked. Thank you!';
+
+    const step = document.querySelector('[data-step="time"]');
+    const title = step?.querySelector('h2');
+    const text = step?.querySelector('p');
+    if (title) title.textContent = 'Your call is in the calendar';
+    if (text)
+      text.textContent =
+        'The calendar invite is in your inbox. The call itself is 15 relaxed minutes about how your business runs. No preparation needed.';
+
+    document.querySelector<HTMLElement>('[data-pick-time]')?.setAttribute('hidden', '');
+  }
 </script>
 
 <style>

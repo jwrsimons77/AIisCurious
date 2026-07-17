@@ -3,8 +3,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // Matches src/data/site.ts — see the TODO there re: the new Delveinai domain.
-  site: 'https://aiiscurious.netlify.app',
+  // Matches src/data/site.ts.
+  site: 'https://delveinai.co.uk',
   trailingSlash: 'always',
   integrations: [
     sitemap({
