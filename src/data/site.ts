@@ -5,13 +5,13 @@
 export const site = {
   name: 'Delveinai',
   tagline: 'Helping small businesses take their first confident step into AI.',
-  // TODO: switch to the new Delveinai domain (e.g. 'https://www.delveinai.co.uk')
-  // once it's registered and its DNS is connected in Netlify. Until then the
-  // real live site is the netlify.app URL, and canonical/OG tags must match it.
-  url: 'https://aiiscurious.netlify.app',
+  // Canonical domain. delveinai.com and the old aiiscurious.netlify.app URL
+  // 301-redirect here (see netlify.toml). Deploy this only once the domain is
+  // connected in Netlify, so canonical/OG tags match the live site.
+  url: 'https://www.delveinai.co.uk',
   founder: 'James',
-  // TODO: point at a working inbox on the new Delveinai domain once its email
-  // (MX) records are set up.
+  // TODO: set up email hosting (MX records) for delveinai.co.uk so this
+  // inbox actually receives mail.
   email: 'hello@delveinai.co.uk',
   region: 'Manchester & the North West',
   address: {

@@ -3,6 +3,37 @@
   command = "npm run build"
   publish = "dist"
 
+# Canonical domain: www.delveinai.co.uk. Everything else 301s to it.
+# For the domain-level rules to work, delveinai.co.uk and delveinai.com
+# (and their www variants) must all be added to this Netlify site as
+# domain aliases, with www.delveinai.co.uk set as the primary domain.
+[[redirects]]
+  from = "https://delveinai.co.uk/*"
+  to = "https://www.delveinai.co.uk/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://delveinai.com/*"
+  to = "https://www.delveinai.co.uk/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.delveinai.com/*"
+  to = "https://www.delveinai.co.uk/:splat"
+  status = 301
+  force = true
+
+# Old pre-rebrand URL: keep any existing links/rankings flowing to the
+# new domain. (Netlify also does this automatically once a primary
+# custom domain is set, but being explicit costs nothing.)
+[[redirects]]
+  from = "https://aiiscurious.netlify.app/*"
+  to = "https://www.delveinai.co.uk/:splat"
+  status = 301
+  force = true
+
 [build.environment]
   NODE_VERSION = "22"
 

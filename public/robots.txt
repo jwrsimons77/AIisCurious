@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# TODO: update to the new Delveinai custom domain once its DNS is live.
-Sitemap: https://aiiscurious.netlify.app/sitemap-index.xml
+Sitemap: https://www.delveinai.co.uk/sitemap-index.xml
