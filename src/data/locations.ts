@@ -30,7 +30,7 @@ export const locations: Location[] = [
     metaDescription:
       'Independent AI consultant in Manchester. Practical AI advice, training and implementation for small businesses, from the Northern Quarter to Spinningfields. Free AI Opportunity Report.',
     intro:
-      'Manchester is where AIisCurious is based, and it’s a city that has always been quick to adopt what works, from the first railways to one of the UK’s largest tech scenes outside London. But away from the venture-funded startups, most Manchester businesses are agencies, practices, workshops and shops with the same question: what would AI actually do for us? That’s the question I answer, in plain English, over a brew.',
+      'Manchester is where Delveinai is based, and it’s a city that has always been quick to adopt what works, from the first railways to one of the UK’s largest tech scenes outside London. But away from the venture-funded startups, most Manchester businesses are agencies, practices, workshops and shops with the same question: what would AI actually do for us? That’s the question I answer, in plain English, over a brew.',
     businesses: [
       'Creative and marketing agencies around the Northern Quarter and Ancoats',
       'Law and accountancy firms in Spinningfields and around Deansgate',

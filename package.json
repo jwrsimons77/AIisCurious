@@ -1,9 +1,9 @@
 {
-  "name": "aiiscurious",
+  "name": "delveinai",
   "type": "module",
   "version": "1.0.0",
   "private": true,
-  "description": "AIisCurious — Helping small businesses take their first confident step into AI.",
+  "description": "Delveinai — Helping small businesses take their first confident step into AI.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

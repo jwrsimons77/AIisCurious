@@ -3,14 +3,16 @@
  * Update contact details, booking links and form endpoints here.
  */
 export const site = {
-  name: 'AIisCurious',
+  name: 'Delveinai',
   tagline: 'Helping small businesses take their first confident step into AI.',
-  // TODO: switch to 'https://www.aiiscurious.co.uk' once that domain's DNS is
-  // connected in Netlify (it currently doesn't resolve at all). Until then the
+  // TODO: switch to the new Delveinai domain (e.g. 'https://www.delveinai.co.uk')
+  // once it's registered and its DNS is connected in Netlify. Until then the
   // real live site is the netlify.app URL, and canonical/OG tags must match it.
   url: 'https://aiiscurious.netlify.app',
   founder: 'James',
-  email: 'hello@aiiscurious.co.uk',
+  // TODO: point at a working inbox on the new Delveinai domain once its email
+  // (MX) records are set up.
+  email: 'hello@delveinai.co.uk',
   region: 'Manchester & the North West',
   address: {
     locality: 'Manchester',
@@ -53,7 +55,8 @@ export const site = {
   // The booking form uses Netlify Forms (form name: "booking").
   // Configure notification emails in Netlify: Site → Forms → Notifications.
   social: {
-    linkedin: 'https://www.linkedin.com/company/aiiscurious',
+    // TODO: create/rename the LinkedIn company page to match the new brand.
+    linkedin: 'https://www.linkedin.com/company/delveinai',
   },
 } as const;
 

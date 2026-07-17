@@ -25,7 +25,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'ai-essentials-workshop',
     areaName: 'Manchester',
     h1: 'AI Training & Workshops in Manchester',
-    metaTitle: 'AI Training Manchester - Practical Workshops for Teams | AIisCurious',
+    metaTitle: 'AI Training Manchester - Practical Workshops for Teams | Delveinai',
     metaDescription:
       'Hands-on AI training in Manchester for small business teams. Half-day workshops using your real work, ChatGPT, Claude, Copilot. Delivered at your office by a local specialist.',
     intro:
@@ -49,7 +49,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'workflow-automation',
     areaName: 'Manchester',
     h1: 'AI Automation in Manchester',
-    metaTitle: 'AI Automation Manchester - Workflow Automation for SMEs | AIisCurious',
+    metaTitle: 'AI Automation Manchester - Workflow Automation for SMEs | Delveinai',
     metaDescription:
       'Workflow and AI automation for Manchester small businesses: quotes, invoicing, enquiries, reporting. Built with tools you already own, by a local independent specialist.',
     intro:
@@ -73,7 +73,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'ai-setup-implementation',
     areaName: 'Manchester',
     h1: 'AI Implementation in Manchester',
-    metaTitle: 'AI Implementation Manchester - Setup Done Properly | AIisCurious',
+    metaTitle: 'AI Implementation Manchester - Setup Done Properly | Delveinai',
     metaDescription:
       'AI setup and implementation for Manchester businesses: tool selection, secure configuration, GDPR-aware data settings and team onboarding. Fixed prices, local specialist.',
     intro:
@@ -99,7 +99,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'ai-essentials-workshop',
     areaName: 'Liverpool',
     h1: 'AI Training & Workshops in Liverpool',
-    metaTitle: 'AI Training Liverpool - Hands-On Workshops for Teams | AIisCurious',
+    metaTitle: 'AI Training Liverpool - Hands-On Workshops for Teams | Delveinai',
     metaDescription:
       'Practical AI training in Liverpool for small business teams. Half-day hands-on workshops at your office using your real work. ChatGPT, Claude and Copilot covered.',
     intro:
@@ -123,7 +123,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'workflow-automation',
     areaName: 'Liverpool',
     h1: 'AI Automation in Liverpool',
-    metaTitle: 'AI Automation Liverpool - Workflow Automation for SMEs | AIisCurious',
+    metaTitle: 'AI Automation Liverpool - Workflow Automation for SMEs | Delveinai',
     metaDescription:
       'Workflow and AI automation for Liverpool businesses: enquiry handling, bookings, freight admin and reporting. Practical builds with a month of included support.',
     intro:
@@ -147,7 +147,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'ai-setup-implementation',
     areaName: 'Liverpool',
     h1: 'AI Implementation in Liverpool',
-    metaTitle: 'AI Implementation Liverpool - Secure AI Setup for SMEs | AIisCurious',
+    metaTitle: 'AI Implementation Liverpool - Secure AI Setup for SMEs | Delveinai',
     metaDescription:
       'AI setup and implementation for Liverpool businesses: tool selection, secure GDPR-aware configuration, and team onboarding. Independent, fixed-price, hands-on.',
     intro:
@@ -173,7 +173,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'ai-essentials-workshop',
     areaName: 'Cheshire',
     h1: 'AI Training & Workshops in Cheshire',
-    metaTitle: 'AI Training Cheshire - Workshops in Chester, Wilmslow & Beyond | AIisCurious',
+    metaTitle: 'AI Training Cheshire - Workshops in Chester, Wilmslow & Beyond | Delveinai',
     metaDescription:
       'Hands-on AI training across Cheshire, Chester, Wilmslow, Macclesfield, Northwich, Crewe. Half-day workshops for small business teams using your real work.',
     intro:
@@ -197,7 +197,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'workflow-automation',
     areaName: 'Cheshire',
     h1: 'AI Automation in Cheshire',
-    metaTitle: 'AI Automation Cheshire - Practical Workflow Automation | AIisCurious',
+    metaTitle: 'AI Automation Cheshire - Practical Workflow Automation | Delveinai',
     metaDescription:
       'Workflow and AI automation for Cheshire businesses, client onboarding, quoting, compliance paperwork and reporting. Fixed prices, built on tools you already own.',
     intro:
@@ -221,7 +221,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'ai-setup-implementation',
     areaName: 'Cheshire',
     h1: 'AI Implementation in Cheshire',
-    metaTitle: 'AI Implementation Cheshire - Secure Setup for Professional Firms | AIisCurious',
+    metaTitle: 'AI Implementation Cheshire - Secure Setup for Professional Firms | Delveinai',
     metaDescription:
       'AI implementation for Cheshire businesses: tool selection, secure GDPR-aware setup and team onboarding for professional firms and SMEs across the county.',
     intro:
@@ -247,7 +247,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'ai-essentials-workshop',
     areaName: 'Warrington',
     h1: 'AI Training & Workshops in Warrington',
-    metaTitle: 'AI Training Warrington - Practical Team Workshops | AIisCurious',
+    metaTitle: 'AI Training Warrington - Practical Team Workshops | Delveinai',
     metaDescription:
       'Hands-on AI training in Warrington for small business teams, logistics offices, consultancies and professional firms. Half-day workshops using your real work.',
     intro:
@@ -271,7 +271,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'workflow-automation',
     areaName: 'Warrington',
     h1: 'AI Automation in Warrington',
-    metaTitle: 'AI Automation Warrington - Logistics & Business Automation | AIisCurious',
+    metaTitle: 'AI Automation Warrington - Logistics & Business Automation | Delveinai',
     metaDescription:
       'Workflow and AI automation for Warrington businesses: transport bookings, PODs, customer updates, bids and reports. Fixed-price builds by a nearby specialist.',
     intro:
@@ -295,7 +295,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'ai-setup-implementation',
     areaName: 'Warrington',
     h1: 'AI Implementation in Warrington',
-    metaTitle: 'AI Implementation Warrington - Secure AI Setup for SMEs | AIisCurious',
+    metaTitle: 'AI Implementation Warrington - Secure AI Setup for SMEs | Delveinai',
     metaDescription:
       'AI setup and implementation for Warrington businesses: secure configuration, data rules, workflow templates and team onboarding. Fixed prices, local delivery.',
     intro:
