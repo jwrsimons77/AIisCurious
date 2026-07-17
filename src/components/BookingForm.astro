@@ -1,5 +1,12 @@
 ---
 import { site } from '../data/site';
+
+interface Props {
+  /** Hide the "choose a slot" link where the calendar is already embedded alongside. */
+  showCalendarLink?: boolean;
+}
+
+const { showCalendarLink = true } = Astro.props;
 ---
 
 <form
@@ -79,9 +86,17 @@ import { site } from '../data/site';
   <p class="form-status" role="status" aria-live="polite" data-form-status hidden></p>
 </form>
 
-<p class="calendly-alt">
-  Prefer to pick a time yourself? <a href={site.calendlyUrl} rel="noopener noreferrer">Choose a slot in the calendar</a>.
-</p>
+{
+  showCalendarLink && (
+    <p class="calendly-alt">
+      Prefer to pick a time yourself?{' '}
+      <a href={site.calendlyUrl} rel="noopener noreferrer">
+        Choose a slot in the calendar
+      </a>
+      .
+    </p>
+  )
+}
 
 <style>
   .booking-form {
