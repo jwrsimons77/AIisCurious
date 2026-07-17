@@ -5,10 +5,7 @@
 export const site = {
   name: 'Delveinai',
   tagline: 'Helping small businesses take their first confident step into AI.',
-  // TODO: switch to the new Delveinai domain (e.g. 'https://www.delveinai.co.uk')
-  // once it's registered and its DNS is connected in Netlify. Until then the
-  // real live site is the netlify.app URL, and canonical/OG tags must match it.
-  url: 'https://aiiscurious.netlify.app',
+  url: 'https://delveinai.co.uk',
   founder: 'James',
   // TODO: point at a working inbox on the new Delveinai domain once its email
   // (MX) records are set up.

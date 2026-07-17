@@ -66,7 +66,7 @@ The site has dedicated ad infrastructure:
 
 - **`/free-ai-report/`** — distraction-free landing page (no nav, one message, one form).
   Point all Meta ads here, with UTM tags, e.g.
-  `https://aiiscurious.netlify.app/free-ai-report/?utm_source=meta&utm_medium=paid&utm_campaign=trades-quotes`
+  `https://delveinai.co.uk/free-ai-report/?utm_source=meta&utm_medium=paid&utm_campaign=trades-quotes`
 - **`/book/thanks/`** — thank-you page every successful form submission redirects to.
   This is your conversion page.
 - **Meta Pixel** — set `metaPixelId` in `src/data/site.ts` (from Meta Events Manager).
@@ -106,7 +106,7 @@ tagged with the channel/campaign that produced it.
 
 1. Add the site as a property in [Google Search Console](https://search.google.com/search-console)
    (domain property is best; verify via DNS).
-2. Submit the sitemap: `https://aiiscurious.netlify.app/sitemap-index.xml`
+2. Submit the sitemap: `https://delveinai.co.uk/sitemap-index.xml`
    (also referenced in `robots.txt`, and linked from every page's `<head>`).
 3. Request indexing for the homepage and a handful of key pages to speed up first crawl.
 4. Repeat in [Bing Webmaster Tools](https://www.bing.com/webmasters) - it can import
@@ -114,13 +114,13 @@ tagged with the channel/campaign that produced it.
 
 ## Before launch — replace these
 
-1. **Domain** — `src/data/site.ts` and `astro.config.mjs` currently point at
-   `https://aiiscurious.netlify.app` because the new Delveinai custom domain hasn't been
-   registered/connected yet. Once it's connected in Netlify, switch both files, plus the
-   `Sitemap:` line in `public/robots.txt` and the contact email in `src/data/site.ts`,
-   to the new domain (e.g. `https://www.delveinai.co.uk`), re-submit the sitemap in
-   Search Console, and set up 301 redirects from the old netlify.app URL so existing
-   rankings and backlinks carry over.
+1. **Domain** — `src/data/site.ts`, `astro.config.mjs` and `public/robots.txt` all point
+   at the live domain `https://delveinai.co.uk`. `www.` already 301-redirects to it, but
+   `aiiscurious.netlify.app` still serves the site directly — in Netlify go to
+   Site → Domain management and confirm `delveinai.co.uk` is set as the **primary domain**
+   so the netlify.app URL redirects too. Then submit the sitemap in Search Console for the
+   new domain, and set up email (MX records) for `hello@delveinai.co.uk` so the contact
+   address in `src/data/site.ts` actually receives mail.
 2. **Form notifications** — enable Netlify Forms email notifications (see above) so
    submissions reach your inbox.
 3. **Tracking IDs** — `metaPixelId`, `ga4MeasurementId`, `googleAdsId` and

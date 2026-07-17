@@ -36,6 +36,11 @@ const bookingFaqs = [
             One short conversation about your business. One personalised written report showing
             exactly where AI could save you time, and whether it’s worth doing at all.
           </p>
+        </div>
+        <div class="book-form-wrap">
+          <BookingForm />
+        </div>
+        <div class="book-details">
           <ul class="checklist book-points">
             <li>Your top AI opportunities, ranked by effort and payoff</li>
             <li>Realistic time savings and honest costs</li>
@@ -47,9 +52,6 @@ const bookingFaqs = [
             No pressure. No obligation. If AI isn’t right for your business yet, the report will
             say so honestly.
           </p>
-        </div>
-        <div class="book-form-wrap">
-          <BookingForm />
         </div>
       </div>
     </div>
@@ -71,14 +73,31 @@ const bookingFaqs = [
 
   .book-grid {
     display: grid;
-    gap: 2.5rem;
+    gap: 2rem;
     align-items: start;
   }
 
   @media (min-width: 1024px) {
     .book-grid {
       grid-template-columns: 5fr 6fr;
-      gap: 4rem;
+      grid-template-rows: auto 1fr;
+      grid-template-areas:
+        'intro form'
+        'details form';
+      column-gap: 4rem;
+      row-gap: 2rem;
+    }
+
+    .book-intro {
+      grid-area: intro;
+    }
+
+    .book-details {
+      grid-area: details;
+    }
+
+    .book-form-wrap {
+      grid-area: form;
     }
   }
 
@@ -90,10 +109,6 @@ const bookingFaqs = [
     margin-top: 1rem;
     font-size: var(--text-lg);
     color: var(--muted);
-  }
-
-  .book-points {
-    margin-top: 1.75rem;
   }
 
   .book-reassure {
