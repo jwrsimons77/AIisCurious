@@ -4,6 +4,8 @@ description: 'Ten genuinely automatable tasks for small businesses, from missed-
 pubDate: 2026-06-30
 cluster: 'AI Automation'
 tags: ['automation', 'workflow', 'productivity']
+cover: '../../assets/images/planning-desk.jpg'
+coverAlt: 'A desk with a notebook and laptop laid out for planning'
 ---
 
 "Automation" sounds like a factory project. In practice, for a small business, it means this: **a repetitive task that currently needs a human now happens by itself.** Here are ten that are realistic within a month, most within a week, roughly ordered by effort.

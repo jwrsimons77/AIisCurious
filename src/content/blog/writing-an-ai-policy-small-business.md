@@ -4,6 +4,8 @@ description: 'Why every small business with employees needs a one-page AI policy
 pubDate: 2026-06-23
 cluster: 'AI Policies'
 tags: ['ai policy', 'security', 'team', 'gdpr']
+cover: '../../assets/images/meeting-table.jpg'
+coverAlt: 'Colleagues discussing a document around a meeting table'
 ---
 
 If anyone in your business uses AI tools, and statistically, someone already does, whether you know or not, you need an AI policy. Not a 40-page legal document. One page, in plain English, that answers the question every employee quietly has: *"Am I allowed to use this, and how?"*

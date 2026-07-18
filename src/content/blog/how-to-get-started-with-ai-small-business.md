@@ -4,6 +4,8 @@ description: 'A practical, no-jargon guide to taking your first steps with AI as
 pubDate: 2026-06-02
 cluster: 'Getting Started with AI'
 tags: ['getting started', 'chatgpt', 'claude', 'small business']
+cover: '../../assets/images/hero-consult.jpg'
+coverAlt: 'A consultant and a business owner talking through options at a desk'
 ---
 
 If you've been putting off "looking into AI" for months, this article is for you. No theory, no futurism, just what to do this week, in the gaps between running your actual business.

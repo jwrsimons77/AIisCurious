@@ -4,6 +4,8 @@ description: 'An independent, plain-English comparison of ChatGPT, Claude and Mi
 pubDate: 2026-06-09
 cluster: 'Getting Started with AI'
 tags: ['chatgpt', 'claude', 'microsoft copilot', 'tools']
+cover: '../../assets/images/writing-laptop.jpg'
+coverAlt: 'Hands typing on a laptop while comparing notes'
 ---
 
 The most common question I'm asked, by some distance: *"Which one should we use?"* Here's the honest, independent answer, I don't resell any of them, so there's no commission influencing this.
