@@ -4,6 +4,8 @@ description: 'Five practical prompting techniques that double the quality of wha
 pubDate: 2026-07-07
 cluster: 'Prompt Engineering'
 tags: ['prompts', 'chatgpt', 'claude', 'skills']
+cover: '../../assets/images/team-workshop.jpg'
+coverAlt: 'A small team practising together in a workshop session'
 ---
 
 Most people's first AI experience goes like this: type a short request, get something generic, conclude "it's not that good really", leave. The tool wasn't the problem, the instruction was. Here are the five techniques that fix it, learnable in the time it takes to drink a coffee.

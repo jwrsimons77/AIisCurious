@@ -4,6 +4,8 @@ description: 'What actually happens to the data you put into AI tools, the real 
 pubDate: 2026-06-16
 cluster: 'AI Security'
 tags: ['security', 'gdpr', 'data protection']
+cover: '../../assets/images/manchester-skyline.jpg'
+coverAlt: 'The Manchester skyline at dusk'
 ---
 
 "Is it secure?" is the best question a business owner can ask about AI, and it deserves a better answer than the two you usually get ("it's fine, stop worrying" and "never touch it, it's a data leak"). The truth is conditional: **AI is as secure as your setup and your habits make it.** Here's what that means, without the jargon.
