@@ -79,8 +79,8 @@ const { showCalendarLink = true } = Astro.props;
     Book my free 15-minute call
   </button>
   <p class="form-reassure">
-    You’ll receive a confirmation email straight away. Your details are never shared or added to a
-    mailing list.
+    I’ll be in touch personally to arrange a time — usually the same working day. Your details are
+    never shared or added to a mailing list.
   </p>
 
   <p class="form-status" role="status" aria-live="polite" data-form-status hidden></p>
@@ -196,8 +196,13 @@ const { showCalendarLink = true } = Astro.props;
 
     try {
       // Netlify Forms accepts URL-encoded POSTs to any path on the site.
-      const data = new FormData(form);
-      const body = new URLSearchParams(data as unknown as Record<string, string>).toString();
+      // Skip empty fields (unpopulated UTM/click-id inputs) so the
+      // submission notification email only lists fields with a value.
+      const params = new URLSearchParams();
+      for (const [key, value] of new FormData(form)) {
+        if (typeof value === 'string' && value.trim() !== '') params.append(key, value);
+      }
+      const body = params.toString();
       const res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
