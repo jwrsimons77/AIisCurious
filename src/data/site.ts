@@ -4,7 +4,7 @@
  */
 export const site = {
   name: 'Delveinai',
-  tagline: 'Helping small businesses take their first confident step into AI.',
+  tagline: 'Websites that win work for small businesses across the North West.',
   url: 'https://delveinai.co.uk',
   founder: 'James',
   // TODO: point at a working inbox on the new Delveinai domain once its email
@@ -57,5 +57,5 @@ export const site = {
   },
 } as const;
 
-export const ctaPrimary = 'Get My Free AI Opportunity Report';
+export const ctaPrimary = 'Get My Free Website Review';
 export const ctaSecondary = 'See How It Works';
