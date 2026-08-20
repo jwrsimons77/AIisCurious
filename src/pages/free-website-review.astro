@@ -16,17 +16,17 @@ const trustPoints = [
 ];
 
 const reportPoints = [
-  'Your top 3–5 AI opportunities, ranked by effort and payoff',
-  'Realistic time savings for your specific business',
-  'Recommended tools with honest costs (most are under £30 a month)',
-  'Security and GDPR notes in plain English',
-  'A simple roadmap, yours to keep whatever you decide',
+  'Your top 3–5 fixes, ranked by effort and payoff',
+  'Speed and mobile scores, explained in plain English',
+  'How you compare with two competitors ranking above you',
+  'An honest answer on rebuild versus repair, with indicative costs',
+  'A simple 90-day plan, yours to keep whatever you decide',
 ];
 ---
 
 <Base
-  title="Free AI Opportunity Report for Your Business | Delveinai"
-  description="One free 15-minute call. One personalised report showing exactly where AI could save your business hours every week. Manchester based, plain English, no obligation."
+  title="Free Website Review for Your Business | Delveinai"
+  description="One free 15-minute call. One personalised report showing exactly what is stopping your website winning work. Manchester based, plain English, no obligation."
   noindex={true}
   minimal={true}
 >
@@ -34,11 +34,11 @@ const reportPoints = [
     <div class="container container--narrow">
       <p class="lp-logo" aria-hidden="true">Delve<em>in</em>ai</p>
 
-      <h1>Find out exactly where AI could save your business hours every week</h1>
+      <h1>Find out exactly why your website isn't winning you work</h1>
       <p class="lp-lede">
-        One free 15-minute phone call. Then a short, personalised report showing your best AI
-        opportunities, what they'd save you, and what they'd cost. Written for your business, in
-        plain English.
+        One free 15-minute phone call. Then a short, personalised report showing what's holding
+        your site back, what each fix involves, and what it would cost. Written for your business,
+        in plain English.
       </p>
 
       <ul class="lp-trust" role="list">
@@ -46,12 +46,12 @@ const reportPoints = [
       </ul>
 
       <div class="lp-form">
-        <h2>Get your free report</h2>
+        <h2>Get your free review</h2>
         <BookingForm />
       </div>
 
       <div class="lp-detail">
-        <h2>What's in the report</h2>
+        <h2>What's in the review</h2>
         <ul class="checklist">
           {reportPoints.map((point) => <li>{point}</li>)}
         </ul>
@@ -60,13 +60,13 @@ const reportPoints = [
       <div class="lp-person">
         <h2>Who you'll be talking to</h2>
         <p>
-          I'm James, an independent AI consultant based in Manchester with a background in product
-          management, enterprise software and AI implementation. No agency, no call centre, no
-          sales team. The person on the call is the person who writes your report.
+          I'm James, an independent web designer based in Manchester with a background in product
+          management, enterprise software and digital design. No agency, no call centre, no
+          sales team. The person on the call is the person who writes your review.
         </p>
         <p class="lp-honest">
-          And an honest promise: if AI isn't worth it for your business yet, the report will say
-          exactly that.
+          And an honest promise: if your site only needs a few small fixes rather than a rebuild,
+          the review will say exactly that.
         </p>
       </div>
 

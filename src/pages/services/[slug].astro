@@ -126,8 +126,8 @@ const otherServices = services.filter((s) => s.slug !== service.slug);
           areaPage
             ? nearbyLocations.map((loc) => (
                 <a href={`/locations/${loc.slug}/`} class="card reveal">
-                  <h3>AI consulting in {loc.name}</h3>
-                  <p>Practical AI help for businesses in {loc.name} and the surrounding area.</p>
+                  <h3>Web design in {loc.name}</h3>
+                  <p>Websites and local SEO for businesses in {loc.name} and the surrounding area.</p>
                 </a>
               ))
             : otherServices.slice(0, 3).map((s) => (

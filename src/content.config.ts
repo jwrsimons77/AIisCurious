@@ -9,7 +9,7 @@ const blog = defineCollection({
       description: z.string(),
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
-      /** Topic cluster, e.g. "Getting Started with AI" */
+      /** Topic cluster, e.g. "Speed & Performance" */
       cluster: z.string(),
       tags: z.array(z.string()).default([]),
       draft: z.boolean().default(false),

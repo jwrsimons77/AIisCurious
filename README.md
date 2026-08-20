@@ -1,8 +1,8 @@
 # Delveinai
 
-**Helping small businesses take their first confident step into AI.**
+**Websites that win work for small businesses across the North West.**
 
-A production-ready, SEO-first marketing website for an independent AI consultant based in
+A production-ready, SEO-first marketing website for an independent web designer based in
 Manchester, serving small businesses across the North West. Built with
 [Astro](https://astro.build) — fully static output, no client framework, excellent Core Web
 Vitals by default.
@@ -29,7 +29,7 @@ Deploy `dist/` to any static host (Netlify, Vercel, Cloudflare Pages, S3+CloudFr
 | Industries | 12 industry guides (accountants → trades) |
 | Knowledge Centre | Topic-cluster hub + markdown blog (6 starter articles) |
 
-**73 static pages**, every one with unique H1, title, meta description, canonical URL,
+**74 static pages**, every one with unique H1, title, meta description, canonical URL,
 OpenGraph/Twitter cards, and JSON-LD (LocalBusiness sitewide; Service, FAQPage,
 BreadcrumbList, Article and Person schema where relevant). Sitemap and robots.txt included.
 
@@ -64,9 +64,9 @@ Netlify Forms webhook or Zapier's Netlify integration.
 
 The site has dedicated ad infrastructure:
 
-- **`/free-ai-report/`** — distraction-free landing page (no nav, one message, one form).
+- **`/free-website-review/`** — distraction-free landing page (no nav, one message, one form).
   Point all Meta ads here, with UTM tags, e.g.
-  `https://delveinai.co.uk/free-ai-report/?utm_source=meta&utm_medium=paid&utm_campaign=trades-quotes`
+  `https://delveinai.co.uk/free-website-review/?utm_source=meta&utm_medium=paid&utm_campaign=trades-websites`
 - **`/book/thanks/`** — thank-you page every successful form submission redirects to.
   This is your conversion page.
 - **Meta Pixel** — set `metaPixelId` in `src/data/site.ts` (from Meta Events Manager).

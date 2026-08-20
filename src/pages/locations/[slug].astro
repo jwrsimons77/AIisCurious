@@ -27,7 +27,7 @@ const nearby = location.nearby
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: `AI Consulting in ${location.name}`,
+  name: `Web Design in ${location.name}`,
   description: location.metaDescription,
   provider: { '@id': `${site.url}/#business` },
   areaServed: {
@@ -46,18 +46,18 @@ const featuredServices = services.slice(0, 4);
 ---
 
 <Base
-  title={`AI Consultant ${location.name} - Practical AI for Small Businesses | Delveinai`}
+  title={`Web Design ${location.name} - Websites for Small Businesses | Delveinai`}
   description={location.metaDescription}
   schema={[schema]}
 >
   <PageHero
     eyebrow={`${location.county} · North West`}
-    title={`AI consulting for ${location.name} businesses`}
+    title={`Web design for ${location.name} businesses`}
     lede={location.intro}
     crumbs={[{ label: 'Locations', href: '/locations/' }, { label: location.name }]}
   >
     <div class="hero-cta">
-      <a href="/book/" class="btn btn--primary btn--lg">Get My Free AI Opportunity Report</a>
+      <a href="/book/" class="btn btn--primary btn--lg">Get My Free Website Review</a>
     </div>
   </PageHero>
 
@@ -84,11 +84,11 @@ const featuredServices = services.slice(0, 4);
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow">Real, local examples</p>
-        <h2>What AI looks like for {location.name} businesses</h2>
+        <h2>What a better website looks like for {location.name} businesses</h2>
       </div>
       <div class="grid grid--2">
         {
-          location.aiExamples.map((example) => (
+          location.webExamples.map((example) => (
             <div class="card reveal">
               <p class="example-text">{example}</p>
             </div>
@@ -132,7 +132,7 @@ const featuredServices = services.slice(0, 4);
         {
           nearby.map((loc) => (
             <li>
-              <a href={`/locations/${loc.slug}/`}>AI consulting in {loc.name}</a>
+              <a href={`/locations/${loc.slug}/`}>Web design in {loc.name}</a>
             </li>
           ))
         }
@@ -141,8 +141,8 @@ const featuredServices = services.slice(0, 4);
   </section>
 
   <CTASection
-    heading={`Curious what AI could do for your ${location.name} business?`}
-    text="Book a free 15-minute conversation and get a personalised AI Opportunity Report, practical recommendations for your business, whether or not we ever work together."
+    heading={`Wondering what your ${location.name} website could be doing better?`}
+    text="Book a free 15-minute conversation and get a personalised Website Review, specific fixes ranked by effort and payoff, whether or not we ever work together."
   />
 </Base>
 

@@ -34,25 +34,25 @@ const schema = {
 ---
 
 <Base
-  title={`${industry.title} - Practical AI for ${industry.name} | Delveinai`}
+  title={`${industry.title} - Websites That Win Work | Delveinai`}
   description={industry.metaDescription}
   schema={[schema]}
 >
   <PageHero
-    eyebrow={`AI for your industry`}
+    eyebrow={`Web design for your industry`}
     title={industry.title}
     lede={industry.intro}
     crumbs={[{ label: 'Industries', href: '/industries/' }, { label: industry.name }]}
   >
     <div class="hero-cta">
-      <a href="/book/" class="btn btn--primary btn--lg">Get My Free AI Opportunity Report</a>
+      <a href="/book/" class="btn btn--primary btn--lg">Get My Free Website Review</a>
     </div>
   </PageHero>
 
   <section class="section--sm">
     <div class="container container--narrow">
       <div class="reveal">
-        <h2 class="block-title">Where the time goes</h2>
+        <h2 class="block-title">Where the website lets you down</h2>
         <ul class="checklist">
           {industry.painPoints.map((p) => <li>{p}</li>)}
         </ul>
@@ -64,7 +64,7 @@ const schema = {
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow">The opportunities</p>
-        <h2>Where AI genuinely helps {industry.name.toLowerCase()}</h2>
+        <h2>Where a better website genuinely helps {industry.name.toLowerCase()}</h2>
       </div>
       <div class="grid grid--2">
         {
@@ -95,7 +95,7 @@ const schema = {
     <div class="container">
       <div class="tools-roi">
         <div class="reveal">
-          <h2 class="block-title">Recommended tools</h2>
+          <h2 class="block-title">What the build involves</h2>
           <ul class="checklist">
             {industry.tools.map((tool) => <li>{tool}</li>)}
           </ul>
@@ -138,8 +138,8 @@ const schema = {
   </section>
 
   <CTASection
-    heading={`See what AI could do for your ${industry.name.toLowerCase().replace(/s$/, '')} business`}
-    text="Book a free 15-minute conversation and get a personalised AI Opportunity Report, specific opportunities, tools and time savings for how your business actually works."
+    heading={`See what a better website could do for your ${industry.name.toLowerCase().replace(/s$/, '')} business`}
+    text="Book a free 15-minute conversation and get a personalised Website Review, the specific fixes that would make the biggest difference to how your business wins work online."
   />
 </Base>
 
