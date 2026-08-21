@@ -1,10 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <radialGradient id="g" cx="32%" cy="30%" r="80%">
-      <stop offset="0%" stop-color="#e9a13b"/>
-      <stop offset="100%" stop-color="#0e6f60"/>
-    </radialGradient>
-  </defs>
-  <rect width="64" height="64" rx="16" fill="url(#g)"/>
-  <text x="32" y="42" font-family="Georgia, serif" font-size="26" font-style="italic" font-weight="600" fill="#fffdf8" text-anchor="middle">RP</text>
+  <rect width="64" height="64" rx="16" fill="#0b1e33"/>
+  <g stroke="#7eb3e8" stroke-width="3" stroke-linecap="round">
+    <path d="M24 13 21 21"/>
+    <path d="M33 11 30 19"/>
+    <path d="M42 14 39 22"/>
+  </g>
+  <g fill="none" stroke="#eff6ff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M17 50V35h8v-5h7V25h8v10h7v15"/>
+    <path d="M13 50h38"/>
+  </g>
 </svg>

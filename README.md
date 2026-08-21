@@ -44,7 +44,10 @@ BreadcrumbList, Article and Person schema where relevant). Sitemap and robots.tx
 - `src/components/` — reusable sections (CTA, FAQ accordion with schema, booking form,
   breadcrumbs, sticky mobile CTA, theme toggle…).
 - `src/styles/global.css` — the design system: fluid type scale, spacing tokens, light/dark
-  themes, WCAG-AA-checked colour tokens, reduced-motion support.
+  themes, WCAG-AA-checked colour tokens, reduced-motion support. Colour starts from the six
+  Rainy City brand tokens (`--rc-midnight` … `--rc-ice`) at the top of the file; every
+  semantic token (`--bg`, `--ink`, `--accent`…) is derived from those, so re-tinting the
+  whole site means editing one block.
 - Fonts (Inter + Fraunces variable) are self-hosted via Fontsource — no third-party requests
   anywhere on the site.
 
