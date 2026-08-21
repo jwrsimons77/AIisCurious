@@ -35,7 +35,7 @@ import { site } from '../data/site';
     box-shadow: var(--shadow-sm);
   }
 
-  /* Calendly injects an iframe-wrapping div — make it fill the card. */
+  /* Calendly injects an iframe-wrapping div: make it fill the card. */
   .calendly-embed :global(.calendly-inline-widget),
   .calendly-embed :global(iframe) {
     width: 100%;
@@ -88,7 +88,7 @@ import { site } from '../data/site';
         if (attribution[key]) url.searchParams.set(key, attribution[key]);
       }
     } catch {
-      // Malformed attribution data — book without tags.
+      // Malformed attribution data: book without tags.
     }
     return url.toString();
   };
@@ -105,7 +105,7 @@ import { site } from '../data/site';
     script.async = true;
     script.onload = render;
     script.onerror = () => {
-      // Ad blockers sometimes block Calendly's script — fall back to a plain link.
+      // Ad blockers sometimes block Calendly's script, so fall back to a plain link.
       const fallback = host.querySelector('.calendly-loading');
       if (fallback)
         fallback.innerHTML = `The calendar couldn’t load here. <a href="${baseUrl}" rel="noopener noreferrer">Open it on Calendly instead</a>.`;

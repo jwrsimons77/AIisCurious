@@ -79,7 +79,7 @@ const { showCalendarLink = true } = Astro.props;
     Book my free 15-minute call
   </button>
   <p class="form-reassure">
-    I’ll be in touch personally to arrange a time — usually the same working day. Your details are
+    I’ll be in touch personally to arrange a time, usually the same working day. Your details are
     never shared or added to a mailing list.
   </p>
 
@@ -176,7 +176,7 @@ const { showCalendarLink = true } = Astro.props;
       if (attribution[key]) input.value = attribution[key];
     });
   } catch {
-    // Malformed or absent attribution data — leave the hidden fields empty.
+    // Malformed or absent attribution data: leave the hidden fields empty.
   }
 
   form?.addEventListener('submit', async (event) => {

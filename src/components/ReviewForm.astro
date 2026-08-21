@@ -1,7 +1,7 @@
 ---
 /**
  * The short Website Review request form: name, how to reach you, and the
- * website itself. Deliberately smaller than a booking flow — three required
+ * website itself. Deliberately smaller than a booking flow: four required
  * fields, no calendar, no scheduling questions.
  *
  * Submissions go to Netlify Forms (form name: "review"). Configure the
@@ -49,8 +49,8 @@ const { heading = 'Request your free review', submitLabel = 'Send my request' } 
       <input id="rf-email" name="email" type="email" autocomplete="email" required />
     </div>
     <div class="field">
-      <label for="rf-phone">Phone number <span class="opt">(optional)</span></label>
-      <input id="rf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" />
+      <label for="rf-phone">Phone number</label>
+      <input id="rf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required />
     </div>
     <div class="field">
       <label for="rf-website">Your website</label>
@@ -165,7 +165,7 @@ const { heading = 'Request your free review', submitLabel = 'Send my request' } 
       if (attribution[key]) input.value = attribution[key];
     });
   } catch {
-    // Malformed or absent attribution data — leave the hidden fields empty.
+    // Malformed or absent attribution data: leave the hidden fields empty.
   }
 
   form?.addEventListener('submit', async (event) => {

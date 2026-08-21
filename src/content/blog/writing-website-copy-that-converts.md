@@ -62,9 +62,9 @@ Here's a structure that works for almost any small business service page:
 
 1. **The problem**, in their words, one sentence.
 2. **What you do about it**, plainly.
-3. **Proof** — photos, numbers, reviews, accreditations.
-4. **What happens next** — the steps from enquiry to job done.
-5. **Cost** — a range, or at least how pricing works.
+3. **Proof**: photos, numbers, reviews, accreditations.
+4. **What happens next**: the steps from enquiry to job done.
+5. **Cost**: a range, or at least how pricing works.
 6. **The one next step**, repeated at the bottom.
 
 That's it. No cleverness required, and it beats a beautifully designed page that says nothing in particular.

@@ -16,9 +16,9 @@ Go to PageSpeed Insights, put your homepage in, and look at the **mobile** score
 
 Roughly:
 
-- **90+** — genuinely fast. Nothing to do here.
-- **50–89** — typical, and costing you some visitors.
-- **Under 50** — people are leaving before your page appears.
+- **90+**: genuinely fast. Nothing to do here.
+- **50–89**: typical, and costing you some visitors.
+- **Under 50**: people are leaving before your page appears.
 
 Google has published research for years showing that when a page takes longer than about three seconds on mobile, a large share of visitors abandon it. They don't wait and then judge your design. They just go back and tap the next result.
 
@@ -60,9 +60,9 @@ If your host takes 800ms to send the first byte, nothing you do on the page can 
 
 You'll see this phrase. It's three measurements Google uses, and they're more sensible than they sound:
 
-- **LCP** — how long until the main thing on screen appears. Under 2.5 seconds.
-- **INP** — how quickly the page responds when someone taps. Under 200ms.
-- **CLS** — whether things jump around while loading. As close to zero as possible. This is the one that makes people tap the wrong button.
+- **LCP**: how long until the main thing on screen appears. Under 2.5 seconds.
+- **INP**: how quickly the page responds when someone taps. Under 200ms.
+- **CLS**: whether things jump around while loading. As close to zero as possible. This is the one that makes people tap the wrong button.
 
 They're a ranking factor, but honestly, the ranking effect is the smaller reason to care. The bigger reason is that slow sites lose customers who were ready to contact you.
 
