@@ -5,7 +5,7 @@
  * noindex + excluded from the sitemap; ads link here with UTM tags.
  */
 import Base from '../layouts/Base.astro';
-import BookingForm from '../components/BookingForm.astro';
+import ReviewForm from '../components/ReviewForm.astro';
 import BrandLogo from '../components/BrandLogo.astro';
 import { site } from '../data/site';
 
@@ -37,9 +37,9 @@ const reportPoints = [
 
       <h1>Find out exactly why your website isn't winning you work</h1>
       <p class="lp-lede">
-        One free 15-minute phone call. Then a short, personalised report showing what's holding
-        your site back, what each fix involves, and what it would cost. Written for your business,
-        in plain English.
+        Three quick boxes, then a short, personalised report showing what's holding your site
+        back, what each fix involves, and what it would cost. Written for your business, in plain
+        English.
       </p>
 
       <ul class="lp-trust" role="list">
@@ -47,8 +47,7 @@ const reportPoints = [
       </ul>
 
       <div class="lp-form">
-        <h2>Get your free review</h2>
-        <BookingForm />
+        <ReviewForm heading="Get your free review" />
       </div>
 
       <div class="lp-detail">

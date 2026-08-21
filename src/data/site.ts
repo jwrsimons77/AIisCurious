@@ -25,6 +25,12 @@ export const site = {
    * Google Calendar appointment link. Every "book a call" button uses this.
    */
   bookingUrl: '/book/',
+  /**
+   * The short Website Review request form. Every "Get My Free Website
+   * Review" button lands here; /book/ stays for people who would rather
+   * pick a call slot.
+   */
+  reviewUrl: '/website-review/',
   calendlyUrl: 'https://calendly.com/jwrsimons/30min',
   /**
    * Meta (Facebook) Pixel ID for ad conversion tracking. Leave empty to

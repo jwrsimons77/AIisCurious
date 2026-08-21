@@ -57,11 +57,17 @@ BreadcrumbList, Article and Person schema where relevant). Sitemap and robots.tx
 Node 22, immutable caching for hashed assets, and sensible security headers.
 Connect the repo in Netlify and it deploys with no further configuration.
 
-**Booking form**: the form uses **Netlify Forms** (form name `booking`) with a honeypot.
-Netlify detects it automatically on first deploy. To receive submissions by email, go to
-**Site configuration → Forms → Form notifications** and add an email notification. To send
-the visitor an automatic confirmation email, connect the form to your email tool via a
-Netlify Forms webhook or Zapier's Netlify integration.
+**Forms**: both use **Netlify Forms** with a honeypot, and Netlify detects them
+automatically on first deploy:
+
+- `review` — the short Website Review request on `/website-review/` and on the ads landing
+  page. This is where every "Get My Free Website Review" button goes.
+- `booking` — the longer call-request form on `/book/`, alongside the Calendly embed.
+
+Both redirect to `/book/thanks/`, which fires the ad conversion events. To receive
+submissions by email, go to **Site configuration → Forms → Form notifications** and add a
+notification for each form. To send the visitor an automatic confirmation email, connect
+the form to your email tool via a Netlify Forms webhook or Zapier's Netlify integration.
 
 ## Meta (Facebook/Instagram) ads
 
@@ -102,8 +108,8 @@ fires so any page can send its own conversion event.
 `src/layouts/Base.astro` captures `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`,
 `utm_term`, `gclid` and `fbclid` from the URL on first landing and stores them in
 `localStorage` (`lead-attribution`, first-touch, kept until a lead converts).
-`BookingForm.astro` injects them as hidden fields, so every Netlify Forms submission is
-tagged with the channel/campaign that produced it.
+`ReviewForm.astro` and `BookingForm.astro` inject them as hidden fields, so every Netlify
+Forms submission is tagged with the channel/campaign that produced it.
 
 ## Google Search Console (do this at launch)
 

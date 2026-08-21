@@ -1,0 +1,217 @@
+---
+/**
+ * The short Website Review request form: name, how to reach you, and the
+ * website itself. Deliberately smaller than a booking flow — three required
+ * fields, no calendar, no scheduling questions.
+ *
+ * Submissions go to Netlify Forms (form name: "review"). Configure the
+ * notification email in Netlify: Site → Forms → Notifications.
+ */
+interface Props {
+  /** Heading rendered above the fields. Pass null to omit it. */
+  heading?: string | null;
+  submitLabel?: string;
+}
+
+const { heading = 'Request your free review', submitLabel = 'Send my request' } = Astro.props;
+---
+
+<form
+  class="review-form"
+  name="review"
+  method="POST"
+  action="/book/thanks/"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  data-review-form
+  novalidate
+>
+  <input type="hidden" name="form-name" value="review" />
+  <!-- Populated from localStorage (see Base.astro) so each lead is tagged with its source. -->
+  <input type="hidden" name="utm_source" data-attr="utm_source" />
+  <input type="hidden" name="utm_medium" data-attr="utm_medium" />
+  <input type="hidden" name="utm_campaign" data-attr="utm_campaign" />
+  <input type="hidden" name="utm_content" data-attr="utm_content" />
+  <input type="hidden" name="utm_term" data-attr="utm_term" />
+  <input type="hidden" name="gclid" data-attr="gclid" />
+  <input type="hidden" name="fbclid" data-attr="fbclid" />
+  <input type="hidden" name="landing_page" data-attr="landing_page" />
+
+  {heading && <h2 class="review-form-title">{heading}</h2>}
+
+  <div class="form-grid">
+    <div class="field">
+      <label for="rf-name">Your name</label>
+      <input id="rf-name" name="name" type="text" autocomplete="name" required />
+    </div>
+    <div class="field">
+      <label for="rf-email">Email address</label>
+      <input id="rf-email" name="email" type="email" autocomplete="email" required />
+    </div>
+    <div class="field">
+      <label for="rf-phone">Phone number <span class="opt">(optional)</span></label>
+      <input id="rf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" />
+    </div>
+    <div class="field">
+      <label for="rf-website">Your website</label>
+      <input
+        id="rf-website"
+        name="website"
+        type="text"
+        inputmode="url"
+        autocomplete="url"
+        placeholder="yourbusiness.co.uk"
+        aria-describedby="rf-website-hint"
+        required
+      />
+      <!-- Hint sits below the input so the two fields on this row stay aligned. -->
+      <span class="hint" id="rf-website-hint">No website yet? Put “none” and I’ll take it from there.</span>
+    </div>
+    <div class="field field--full">
+      <label for="rf-notes">Anything you'd like me to look at? <span class="opt">(optional)</span></label>
+      <textarea id="rf-notes" name="notes" rows="3"></textarea>
+    </div>
+  </div>
+
+  <!-- Netlify honeypot field to deter spam bots -->
+  <p class="hp" aria-hidden="true">
+    <label>Leave this field empty <input type="text" name="bot-field" tabindex="-1" autocomplete="off" /></label>
+  </p>
+
+  <button type="submit" class="btn btn--primary btn--lg form-submit">{submitLabel}</button>
+
+  <p class="form-reassure">
+    I read every one personally and reply the same working day. Your details are never shared or
+    added to a mailing list.
+  </p>
+
+  <p class="form-status" role="status" aria-live="polite" data-form-status hidden></p>
+</form>
+
+<style>
+  .review-form {
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.35rem, 1rem + 2vw, 2.5rem);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .review-form-title {
+    font-size: var(--text-xl);
+    margin-bottom: 1.25rem;
+  }
+
+  .form-grid {
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  @media (min-width: 640px) {
+    .form-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .field--full {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .opt {
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .form-submit {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .form-reassure {
+    margin-top: 0.9rem;
+    font-size: var(--text-xs);
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .form-status {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    background: var(--accent-alt-soft);
+    color: var(--ink-soft);
+  }
+
+  /* Honeypot: hidden from people, visible to bots. */
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-review-form]');
+  const status = form?.querySelector<HTMLElement>('[data-form-status]');
+
+  // Carry the first-touch campaign tags captured in Base.astro into the submission.
+  try {
+    const attribution = JSON.parse(localStorage.getItem('lead-attribution') ?? '{}');
+    form?.querySelectorAll<HTMLInputElement>('[data-attr]').forEach((input) => {
+      const key = input.dataset.attr!;
+      if (attribution[key]) input.value = attribution[key];
+    });
+  } catch {
+    // Malformed or absent attribution data — leave the hidden fields empty.
+  }
+
+  form?.addEventListener('submit', async (event) => {
+    if (!form.checkValidity()) {
+      // Let the browser surface native validation messages.
+      form.reportValidity();
+      event.preventDefault();
+      return;
+    }
+
+    event.preventDefault();
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const label = button?.textContent ?? 'Send my request';
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'Sending…';
+    }
+
+    try {
+      // Netlify Forms accepts URL-encoded POSTs to any path on the site.
+      // Skip empty fields (unpopulated UTM/click-id inputs) so the
+      // submission notification email only lists fields with a value.
+      const params = new URLSearchParams();
+      for (const [key, value] of new FormData(form)) {
+        if (typeof value === 'string' && value.trim() !== '') params.append(key, value);
+      }
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString(),
+      });
+      if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+      // The thank-you page confirms next steps and records the ad conversion.
+      window.location.assign('/book/thanks/');
+      return;
+    } catch {
+      if (status) {
+        status.hidden = false;
+        status.textContent =
+          'Something went wrong sending the form. Please email hello@rainypeaks.co.uk instead and you’ll get a reply the same day.';
+      }
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = label;
+      }
+    }
+  });
+</script>
