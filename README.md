@@ -110,7 +110,72 @@ Set up, once:
    Functions → `submission-created` for the log line, and Resend → Emails for the send.
 
 To change the wording, edit the `REPLIES` object at the top of the function; the plain-text
-and HTML versions are both generated from it.
+and HTML versions are both generated from it. Each form has a `subject`, a `preview` (the
+line inboxes show after the subject), an `opening`, numbered `steps` and a `reason` for the
+footer.
+
+#### How the email is built
+
+The template mirrors the site's brand tokens (`src/styles/global.css`), repeated as the
+`BRAND` object because email clients strip custom properties and external stylesheets:
+midnight ink on white cards, an ice page background, mist step badges, and the Georgia
+fallback the site uses for Fraunces on the wordmark and headings.
+
+Three deliberate choices worth keeping if you edit it:
+
+- **Tables, everything inlined.** Outlook ignores `<div>` widths and Gmail drops `<style>`
+  blocks apart from media queries.
+- **No images.** The wordmark is live text, so it renders when images are blocked (the
+  default in Outlook and for unknown senders in Gmail) and adds nothing to the spam score.
+- **Both a text and an HTML part.** HTML-only mail scores worse with filters. `buildText`
+  and `buildHtml` read the same `REPLIES` entry, so keep them in step.
+
+A `prefers-color-scheme: dark` block gives Apple Mail the brand's dark surfaces instead of
+an automatic inversion.
+
+### Staying out of junk mail
+
+Filters score the *sender*, not the design, so most of this is DNS and habit rather than
+markup.
+
+**Authentication, all three (non-negotiable since the 2024 Gmail/Yahoo sender rules):**
+
+1. **SPF and DKIM** come from verifying the domain in Resend. Do not skip the `send.`
+   subdomain records; they are what makes the return path align with the From address.
+2. **DMARC** at `_dmarc` is now expected of every sender, not just bulk ones. Start at
+   `v=DMARC1; p=none; rua=mailto:hello@rainypeaks.co.uk`, read the reports for a fortnight,
+   then move to `p=quarantine`.
+3. **Verify in Resend → Domains** before switching `REPLY_FROM` off `onboarding@resend.dev`.
+   Sending unauthenticated from your own domain is the fastest route into junk.
+
+**Sender habits:**
+
+- Keep `From` stable: always `Rainy Peaks <hello@rainypeaks.co.uk>`. A changing From address
+  or display name resets the reputation you are building.
+- `REPLY_TO` must be a mailbox you actually read. Replies to a dead address bounce, and
+  bounce rate feeds the score.
+- `hello@` needs real `MX` records *before* you send anything; see the DNS table below.
+- Warm up gently. A brand new domain sending a handful of transactional replies a day is
+  the ideal pattern, which is what this is. Do not send a bulk campaign from the same
+  domain in its first few weeks.
+- Keep the subject plain. No all-caps, no exclamation marks, no "FREE!!!", no emoji.
+- Few links, all first-party. Never a link shortener, and never a bare tracking domain.
+- Leave the footer alone: a working reply address, a real location and a plain sentence
+  saying why the person is getting the email are all things filters look for.
+
+**Check it, don't assume:**
+
+- Send a real submission to a [mail-tester.com](https://www.mail-tester.com) address. Aim
+  for 9/10 or better; it names the exact record if SPF, DKIM or DMARC is off.
+- Add the domain to [Google Postmaster Tools](https://postmaster.google.com) once live, and
+  watch the spam rate stay under 0.1%.
+- Test the real thing into a Gmail, an Outlook.com and an iCloud address, then check the
+  junk folder in each, not just the inbox.
+- Resend → Emails shows delivered, bounced and complained per send.
+
+One thing outside your control: Netlify's *own* notification to you comes from Netlify's
+servers, not Resend, so it authenticates against their domain. If those land in junk,
+allowlist them in your mailbox; it says nothing about the visitor's copy.
 
 ## Meta (Facebook/Instagram) ads
 
