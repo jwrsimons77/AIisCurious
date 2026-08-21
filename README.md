@@ -57,17 +57,35 @@ BreadcrumbList, Article and Person schema where relevant). Sitemap and robots.tx
 Node 22, immutable caching for hashed assets, and sensible security headers.
 Connect the repo in Netlify and it deploys with no further configuration.
 
-**Forms**: both use **Netlify Forms** with a honeypot, and Netlify detects them
-automatically on first deploy:
+### Forms
 
-- `review` — the short Website Review request on `/website-review/` and on the ads landing
-  page. This is where every "Get My Free Website Review" button goes.
-- `booking` — the longer call-request form on `/book/`, alongside the Calendly embed.
+Two **Netlify Forms**, both with a honeypot (`bot-field`) and both redirecting to
+`/book/thanks/`, which fires the ad conversion events:
 
-Both redirect to `/book/thanks/`, which fires the ad conversion events. To receive
-submissions by email, go to **Site configuration → Forms → Form notifications** and add a
-notification for each form. To send the visitor an automatic confirmation email, connect
-the form to your email tool via a Netlify Forms webhook or Zapier's Netlify integration.
+| Form name | Component | Appears on |
+| --- | --- | --- |
+| `review` | `ReviewForm.astro` | `/website-review/` and `/free-website-review/` — every "Get My Free Website Review" button |
+| `booking` | `BookingForm.astro` | `/book/`, alongside the Calendly embed |
+
+Each form submits over `fetch` as `application/x-www-form-urlencoded` with its `form-name`
+in the body, and falls back to a native POST when JavaScript is unavailable. Netlify
+captures both.
+
+**After the first deploy, do these two things in the Netlify UI:**
+
+1. **Site configuration → Forms → Form detection.** Netlify does not scan for forms on new
+   sites unless this is enabled. Turn it on, then trigger a redeploy — detection happens at
+   deploy time, so an already-built deploy will not pick the forms up retroactively.
+2. **Site configuration → Forms → Form notifications.** Add an email notification *per
+   form* (`review` and `booking`); without this nothing lands in your inbox.
+
+Confirm both forms are listed under **Forms** in the Netlify dashboard before running ads
+at the page.
+
+Netlify's notifications email *you*, not the visitor. To auto-reply to the person who
+filled the form, add a `netlify/functions/submission-created.mjs` function (Netlify runs a
+function with that exact name on every submission) that sends the email through a provider
+such as Resend or Postmark, or connect an outgoing webhook to your email tool.
 
 ## Meta (Facebook/Instagram) ads
 

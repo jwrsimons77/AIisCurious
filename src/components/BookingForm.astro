@@ -200,7 +200,11 @@ const { showCalendarLink = true } = Astro.props;
       // submission notification email only lists fields with a value.
       const params = new URLSearchParams();
       for (const [key, value] of new FormData(form)) {
-        if (typeof value === 'string' && value.trim() !== '') params.append(key, value);
+        if (typeof value !== 'string') continue;
+        // Netlify expects the honeypot key even when empty; other blanks are
+        // dropped so the notification email only lists fields with a value.
+        if (value.trim() === '' && key !== 'bot-field') continue;
+        params.append(key, value);
       }
       const body = params.toString();
       const res = await fetch('/', {
