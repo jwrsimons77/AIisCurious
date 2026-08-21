@@ -1,27 +1,47 @@
 /* ==========================================================================
-   AIisCurious, Design System
+   Rainy Peaks, Design System
    Calm, editorial, premium. Mobile-first. Light & dark.
+   Built on the Rainy City Web Design palette, see the brand tokens below.
    ========================================================================== */
 
 /* ---------- Design tokens ---------- */
+
+/* Brand palette, Rainy City Web Design.
+   These six are the source of truth, everything below is derived from them.
+   Contrast notes are against WCAG 2.1 at normal text size. */
 :root {
+  --rc-midnight: #0b1e33; /* backgrounds, footers, white text: AAA */
+  --rc-slate: #1e3a5f; /* headings on light, white text: AAA */
+  --rc-action: #2563eb; /* buttons, links, white text: AA */
+  --rc-rain: #7eb3e8; /* accents on dark, illustration strokes, pair with dark text */
+  --rc-drizzle: #bfdbfe; /* tints, hover states, cards, pair with dark text */
+  --rc-ice: #eff6ff; /* page background, section breaks */
+
+  /* Derived shades, mixed from the six above where a step in between was needed.
+     --rc-action-deep is action darkened for link text and hover, it clears AA
+     as text on every light surface here (6.2:1 on ice). */
+  --rc-action-deep: #1d4ed8;
+  --rc-mist: #dbeafe; /* drizzle + ice, soft chips and rings */
+  --rc-haze: #deedff; /* ice + a third drizzle, alternate sections */
+  --rc-steel: #456080; /* slate lightened for secondary text, 5.5:1+ on light */
+
   /* Colour, light */
-  --bg: #fbfaf7;
-  --bg-alt: #f4f1ea;
+  --bg: var(--rc-ice);
+  --bg-alt: var(--rc-haze);
   --surface: #ffffff;
-  --ink: #21201c;
-  --ink-soft: #4c4a44;
-  --muted: #6b675e;
-  --line: #e7e2d8;
-  --line-soft: #efebe2;
-  --accent: #0e6f60;
-  --accent-strong: #0a564a;
-  --accent-soft: #e2f0ec;
-  --accent-ink: #0a564a;
-  --amber: #e9a13b;
-  --amber-soft: #fbf0dd;
-  --peach: #f6d8c3;
-  --focus: #0e6f60;
+  --ink: var(--rc-midnight); /* 15.5:1 on --bg */
+  --ink-soft: var(--rc-slate); /* 10.6:1 on --bg */
+  --muted: var(--rc-steel); /* 6.0:1 on --bg */
+  --line: #c3d9f2;
+  --line-soft: #dce8f9;
+  --accent: var(--rc-action);
+  --accent-strong: var(--rc-action-deep);
+  --accent-soft: var(--rc-mist);
+  --accent-ink: var(--rc-action-deep); /* link text, 6.2:1 on --bg */
+  --accent-alt: var(--rc-rain); /* decorative only, never text */
+  --accent-alt-soft: #e4f0fc;
+  --tint: var(--rc-drizzle);
+  --focus: var(--rc-action);
 
   /* Typography */
   --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
@@ -30,12 +50,12 @@
   --text-xs: 0.8125rem;
   --text-sm: 0.9rem;
   --text-base: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);
-  --text-lg: clamp(1.1rem, 1rem + 0.4vw, 1.25rem);
-  --text-xl: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
-  --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 1.9rem);
-  --text-3xl: clamp(1.85rem, 1.5rem + 1.6vw, 2.5rem);
-  --text-4xl: clamp(2.25rem, 1.8rem + 2.4vw, 3.25rem);
-  --text-display: clamp(2.5rem, 1.9rem + 3.4vw, 4.25rem);
+  --text-lg: clamp(1.05rem, 0.98rem + 0.35vw, 1.25rem);
+  --text-xl: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  --text-2xl: clamp(1.35rem, 1.2rem + 0.9vw, 1.9rem);
+  --text-3xl: clamp(1.6rem, 1.3rem + 1.5vw, 2.5rem);
+  --text-4xl: clamp(1.95rem, 1.55rem + 2vw, 3.25rem);
+  --text-display: clamp(2.1rem, 1.55rem + 3vw, 4.25rem);
 
   /* Spacing */
   --space-1: 0.25rem;
@@ -46,17 +66,17 @@
   --space-6: 2rem;
   --space-7: 3rem;
   --space-8: 4rem;
-  --space-section: clamp(4rem, 3rem + 6vw, 7.5rem);
-  --space-section-sm: clamp(3rem, 2.25rem + 4vw, 5rem);
+  --space-section: clamp(3.25rem, 2.4rem + 5vw, 7.5rem);
+  --space-section-sm: clamp(2.5rem, 1.9rem + 3.4vw, 5rem);
 
   /* Shape & elevation */
   --radius-sm: 0.5rem;
   --radius: 0.875rem;
   --radius-lg: 1.375rem;
   --radius-full: 999px;
-  --shadow-sm: 0 1px 2px rgb(33 32 28 / 0.05);
-  --shadow: 0 1px 3px rgb(33 32 28 / 0.06), 0 8px 24px -8px rgb(33 32 28 / 0.1);
-  --shadow-lg: 0 2px 6px rgb(33 32 28 / 0.05), 0 24px 48px -16px rgb(33 32 28 / 0.16);
+  --shadow-sm: 0 1px 2px rgb(11 30 51 / 0.05);
+  --shadow: 0 1px 3px rgb(11 30 51 / 0.06), 0 8px 24px -8px rgb(11 30 51 / 0.1);
+  --shadow-lg: 0 2px 6px rgb(11 30 51 / 0.05), 0 24px 48px -16px rgb(11 30 51 / 0.16);
 
   /* Layout */
   --container: 72rem;
@@ -69,22 +89,22 @@
 }
 
 :root[data-theme='dark'] {
-  --bg: #14130f;
-  --bg-alt: #1b1a15;
-  --surface: #201f19;
-  --ink: #f1eee6;
-  --ink-soft: #cfcabe;
-  --muted: #a39e91;
-  --line: #33312a;
-  --line-soft: #2a2822;
-  --accent: #4ec3ab;
-  --accent-strong: #6ad2bd;
-  --accent-soft: #1c2f2a;
-  --accent-ink: #8fe0cf;
-  --amber: #e9a13b;
-  --amber-soft: #2e2617;
-  --peach: #3a2c22;
-  --focus: #4ec3ab;
+  --bg: var(--rc-midnight);
+  --bg-alt: #0e2740;
+  --surface: #12314f;
+  --ink: var(--rc-ice); /* 15.5:1 on --bg */
+  --ink-soft: var(--rc-drizzle); /* 11.8:1 on --bg */
+  --muted: #8fb3d6; /* 7.7:1 on --bg */
+  --line: #29486c;
+  --line-soft: #1d3a5c;
+  --accent: var(--rc-rain);
+  --accent-strong: #a5cbf0;
+  --accent-soft: #16324f;
+  --accent-ink: #9ec6ee; /* link text, 9.4:1 on --bg */
+  --accent-alt: var(--rc-drizzle);
+  --accent-alt-soft: #1a3350;
+  --tint: #1f4468;
+  --focus: var(--rc-rain);
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
   --shadow: 0 1px 3px rgb(0 0 0 / 0.35), 0 8px 24px -8px rgb(0 0 0 / 0.5);
   --shadow-lg: 0 2px 6px rgb(0 0 0 / 0.35), 0 24px 48px -16px rgb(0 0 0 / 0.6);
@@ -302,7 +322,7 @@ a:hover {
 
 :root[data-theme='dark'] .btn--primary {
   background: var(--accent);
-  color: #10201c;
+  color: var(--rc-midnight);
 }
 
 .btn--primary:hover {
@@ -312,7 +332,7 @@ a:hover {
 }
 
 :root[data-theme='dark'] .btn--primary:hover {
-  color: #10201c;
+  color: var(--rc-midnight);
 }
 
 .btn--secondary {
@@ -339,12 +359,19 @@ a:hover {
   font-size: var(--text-sm);
 }
 
+/* Page-level CTAs run full width on phones, the easiest target to hit. */
+@media (max-width: 639px) {
+  .btn--lg {
+    width: 100%;
+  }
+}
+
 /* ---------- Cards ---------- */
 .card {
   background: var(--surface);
   border: 1px solid var(--line-soft);
   border-radius: var(--radius-lg);
-  padding: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+  padding: clamp(1.25rem, 1rem + 1.4vw, 2.25rem);
   box-shadow: var(--shadow-sm);
   transition:
     box-shadow 200ms ease,
@@ -450,20 +477,22 @@ a.card:hover {
   margin-top: 0.2rem;
   border-radius: 50%;
   background-color: var(--accent-soft);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e6f60' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231d4ed8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
   background-size: 0.7rem;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 :root[data-theme='dark'] .checklist li::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234ec3ab' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237eb3e8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
 }
 
 /* ---------- Forms ---------- */
 .field {
   display: grid;
   gap: 0.4rem;
+  /* Start-aligned so paired fields line up their labels and inputs. */
+  align-content: start;
 }
 
 .field label {
@@ -517,6 +546,17 @@ a.card:hover {
   }
 }
 
+/* The mobile sticky CTA is fixed over the page, so reserve its height. */
+body.has-sticky-cta {
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 900px) {
+  body.has-sticky-cta {
+    padding-bottom: 0;
+  }
+}
+
 /* ---------- Accessibility helpers ---------- */
 .visually-hidden {
   position: absolute;
@@ -546,6 +586,12 @@ a.card:hover {
 .skip-link:focus {
   top: 0;
   color: #fff;
+}
+
+/* Dark theme's accent is the pale rain blue, so the label flips to midnight. */
+:root[data-theme='dark'] .skip-link,
+:root[data-theme='dark'] .skip-link:focus {
+  color: var(--rc-midnight);
 }
 
 @media (prefers-reduced-motion: reduce) {

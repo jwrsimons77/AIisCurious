@@ -1,21 +1,29 @@
 ---
+import BrandLogo from './BrandLogo.astro';
 import { site } from '../data/site';
+
+interface Props {
+  /** Skip the CTA block, e.g. on the review form page it points at. */
+  hideCta?: boolean;
+}
+
+const { hideCta = false } = Astro.props;
 
 const year = new Date().getFullYear();
 
 const serviceLinks = [
-  { href: '/services/ai-opportunity-review/', label: 'AI Opportunity Review' },
-  { href: '/services/ai-essentials-workshop/', label: 'AI Essentials Workshop' },
-  { href: '/services/ai-setup-implementation/', label: 'AI Setup & Implementation' },
-  { href: '/services/workflow-automation/', label: 'Workflow Automation' },
-  { href: '/services/ongoing-ai-support/', label: 'Ongoing AI Support' },
+  { href: '/services/free-website-review/', label: 'Free Website Review' },
+  { href: '/services/website-design-build/', label: 'Website Design & Build' },
+  { href: '/services/ecommerce-websites/', label: 'Ecommerce Websites' },
+  { href: '/services/local-seo/', label: 'Local SEO' },
+  { href: '/services/website-care-plan/', label: 'Website Care Plan' },
 ];
 
 const industryLinks = [
-  { href: '/industries/accountants/', label: 'AI for Accountants' },
-  { href: '/industries/recruitment/', label: 'AI for Recruitment' },
-  { href: '/industries/trades/', label: 'AI for Trades' },
-  { href: '/industries/marketing-agencies/', label: 'AI for Marketing Agencies' },
+  { href: '/industries/accountants/', label: 'Web Design for Accountants' },
+  { href: '/industries/recruitment/', label: 'Web Design for Recruitment' },
+  { href: '/industries/trades/', label: 'Web Design for Trades' },
+  { href: '/industries/hospitality/', label: 'Web Design for Hospitality' },
   { href: '/industries/', label: 'All industries →' },
 ];
 
@@ -37,22 +45,30 @@ const companyLinks = [
 ---
 
 <footer class="site-footer">
-  <div class="footer-cta">
-    <div class="container footer-cta-inner">
-      <div>
-        <h2>Curious where AI could save you time?</h2>
-        <p>
-          Book a free 15-minute conversation and get a personalised AI Opportunity Report for your
-          business. No jargon, no pressure, no obligation.
-        </p>
+  {
+    !hideCta && (
+      <div class="footer-cta">
+        <div class="container footer-cta-inner">
+          <div>
+            <h2>Wondering what your website could be doing better?</h2>
+            <p>
+              Tell me your name and your website address and I'll send back a personalised Website
+              Review. No jargon, no pressure, no obligation.
+            </p>
+          </div>
+          <a href="/website-review/" class="btn btn--primary btn--lg">
+            Get My Free Website Review
+          </a>
+        </div>
       </div>
-      <a href="/book/" class="btn btn--primary btn--lg">Get My Free AI Opportunity Report</a>
-    </div>
-  </div>
+    )
+  }
 
   <div class="container footer-main">
     <div class="footer-brand">
-      <a href="/" class="footer-logo">AI<em>is</em>Curious</a>
+      <a href="/" class="footer-logo" aria-label="Rainy Peaks, home">
+        <BrandLogo variant="stack" tagline />
+      </a>
       <p>{site.tagline}</p>
       <p class="footer-contact">
         Based in Manchester, working across the North West.<br />
@@ -89,7 +105,7 @@ const companyLinks = [
   </div>
 
   <div class="container footer-bottom">
-    <p>© {year} {site.name}. Independent AI consultant, Manchester.</p>
+    <p>© {year} {site.name}. Independent web designer, Manchester.</p>
     <p>
       <a href={site.social.linkedin} rel="noopener noreferrer">LinkedIn</a>
     </p>
@@ -138,16 +154,10 @@ const companyLinks = [
   }
 
   .footer-logo {
-    font-family: var(--font-display);
-    font-size: 1.35rem;
-    font-weight: 600;
+    display: inline-flex;
+    font-size: 1.5rem;
     color: var(--ink);
     text-decoration: none;
-  }
-
-  .footer-logo em {
-    font-style: italic;
-    color: var(--accent-ink);
   }
 
   .footer-brand p {
@@ -182,10 +192,13 @@ const companyLinks = [
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 0.55rem;
+    gap: 0.35rem;
   }
 
   .footer-cols a {
+    display: inline-block;
+    /* Padding takes the tap target past the 24px minimum. */
+    padding-block: 0.2rem;
     color: var(--ink-soft);
     text-decoration: none;
     font-size: var(--text-sm);
@@ -211,19 +224,15 @@ const companyLinks = [
     flex-wrap: wrap;
     gap: 0.5rem 1.5rem;
     justify-content: space-between;
-    padding-block: 1.5rem calc(1.5rem + 4.5rem);
+    padding-block: 1.5rem;
     border-top: 1px solid var(--line-soft);
     color: var(--muted);
     font-size: var(--text-xs);
   }
 
-  @media (min-width: 900px) {
-    .footer-bottom {
-      padding-bottom: 1.5rem;
-    }
-  }
-
   .footer-bottom a {
+    display: inline-block;
+    padding-block: 0.25rem;
     color: var(--muted);
   }
 </style>

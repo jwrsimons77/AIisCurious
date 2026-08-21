@@ -1,0 +1,131 @@
+---
+import { site } from '../data/site';
+
+/**
+ * Inline Calendly booking calendar. Visitors pick a slot without leaving the
+ * site; a successful booking redirects to /book/thanks/ so the ad conversion
+ * events fire exactly like a form submission. The widget re-renders with
+ * matching colours when the visitor switches between light and dark themes.
+ */
+---
+
+<div
+  class="calendly-embed"
+  data-calendly-embed
+  data-calendly-url={site.calendlyUrl}
+>
+  <p class="calendly-loading">Loading the calendar…</p>
+</div>
+<noscript>
+  <p class="calendly-noscript">
+    The calendar needs JavaScript to load here.
+    <a href={site.calendlyUrl} rel="noopener noreferrer">Open it on Calendly instead</a>.
+  </p>
+</noscript>
+
+<style>
+  .calendly-embed {
+    position: relative;
+    min-width: 320px;
+    height: 760px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Calendly injects an iframe-wrapping div — make it fill the card. */
+  .calendly-embed :global(.calendly-inline-widget),
+  .calendly-embed :global(iframe) {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .calendly-loading {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+
+  .calendly-noscript {
+    margin-top: 1rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: var(--text-sm);
+  }
+</style>
+
+<script>
+  declare global {
+    interface Window {
+      Calendly?: {
+        initInlineWidget: (options: { url: string; parentElement: HTMLElement }) => void;
+      };
+    }
+  }
+
+  const host = document.querySelector<HTMLElement>('[data-calendly-embed]');
+  const baseUrl = host?.dataset.calendlyUrl;
+
+  // Calendly colour params must mirror global.css (light / dark palettes).
+  const themeColors = () =>
+    document.documentElement.dataset.theme === 'dark'
+      ? { background_color: '201f19', text_color: 'f1eee6', primary_color: '4ec3ab' }
+      : { background_color: 'ffffff', text_color: '21201c', primary_color: '0e6f60' };
+
+  const buildUrl = () => {
+    const url = new URL(baseUrl!);
+    url.searchParams.set('hide_gdpr_banner', '1');
+    for (const [key, value] of Object.entries(themeColors())) url.searchParams.set(key, value);
+    try {
+      // Same first-touch attribution the form uses; Calendly stores utm_* on the booking.
+      const attribution = JSON.parse(localStorage.getItem('lead-attribution') ?? '{}');
+      for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']) {
+        if (attribution[key]) url.searchParams.set(key, attribution[key]);
+      }
+    } catch {
+      // Malformed attribution data — book without tags.
+    }
+    return url.toString();
+  };
+
+  const render = () => {
+    if (!host || !window.Calendly) return;
+    host.innerHTML = '';
+    window.Calendly.initInlineWidget({ url: buildUrl(), parentElement: host });
+  };
+
+  if (host && baseUrl) {
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    script.onload = render;
+    script.onerror = () => {
+      // Ad blockers sometimes block Calendly's script — fall back to a plain link.
+      const fallback = host.querySelector('.calendly-loading');
+      if (fallback)
+        fallback.innerHTML = `The calendar couldn’t load here. <a href="${baseUrl}" rel="noopener noreferrer">Open it on Calendly instead</a>.`;
+    };
+    document.head.appendChild(script);
+
+    // Re-render in matching colours when the visitor flips the theme toggle.
+    new MutationObserver(render).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+
+    window.addEventListener('message', (event) => {
+      if (
+        event.origin === 'https://calendly.com' &&
+        event.data?.event === 'calendly.event_scheduled'
+      ) {
+        // The thank-you page fires the ad conversion events and confirms next steps.
+        window.location.assign('/book/thanks/?scheduled=1');
+      }
+    });
+  }
+</script>

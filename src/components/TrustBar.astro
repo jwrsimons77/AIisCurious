@@ -1,14 +1,14 @@
 ---
 const points = [
   'Manchester based',
-  'Independent AI specialist',
-  'Practical implementation, not theory',
-  'Security-conscious approach',
-  'No technical knowledge required',
+  'Independent web designer',
+  'Fixed prices, no lock-in',
+  'Accessible, fast-loading builds',
+  'You own everything',
 ];
 ---
 
-<section class="trust-bar" aria-label="Why trust AIisCurious">
+<section class="trust-bar" aria-label="Why trust Rainy Peaks">
   <div class="container">
     <ul>
       {
@@ -46,14 +46,27 @@ const points = [
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.6rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem 2rem;
+  }
+
+  @media (min-width: 480px) {
+    .trust-bar ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 900px) {
+    .trust-bar ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
 
   .trust-bar li {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 0.5rem;
     font-size: var(--text-sm);

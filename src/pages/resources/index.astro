@@ -15,18 +15,18 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
  * show them; the rest signal what's coming as the content plan grows.
  */
 const clusters = [
-  'Getting Started with AI',
-  'AI Security',
-  'AI Policies',
-  'AI Automation',
-  'Prompt Engineering',
-  'ChatGPT Guides',
-  'Claude Guides',
-  'Microsoft Copilot',
-  'AI for Small Business',
-  'Customer Service AI',
-  'Marketing AI',
-  'Operations AI',
+  'Getting Started',
+  'Speed & Performance',
+  'Accessibility',
+  'Website Improvements',
+  'Website Copywriting',
+  'Choosing a Platform',
+  'Local SEO',
+  'Ecommerce',
+  'Design & Branding',
+  'Hosting & Maintenance',
+  'Analytics & Measurement',
+  'Domains & Ownership',
 ];
 
 const postsByCluster = new Map(
@@ -37,12 +37,12 @@ const upcomingClusters = clusters.filter((c) => (postsByCluster.get(c) ?? []).le
 ---
 
 <Base
-  title="Knowledge Centre - Free AI Guides for Small Businesses | AIisCurious"
-  description="Free plain-English AI resources for small businesses, organised by topic: getting started, tools, security, policies, automation and prompting. No jargon, no hype."
+  title="Knowledge Centre - Free Web Design Guides for Small Businesses | Rainy Peaks"
+  description="Free plain-English web design resources for small businesses, organised by topic: speed, accessibility, copywriting, platforms, local SEO and ecommerce. No jargon, no hype."
 >
   <PageHero
     eyebrow="Knowledge Centre"
-    title="Understand AI at your own pace"
+    title="Understand your website at your own pace"
     lede="Free, practical guides organised by topic, written for business owners, not technologists. Everything links to everything relevant, so start with whatever question is on your mind."
     crumbs={[{ label: 'Resources' }]}
   />
@@ -88,7 +88,7 @@ const upcomingClusters = clusters.filter((c) => (postsByCluster.get(c) ?? []).le
 
   <CTASection
     heading="Reading is good. A personalised report is better."
-    text="Get the top AI opportunities for your specific business, free, in plain English, within three days of a 15-minute call."
+    text="Get the top fixes for your specific website, free, in plain English, within three days of a 15-minute call."
   />
 </Base>
 

@@ -4,23 +4,21 @@ import { site } from '../../data/site';
 
 const steps = [
   {
-    title: 'Check your inbox',
-    text: 'A confirmation email is on its way. If it hasn’t arrived in a few minutes, check your spam folder just in case.',
+    key: 'time',
+    title: 'I’ll be in touch, usually the same working day',
+    text: 'If you asked for a call, I’ll confirm a time that suits you — 15 relaxed minutes, no preparation needed. Otherwise I’ll go straight to your review.',
   },
   {
-    title: 'I’ll be in touch to agree a time',
-    text: 'Usually the same working day. The call itself is 15 relaxed minutes about how your business runs. No preparation needed.',
-  },
-  {
+    key: 'report',
     title: 'Your report arrives within 3 working days',
-    text: 'A short, personalised AI Opportunity Report: your best opportunities, realistic time savings, recommended tools and a simple roadmap.',
+    text: 'A short, personalised Website Review: what’s costing you enquiries, your speed and mobile scores, and a simple 90-day plan.',
   },
 ];
 ---
 
 <Base
-  title="Request Received | AIisCurious"
-  description="Your free AI Opportunity Report request has been received. Here's what happens next."
+  title="Request Received | Rainy Peaks"
+  description="Your free Website Review request has been received. Here's what happens next."
   noindex={true}
 >
   <section class="thanks">
@@ -37,13 +35,13 @@ const steps = [
           stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg
         >
       </span>
-      <h1>Request received. Thank you!</h1>
+      <h1 data-thanks-heading>Request received. Thank you!</h1>
       <p class="thanks-lede">You’ve just taken the first step. Here’s exactly what happens next:</p>
 
       <ol class="thanks-steps">
         {
           steps.map((step) => (
-            <li>
+            <li data-step={step.key}>
               <h2>{step.title}</h2>
               <p>{step.text}</p>
             </li>
@@ -55,14 +53,14 @@ const steps = [
         <h2>While you wait</h2>
         <p>
           Two short reads that pair well with your report:
-          <a href="/blog/how-to-get-started-with-ai-small-business/"
-            >How to get started with AI (without buying anything)</a
+          <a href="/blog/does-your-website-need-a-rebuild/"
+            >Does your website need a rebuild, or just three fixes?</a
           >
           and
-          <a href="/blog/ten-tasks-to-automate-this-month/">10 tasks you could automate this month</a
+          <a href="/blog/ten-website-fixes-this-month/">10 website fixes you could make this month</a
           >.
         </p>
-        <p>
+        <p data-pick-time>
           Rather pick your call time now? <a href={site.calendlyUrl} rel="noopener noreferrer"
             >Choose a slot in the calendar</a
           >.
@@ -91,6 +89,24 @@ const steps = [
   else document.addEventListener('tracking:ready', fireConversions, { once: true });
 </script>
 
+<!-- Visitors who booked via the embedded calendar already have a confirmed slot. -->
+<script>
+  if (new URLSearchParams(window.location.search).get('scheduled') === '1') {
+    const heading = document.querySelector('[data-thanks-heading]');
+    if (heading) heading.textContent = 'Your call is booked. Thank you!';
+
+    const step = document.querySelector('[data-step="time"]');
+    const title = step?.querySelector('h2');
+    const text = step?.querySelector('p');
+    if (title) title.textContent = 'Your call is in the calendar';
+    if (text)
+      text.textContent =
+        'The calendar invite is in your inbox. The call itself is 15 relaxed minutes about how your business runs. No preparation needed.';
+
+    document.querySelector<HTMLElement>('[data-pick-time]')?.setAttribute('hidden', '');
+  }
+</script>
+
 <style>
   .thanks {
     padding-block: clamp(3.5rem, 2.5rem + 5vw, 7rem);
@@ -109,7 +125,7 @@ const steps = [
   }
 
   :global(:root[data-theme='dark']) .thanks-check {
-    color: #10201c;
+    color: var(--rc-midnight);
   }
 
   .thanks-lede {

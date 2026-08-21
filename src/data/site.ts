@@ -3,14 +3,13 @@
  * Update contact details, booking links and form endpoints here.
  */
 export const site = {
-  name: 'AIisCurious',
-  tagline: 'Helping small businesses take their first confident step into AI.',
-  // TODO: switch to 'https://www.aiiscurious.co.uk' once that domain's DNS is
-  // connected in Netlify (it currently doesn't resolve at all). Until then the
-  // real live site is the netlify.app URL, and canonical/OG tags must match it.
-  url: 'https://aiiscurious.netlify.app',
+  name: 'Rainy Peaks',
+  tagline: 'A northern web design studio building websites that win work for small businesses.',
+  url: 'https://rainypeaks.co.uk',
   founder: 'James',
-  email: 'hello@aiiscurious.co.uk',
+  // TODO: point at a working inbox on the new Rainy Peaks domain once its email
+  // (MX) records are set up.
+  email: 'hello@rainypeaks.co.uk',
   region: 'Manchester & the North West',
   address: {
     locality: 'Manchester',
@@ -26,6 +25,12 @@ export const site = {
    * Google Calendar appointment link. Every "book a call" button uses this.
    */
   bookingUrl: '/book/',
+  /**
+   * The short Website Review request form. Every "Get My Free Website
+   * Review" button lands here; /book/ stays for people who would rather
+   * pick a call slot.
+   */
+  reviewUrl: '/website-review/',
   calendlyUrl: 'https://calendly.com/jwrsimons/30min',
   /**
    * Meta (Facebook) Pixel ID for ad conversion tracking. Leave empty to
@@ -53,9 +58,10 @@ export const site = {
   // The booking form uses Netlify Forms (form name: "booking").
   // Configure notification emails in Netlify: Site → Forms → Notifications.
   social: {
-    linkedin: 'https://www.linkedin.com/company/aiiscurious',
+    // TODO: create/rename the LinkedIn company page to match the new brand.
+    linkedin: 'https://www.linkedin.com/company/rainypeaks',
   },
 } as const;
 
-export const ctaPrimary = 'Get My Free AI Opportunity Report';
+export const ctaPrimary = 'Get My Free Website Review';
 export const ctaSecondary = 'See How It Works';

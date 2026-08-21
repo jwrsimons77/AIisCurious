@@ -14,9 +14,13 @@ interface Props {
   /** Extra JSON-LD objects rendered alongside the LocalBusiness schema */
   schema?: Record<string, unknown>[];
   ogType?: 'website' | 'article';
+  /** Absolute URL of a page-specific social sharing image */
+  ogImage?: string;
   noindex?: boolean;
   /** Landing-page mode: no nav, no footer links, no sticky CTA */
   minimal?: boolean;
+  /** Hide the footer's CTA block on pages that are themselves the CTA */
+  hideFooterCta?: boolean;
 }
 
 const {
@@ -24,8 +28,10 @@ const {
   description,
   schema = [],
   ogType = 'website',
+  ogImage = new URL('/og-default.png', site.url).href,
   noindex = false,
   minimal = false,
+  hideFooterCta = false,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 
@@ -40,7 +46,7 @@ const localBusiness = {
   founder: {
     '@type': 'Person',
     name: site.founder,
-    jobTitle: 'Independent AI Consultant',
+    jobTitle: 'Independent Web Designer',
   },
   address: {
     '@type': 'PostalAddress',
@@ -65,13 +71,13 @@ const localBusiness = {
   ].map((name) => ({ '@type': 'Place', name })),
   priceRange: '££',
   knowsAbout: [
-    'Artificial Intelligence',
-    'AI implementation',
-    'Workflow automation',
-    'AI training',
-    'ChatGPT',
-    'Claude',
-    'Microsoft Copilot',
+    'Web design',
+    'Web development',
+    'Ecommerce websites',
+    'Local SEO',
+    'Website accessibility',
+    'Core Web Vitals',
+    'Website hosting and maintenance',
   ],
 };
 
@@ -101,8 +107,9 @@ const allSchema = [localBusiness, website, ...schema];
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#14130f" media="(prefers-color-scheme: dark)" />
+    <link rel="alternate" type="application/rss+xml" title={`${site.name} blog`} href="/rss.xml" />
+    <meta name="theme-color" content="#eff6ff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b1e33" media="(prefers-color-scheme: dark)" />
 
     <!-- OpenGraph -->
     <meta property="og:site_name" content={site.name} />
@@ -110,16 +117,14 @@ const allSchema = [localBusiness, website, ...schema];
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL('/og-default.png', site.url).href} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content="en_GB" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL('/og-default.png', site.url).href} />
+    <meta name="twitter:image" content={ogImage} />
 
     <script is:inline type="application/ld+json" set:html={JSON.stringify(allSchema)} />
 
@@ -162,7 +167,7 @@ const allSchema = [localBusiness, website, ...schema];
     <main id="main">
       <slot />
     </main>
-    {!minimal && <Footer />}
+    {!minimal && <Footer hideCta={hideFooterCta} />}
     {!minimal && <StickyCTA />}
     <ConsentPixel />
 

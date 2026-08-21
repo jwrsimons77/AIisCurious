@@ -1,4 +1,5 @@
 ---
+import BrandLogo from './BrandLogo.astro';
 import ThemeToggle from './ThemeToggle.astro';
 
 const nav = [
@@ -15,9 +16,8 @@ const path = Astro.url.pathname;
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="/" class="logo" aria-label="AIisCurious, home">
-      <span class="logo-mark" aria-hidden="true"></span>
-      <span class="logo-text">AI<em>is</em>Curious</span>
+    <a href="/" class="logo" aria-label="Rainy Peaks, home">
+      <BrandLogo />
     </a>
 
     <nav class="main-nav" aria-label="Main">
@@ -64,8 +64,8 @@ const path = Astro.url.pathname;
           <a href="/contact/">Contact</a>
         </li>
       </ul>
-      <a href="/book/" class="btn btn--primary btn--lg mobile-menu-cta">
-        Get My Free AI Opportunity Report
+      <a href="/website-review/" class="btn btn--primary btn--lg mobile-menu-cta">
+        Get My Free Website Review
       </a>
     </nav>
   </div>
@@ -92,31 +92,13 @@ const path = Astro.url.pathname;
 
   .logo {
     display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
     text-decoration: none;
     color: var(--ink);
-    font-family: var(--font-display);
     font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
   }
 
   .logo:hover {
     color: var(--ink);
-  }
-
-  .logo-mark {
-    width: 0.75rem;
-    height: 0.75rem;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, var(--amber), var(--accent));
-    flex-shrink: 0;
-  }
-
-  .logo-text em {
-    font-style: italic;
-    color: var(--accent-ink);
   }
 
   .main-nav ul {

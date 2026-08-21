@@ -1,12 +1,12 @@
 ---
 /**
- * Mobile-only sticky booking bar. Appears after the visitor scrolls past
- * the hero, stays out of the way otherwise.
+ * Mobile-only sticky CTA. Appears after the visitor scrolls past the hero,
+ * stays out of the way otherwise. Hidden on the pages it would link to.
  */
 ---
 
 <div class="sticky-cta" data-sticky-cta hidden>
-  <a href="/book/" class="btn btn--primary sticky-cta-btn">Get My Free AI Opportunity Report</a>
+  <a href="/website-review/" class="btn btn--primary sticky-cta-btn">Get My Free Website Review</a>
 </div>
 
 <style>
@@ -41,9 +41,11 @@
 
 <script>
   const bar = document.querySelector<HTMLElement>('[data-sticky-cta]');
-  // Don't show the sticky bar on the booking page itself.
-  if (bar && !location.pathname.startsWith('/book')) {
+  // Don't show the sticky bar on the pages it points at.
+  if (bar && !location.pathname.startsWith('/book') &&
+    !location.pathname.startsWith('/website-review')) {
     bar.hidden = false;
+    document.body.classList.add('has-sticky-cta');
     let shown = false;
     const onScroll = () => {
       const next = window.scrollY > window.innerHeight * 0.7;
