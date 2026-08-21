@@ -25,10 +25,10 @@ const og = `
   <rect width="1200" height="630" fill="url(#glow1)"/>
   <rect width="1200" height="630" fill="url(#glow2)"/>
   <circle cx="120" cy="130" r="26" fill="url(#mark)"/>
-  <text x="170" y="146" font-family="Georgia, serif" font-size="44" font-weight="600" fill="#21201c">Delve<tspan font-style="italic" fill="#0a564a">in</tspan>ai</text>
-  <text x="100" y="330" font-family="Georgia, serif" font-size="76" font-weight="600" fill="#21201c" letter-spacing="-1">AI doesn't have to be</text>
-  <text x="100" y="420" font-family="Georgia, serif" font-size="76" font-weight="600" font-style="italic" fill="#0a564a" letter-spacing="-1">complicated.</text>
-  <text x="100" y="520" font-family="Helvetica, Arial, sans-serif" font-size="30" fill="#6b675e">Practical AI for small businesses · Manchester &amp; the North West</text>
+  <text x="170" y="146" font-family="Georgia, serif" font-size="44" font-weight="600" fill="#21201c">Rainy <tspan font-style="italic" fill="#0a564a">Peaks</tspan></text>
+  <text x="100" y="330" font-family="Georgia, serif" font-size="76" font-weight="600" fill="#21201c" letter-spacing="-1">Websites that win</text>
+  <text x="100" y="420" font-family="Georgia, serif" font-size="76" font-weight="600" font-style="italic" fill="#0a564a" letter-spacing="-1">work.</text>
+  <text x="100" y="520" font-family="Helvetica, Arial, sans-serif" font-size="30" fill="#6b675e">A northern web design studio · Manchester &amp; the North West</text>
 </svg>`;
 
 const icon = `
@@ -40,7 +40,7 @@ const icon = `
     </radialGradient>
   </defs>
   <rect width="180" height="180" rx="42" fill="url(#g)"/>
-  <text x="90" y="122" font-family="Georgia, serif" font-size="84" font-style="italic" font-weight="600" fill="#fffdf8" text-anchor="middle">ai</text>
+  <text x="90" y="120" font-family="Georgia, serif" font-size="72" font-style="italic" font-weight="600" fill="#fffdf8" text-anchor="middle">RP</text>
 </svg>`;
 
 await mkdir('public', { recursive: true });

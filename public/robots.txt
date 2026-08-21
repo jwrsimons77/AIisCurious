@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://delveinai.co.uk/sitemap-index.xml
+Sitemap: https://rainypeaks.co.uk/sitemap-index.xml

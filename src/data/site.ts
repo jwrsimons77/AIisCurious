@@ -3,13 +3,13 @@
  * Update contact details, booking links and form endpoints here.
  */
 export const site = {
-  name: 'Delveinai',
-  tagline: 'Websites that win work for small businesses across the North West.',
-  url: 'https://delveinai.co.uk',
+  name: 'Rainy Peaks',
+  tagline: 'A northern web design studio building websites that win work for small businesses.',
+  url: 'https://rainypeaks.co.uk',
   founder: 'James',
-  // TODO: point at a working inbox on the new Delveinai domain once its email
+  // TODO: point at a working inbox on the new Rainy Peaks domain once its email
   // (MX) records are set up.
-  email: 'hello@delveinai.co.uk',
+  email: 'hello@rainypeaks.co.uk',
   region: 'Manchester & the North West',
   address: {
     locality: 'Manchester',
@@ -53,7 +53,7 @@ export const site = {
   // Configure notification emails in Netlify: Site → Forms → Notifications.
   social: {
     // TODO: create/rename the LinkedIn company page to match the new brand.
-    linkedin: 'https://www.linkedin.com/company/delveinai',
+    linkedin: 'https://www.linkedin.com/company/rainypeaks',
   },
 } as const;
 

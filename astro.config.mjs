@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   // Matches src/data/site.ts.
-  site: 'https://delveinai.co.uk',
+  site: 'https://rainypeaks.co.uk',
   trailingSlash: 'always',
   integrations: [
     sitemap({

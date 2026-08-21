@@ -30,7 +30,7 @@ export const locations: Location[] = [
     metaDescription:
       'Web design in Manchester for small businesses. Fast, mobile-first websites that win enquiries, from the Northern Quarter to Didsbury. Free website review, no obligation.',
     intro:
-      'Manchester is where Delveinai is based, and it’s a city with no shortage of web designers. What’s harder to find is someone who’ll tell you honestly that your site doesn’t need rebuilding, it needs three fixes and better photographs. Most Manchester businesses aren’t venture-funded startups; they’re agencies, practices, workshops and shops that need a website to earn its keep. That’s what I build.',
+      'Manchester is where Rainy Peaks is based, and it’s a city with no shortage of web designers. What’s harder to find is someone who’ll tell you honestly that your site doesn’t need rebuilding, it needs three fixes and better photographs. Most Manchester businesses aren’t venture-funded startups; they’re agencies, practices, workshops and shops that need a website to earn its keep. That’s what I build.',
     businesses: [
       'Creative and marketing agencies around the Northern Quarter and Ancoats',
       'Law and accountancy firms in Spinningfields and around Deansgate',

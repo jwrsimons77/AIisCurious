@@ -20,7 +20,7 @@ export const services: Service[] = [
     name: 'Free Website Review',
     shortName: 'Website Review',
     tagline: 'Find out exactly why your website isn’t winning work, before you spend anything.',
-    metaTitle: 'Free Website Review for Small Businesses | Delveinai',
+    metaTitle: 'Free Website Review for Small Businesses | Rainy Peaks',
     metaDescription:
       'A free 15-minute conversation and a personalised report showing exactly what is holding your website back. Manchester-based web designer, no jargon, no obligation.',
     whoFor:
@@ -66,7 +66,7 @@ export const services: Service[] = [
     name: 'Website Design & Build',
     shortName: 'Design & Build',
     tagline: 'A fast, professional website that turns visitors into enquiries, built in weeks not months.',
-    metaTitle: 'Website Design & Build for Small Businesses | Delveinai',
+    metaTitle: 'Website Design & Build for Small Businesses | Rainy Peaks',
     metaDescription:
       'Custom website design and build for small businesses across Manchester and the North West. Fast, mobile-first, accessible sites with fixed prices and no lock-in.',
     whoFor:
@@ -113,7 +113,7 @@ export const services: Service[] = [
     name: 'Ecommerce Websites',
     shortName: 'Ecommerce',
     tagline: 'An online shop that’s quick to buy from and quick for you to run.',
-    metaTitle: 'Ecommerce Website Design for Small Businesses | Delveinai',
+    metaTitle: 'Ecommerce Website Design for Small Businesses | Rainy Peaks',
     metaDescription:
       'Ecommerce websites for small businesses in the North West: Shopify and headless builds, fast product pages, sensible checkouts and stock that stays in sync.',
     whoFor:
@@ -159,7 +159,7 @@ export const services: Service[] = [
     name: 'Local SEO & Google Visibility',
     shortName: 'Local SEO',
     tagline: 'Get found by the people searching for what you do, in the towns you actually serve.',
-    metaTitle: 'Local SEO for Small Businesses in the North West | Delveinai',
+    metaTitle: 'Local SEO for Small Businesses in the North West | Rainy Peaks',
     metaDescription:
       'Practical local SEO for small businesses: Google Business Profile, local landing pages, technical fixes and reviews. Honest reporting from a Manchester-based specialist.',
     whoFor:
@@ -205,7 +205,7 @@ export const services: Service[] = [
     name: 'Website Care Plan',
     shortName: 'Care Plan',
     tagline: 'Someone looking after your website every month, so it never quietly falls over.',
-    metaTitle: 'Website Care, Hosting & Support Plans | Delveinai',
+    metaTitle: 'Website Care, Hosting & Support Plans | Rainy Peaks',
     metaDescription:
       'Monthly website care for small businesses: hosting, updates, backups, security, edits and improvements. One predictable cost, no long contracts.',
     whoFor:
