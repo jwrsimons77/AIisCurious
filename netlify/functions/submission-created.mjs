@@ -31,7 +31,7 @@ const SIGN_OFF = 'James\nRainy Peaks\nWebsites that win work, Manchester & the N
 /** Forms that should get an auto-reply, and how to describe what happens next. */
 const REPLIES = {
   review: {
-    subject: 'Got it — your free Website Review is on its way',
+    subject: 'Got it, your free Website Review is on its way',
     opening: (site) =>
       site
         ? `Thanks for getting in touch. I've got your details and I'll take a proper look at ${site}.`
@@ -42,10 +42,10 @@ const REPLIES = {
     ],
   },
   booking: {
-    subject: 'Got it — I’ll confirm your call shortly',
+    subject: 'Got it, I’ll confirm your call shortly',
     opening: () => "Thanks for getting in touch. I've got your details and your preferred time.",
     steps: [
-      "I'll come back with a time that suits, usually the same working day. The call is 15 relaxed minutes about how your business runs — no preparation needed.",
+      "I'll come back with a time that suits, usually the same working day. The call is 15 relaxed minutes about how your business runs, with no preparation needed.",
       'Your Website Review follows within 3 working days: your top fixes ranked by effort and payoff, speed and mobile scores in plain English, an honest answer on rebuild versus repair, and a simple 90-day plan.',
     ],
   },
@@ -157,14 +157,14 @@ export const handler = async (event) => {
 
     if (!res.ok) {
       // Log the provider's reason, never the visitor's details.
-      console.error(`submission-created: Resend returned ${res.status} — ${await res.text()}`);
+      console.error(`submission-created: Resend returned ${res.status}: ${await res.text()}`);
       return { statusCode: 200, body: 'send failed' };
     }
 
     console.log(`submission-created: auto-reply sent for form "${formName}".`);
     return { statusCode: 200, body: 'sent' };
   } catch (error) {
-    console.error('submission-created: auto-reply request failed —', error.message);
+    console.error('submission-created: auto-reply request failed:', error.message);
     return { statusCode: 200, body: 'send failed' };
   }
 };
