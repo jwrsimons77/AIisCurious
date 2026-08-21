@@ -55,7 +55,23 @@ const icon = `
   ${peaks(8, 12, 2.5, "#7eb3e8", "#eff6ff", 2.6)}
 </svg>`;
 
+/**
+ * Email header lockup for the auto-reply (netlify/functions/submission-created.mjs).
+ * Drawn at 2x and displayed at 200x52, and the midnight background is baked in
+ * rather than left transparent: clients that invert an email for dark mode then
+ * flip the band behind it, and a light-ink logo on a flipped-white band would
+ * disappear. Baked in, the mark keeps its own backdrop whatever the client does.
+ */
+const emailLogo = `
+<svg xmlns="http://www.w3.org/2000/svg" width="352" height="104">
+  <rect width="352" height="104" fill="#0b1e33"/>
+  ${peaks(0, 10, 1.3, "#7eb3e8", "#eff6ff", 2.4)}
+  <text x="88" y="57" font-family="Georgia, serif" font-size="38" fill="#eff6ff"><tspan font-style="italic">rainy</tspan><tspan font-weight="700">PEAKS</tspan></text>
+  <text x="90" y="81" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" letter-spacing="3.4" fill="#7eb3e8">WEB DESIGN</text>
+</svg>`;
+
 await mkdir('public', { recursive: true });
 await sharp(Buffer.from(og)).png().toFile('public/og-default.png');
 await sharp(Buffer.from(icon)).png().toFile('public/apple-touch-icon.png');
-console.log('Generated public/og-default.png and public/apple-touch-icon.png');
+await sharp(Buffer.from(emailLogo)).png().toFile('public/email-logo.png');
+console.log('Generated public/og-default.png, public/apple-touch-icon.png and public/email-logo.png');
