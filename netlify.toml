@@ -6,6 +6,10 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# submission-created.mjs auto-replies to form submissions.
+[functions]
+  directory = "netlify/functions"
+
 # Hashed build assets never change: cache forever
 [[headers]]
   for = "/_astro/*"

@@ -82,10 +82,34 @@ captures both.
 Confirm both forms are listed under **Forms** in the Netlify dashboard before running ads
 at the page.
 
-Netlify's notifications email *you*, not the visitor. To auto-reply to the person who
-filled the form, add a `netlify/functions/submission-created.mjs` function (Netlify runs a
-function with that exact name on every submission) that sends the email through a provider
-such as Resend or Postmark, or connect an outgoing webhook to your email tool.
+### Automatic reply to the visitor
+
+Netlify's notifications email *you*. The visitor's confirmation comes from
+`netlify/functions/submission-created.mjs` — Netlify runs a function with that exact name
+on every non-spam submission, so there is nothing to wire up beyond the environment
+variables. It sends through [Resend](https://resend.com) and covers both forms, with
+slightly different wording for a call request. If the key is missing or the send fails it
+logs and returns cleanly: the submission is already saved either way.
+
+Set up, once:
+
+1. **Verify the sending domain.** In Resend → Domains, add `rainypeaks.co.uk` and copy the
+   DKIM/SPF records into DNS. Sending as `hello@rainypeaks.co.uk` will fail until this is
+   done — that is the same DNS work as the MX records for receiving mail.
+2. **Add the environment variables** in Netlify → Site configuration → Environment
+   variables:
+
+   | Variable | Required | Notes |
+   | --- | --- | --- |
+   | `RESEND_API_KEY` | yes | From resend.com/api-keys |
+   | `REPLY_FROM` | no | Defaults to `Rainy Peaks <hello@rainypeaks.co.uk>`. Before the domain is verified, set it to `onboarding@resend.dev` to test end to end |
+   | `REPLY_TO` | no | Where replies land. Defaults to `hello@rainypeaks.co.uk` |
+
+3. **Test it** by submitting the real form on the deployed site, then check Netlify →
+   Functions → `submission-created` for the log line, and Resend → Emails for the send.
+
+To change the wording, edit the `REPLIES` object at the top of the function; the plain-text
+and HTML versions are both generated from it.
 
 ## Meta (Facebook/Instagram) ads
 
