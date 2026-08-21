@@ -1,4 +1,4 @@
-# Netlify configuration for Delveinai
+# Netlify configuration for Rainy Peaks
 [build]
   command = "npm run build"
   publish = "dist"

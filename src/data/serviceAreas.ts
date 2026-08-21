@@ -25,7 +25,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'website-design-build',
     areaName: 'Manchester',
     h1: 'Web Design in Manchester',
-    metaTitle: 'Web Design Manchester - Websites for Small Businesses | Delveinai',
+    metaTitle: 'Web Design Manchester - Websites for Small Businesses | Rainy Peaks',
     metaDescription:
       'Web design in Manchester for small businesses. Fast, mobile-first, accessible websites built to win enquiries. Fixed prices, no lock-in, designed and built locally.',
     intro:
@@ -49,7 +49,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'ecommerce-websites',
     areaName: 'Manchester',
     h1: 'Ecommerce Web Design in Manchester',
-    metaTitle: 'Ecommerce Web Design Manchester - Online Shops That Sell | Delveinai',
+    metaTitle: 'Ecommerce Web Design Manchester - Online Shops That Sell | Rainy Peaks',
     metaDescription:
       'Ecommerce web design in Manchester: fast product pages, short checkouts and stock that stays in sync. Shopify and custom builds for independent retailers and makers.',
     intro:
@@ -73,7 +73,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'local-seo',
     areaName: 'Manchester',
     h1: 'Local SEO in Manchester',
-    metaTitle: 'Local SEO Manchester - Get Found by Nearby Customers | Delveinai',
+    metaTitle: 'Local SEO Manchester - Get Found by Nearby Customers | Rainy Peaks',
     metaDescription:
       'Local SEO in Manchester for small businesses: Google Business Profile, map pack visibility, local landing pages and technical fixes. Honest monthly reporting.',
     intro:
@@ -99,7 +99,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'website-design-build',
     areaName: 'Liverpool',
     h1: 'Web Design in Liverpool',
-    metaTitle: 'Web Design Liverpool - Websites for Small Businesses | Delveinai',
+    metaTitle: 'Web Design Liverpool - Websites for Small Businesses | Rainy Peaks',
     metaDescription:
       'Web design in Liverpool for small businesses. Fast, mobile-first websites built to win enquiries, with fixed prices, full ownership and no lock-in.',
     intro:
@@ -123,7 +123,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'ecommerce-websites',
     areaName: 'Liverpool',
     h1: 'Ecommerce Web Design in Liverpool',
-    metaTitle: 'Ecommerce Web Design Liverpool - Online Shops That Sell | Delveinai',
+    metaTitle: 'Ecommerce Web Design Liverpool - Online Shops That Sell | Rainy Peaks',
     metaDescription:
       'Ecommerce web design in Liverpool: fast product pages, trusted checkouts and stock synced with your shop floor. Shopify and custom builds for independent retailers.',
     intro:
@@ -147,7 +147,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'local-seo',
     areaName: 'Liverpool',
     h1: 'Local SEO in Liverpool',
-    metaTitle: 'Local SEO Liverpool - Get Found by Nearby Customers | Delveinai',
+    metaTitle: 'Local SEO Liverpool - Get Found by Nearby Customers | Rainy Peaks',
     metaDescription:
       'Local SEO in Liverpool for small businesses: Google Business Profile, map pack rankings, local pages and technical fixes. Reporting tied to enquiries, not vanity metrics.',
     intro:
@@ -173,7 +173,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'website-design-build',
     areaName: 'Cheshire',
     h1: 'Web Design in Cheshire',
-    metaTitle: 'Web Design Cheshire - Websites for Small Businesses | Delveinai',
+    metaTitle: 'Web Design Cheshire - Websites for Small Businesses | Rainy Peaks',
     metaDescription:
       'Web design across Cheshire: Chester, Wilmslow, Macclesfield, Crewe and Northwich. Fast, well-crafted websites for businesses selling on quality rather than price.',
     intro:
@@ -197,7 +197,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'ecommerce-websites',
     areaName: 'Cheshire',
     h1: 'Ecommerce Web Design in Cheshire',
-    metaTitle: 'Ecommerce Web Design Cheshire - Online Shops That Sell | Delveinai',
+    metaTitle: 'Ecommerce Web Design Cheshire - Online Shops That Sell | Rainy Peaks',
     metaDescription:
       'Ecommerce web design across Cheshire: fast, well-photographed product pages and short checkouts for boutiques, makers, farm shops and specialist retailers.',
     intro:
@@ -221,7 +221,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'local-seo',
     areaName: 'Cheshire',
     h1: 'Local SEO in Cheshire',
-    metaTitle: 'Local SEO Cheshire - Get Found by Nearby Customers | Delveinai',
+    metaTitle: 'Local SEO Cheshire - Get Found by Nearby Customers | Rainy Peaks',
     metaDescription:
       'Local SEO across Cheshire: Google Business Profile, map pack visibility and local landing pages for Chester, Wilmslow, Macclesfield, Northwich and Crewe.',
     intro:
@@ -247,7 +247,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'website-design-build',
     areaName: 'Warrington',
     h1: 'Web Design in Warrington',
-    metaTitle: 'Web Design Warrington - Websites for Small Businesses | Delveinai',
+    metaTitle: 'Web Design Warrington - Websites for Small Businesses | Rainy Peaks',
     metaDescription:
       'Web design in Warrington for small businesses. Fast, mobile-first websites for trades, logistics, manufacturing and professional services. Fixed prices, no lock-in.',
     intro:
@@ -271,7 +271,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'ecommerce-websites',
     areaName: 'Warrington',
     h1: 'Ecommerce Web Design in Warrington',
-    metaTitle: 'Ecommerce Web Design Warrington - Online Shops That Sell | Delveinai',
+    metaTitle: 'Ecommerce Web Design Warrington - Online Shops That Sell | Rainy Peaks',
     metaDescription:
       'Ecommerce web design in Warrington: fast product pages, trade accounts and stock synced with your systems. Built for retailers, wholesalers and distributors.',
     intro:
@@ -295,7 +295,7 @@ export const serviceAreaPages: ServiceAreaPage[] = [
     serviceSlug: 'local-seo',
     areaName: 'Warrington',
     h1: 'Local SEO in Warrington',
-    metaTitle: 'Local SEO Warrington - Get Found by Nearby Customers | Delveinai',
+    metaTitle: 'Local SEO Warrington - Get Found by Nearby Customers | Rainy Peaks',
     metaDescription:
       'Local SEO in Warrington for small businesses: Google Business Profile, map pack rankings and local landing pages that bring calls, not just impressions.',
     intro:

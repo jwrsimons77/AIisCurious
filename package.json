@@ -1,9 +1,9 @@
 {
-  "name": "delveinai",
+  "name": "rainypeaks",
   "type": "module",
   "version": "1.0.0",
   "private": true,
-  "description": "Delveinai — Helping small businesses take their first confident step into AI.",
+  "description": "Rainy Peaks — a northern web design studio building websites that win work for small businesses.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

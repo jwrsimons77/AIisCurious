@@ -1,6 +1,6 @@
-# Delveinai
+# Rainy Peaks
 
-**Websites that win work for small businesses across the North West.**
+**A northern web design studio building websites that win work for small businesses.**
 
 A production-ready, SEO-first marketing website for an independent web designer based in
 Manchester, serving small businesses across the North West. Built with
@@ -66,7 +66,7 @@ The site has dedicated ad infrastructure:
 
 - **`/free-website-review/`** — distraction-free landing page (no nav, one message, one form).
   Point all Meta ads here, with UTM tags, e.g.
-  `https://delveinai.co.uk/free-website-review/?utm_source=meta&utm_medium=paid&utm_campaign=trades-websites`
+  `https://rainypeaks.co.uk/free-website-review/?utm_source=meta&utm_medium=paid&utm_campaign=trades-websites`
 - **`/book/thanks/`** — thank-you page every successful form submission redirects to.
   This is your conversion page.
 - **Meta Pixel** — set `metaPixelId` in `src/data/site.ts` (from Meta Events Manager).
@@ -106,7 +106,7 @@ tagged with the channel/campaign that produced it.
 
 1. Add the site as a property in [Google Search Console](https://search.google.com/search-console)
    (domain property is best; verify via DNS).
-2. Submit the sitemap: `https://delveinai.co.uk/sitemap-index.xml`
+2. Submit the sitemap: `https://rainypeaks.co.uk/sitemap-index.xml`
    (also referenced in `robots.txt`, and linked from every page's `<head>`).
 3. Request indexing for the homepage and a handful of key pages to speed up first crawl.
 4. Repeat in [Bing Webmaster Tools](https://www.bing.com/webmasters) - it can import
@@ -114,13 +114,14 @@ tagged with the channel/campaign that produced it.
 
 ## Before launch — replace these
 
-1. **Domain** — `src/data/site.ts`, `astro.config.mjs` and `public/robots.txt` all point
-   at the live domain `https://delveinai.co.uk`. `www.` already 301-redirects to it, but
-   `aiiscurious.netlify.app` still serves the site directly — in Netlify go to
-   Site → Domain management and confirm `delveinai.co.uk` is set as the **primary domain**
-   so the netlify.app URL redirects too. Then submit the sitemap in Search Console for the
-   new domain, and set up email (MX records) for `hello@delveinai.co.uk` so the contact
-   address in `src/data/site.ts` actually receives mail.
+1. **Domain** — `src/data/site.ts`, `astro.config.mjs` and `public/robots.txt` now point
+   at `https://rainypeaks.co.uk`. Register it if you haven't, add it in Netlify under
+   Site → Domain management and set it as the **primary domain** so both `www.` and
+   `aiiscurious.netlify.app` 301-redirect to it. Add a 301 from the previous domain
+   `delveinai.co.uk` as well so any indexed URLs and existing ad links pass their equity
+   across rather than dying. Then submit the sitemap in Search Console for the new domain,
+   and set up email (MX records) for `hello@rainypeaks.co.uk` so the contact address in
+   `src/data/site.ts` actually receives mail.
 2. **Form notifications** — enable Netlify Forms email notifications (see above) so
    submissions reach your inbox.
 3. **Tracking IDs** — `metaPixelId`, `ga4MeasurementId`, `googleAdsId` and
