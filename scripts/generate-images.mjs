@@ -5,6 +5,24 @@
 import sharp from 'sharp';
 import { mkdir } from 'node:fs/promises';
 
+const peaks = (x, y, scale, rain, ridge, width) => `
+  <g transform="translate(${x} ${y}) scale(${scale})" fill="none"
+     stroke-linecap="round" stroke-linejoin="round" stroke-width="${width}">
+    <g stroke="${rain}">
+      <path d="M26.4 7.4 23.5 14.5"/>
+      <path d="M36.3 5 34.6 12.7"/>
+      <path d="M48 7.4 45.1 14.5"/>
+      <path d="M19.9 17.5 17.6 24.6"/>
+      <path d="M31.6 16.9 29.3 23.4"/>
+      <path d="M42.8 17.5 40.4 24.3"/>
+    </g>
+    <g stroke="${ridge}">
+      <path d="M10.8 56.6C13.6 51 19.4 42.4 21.8 39.6c.6-.6 1.4-.2 2 1c1.2 2.6 2.8 6 4.4 9.2"/>
+      <path d="M24.5 56.5C27 52 34 38 39.2 28.8c.8-1.3 2.2-1 2.6.5c.8 2.7 2.6 5.1 4.4 6.9c1.2 1.4 1.8 4.4 2.2 8.2c1-3 2.6-5.8 4-5.4c1.4.6 2.8 9 4.2 17.4"/>
+      <path d="M9.6 56.8c10.4-1.2 24.4.4 34.4-.2c5-.3 9 .3 13.4-.1"/>
+    </g>
+  </g>`;
+
 const og = `
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
   <defs>
@@ -24,8 +42,8 @@ const og = `
   <rect width="1200" height="630" fill="#eff6ff"/>
   <rect width="1200" height="630" fill="url(#glow1)"/>
   <rect width="1200" height="630" fill="url(#glow2)"/>
-  <circle cx="120" cy="130" r="26" fill="url(#mark)"/>
-  <text x="170" y="146" font-family="Georgia, serif" font-size="44" font-weight="600" fill="#0b1e33">Rainy <tspan font-style="italic" fill="#1d4ed8">Peaks</tspan></text>
+  ${peaks(78, 88, 1.45, "#7eb3e8", "#1e3a5f", 2.2)}
+  <text x="186" y="148" font-family="Georgia, serif" font-size="44" fill="#0b1e33"><tspan font-style="italic">rainy</tspan><tspan font-weight="700">PEAKS</tspan></text>
   <text x="100" y="330" font-family="Georgia, serif" font-size="76" font-weight="600" fill="#0b1e33" letter-spacing="-1">Websites that win</text>
   <text x="100" y="420" font-family="Georgia, serif" font-size="76" font-weight="600" font-style="italic" fill="#1d4ed8" letter-spacing="-1">work.</text>
   <text x="100" y="520" font-family="Helvetica, Arial, sans-serif" font-size="30" fill="#456080">A northern web design studio · Manchester &amp; the North West</text>
@@ -33,16 +51,8 @@ const og = `
 
 const icon = `
 <svg xmlns="http://www.w3.org/2000/svg" width="180" height="180">
-  <rect width="180" height="180" rx="42" fill="#0b1e33"/>
-  <g stroke="#7eb3e8" stroke-width="8" stroke-linecap="round">
-    <path d="M68 37 59 60"/>
-    <path d="M93 31 84 54"/>
-    <path d="M118 40 109 63"/>
-  </g>
-  <g fill="none" stroke="#eff6ff" stroke-width="8" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M48 141V99h22V85h20V71h22v28h20v42"/>
-    <path d="M37 141h106"/>
-  </g>
+  <rect width="180" height="180" rx="40" fill="#0b1e33"/>
+  ${peaks(8, 12, 2.5, "#7eb3e8", "#eff6ff", 2.6)}
 </svg>`;
 
 await mkdir('public', { recursive: true });
