@@ -94,8 +94,9 @@ logs and returns cleanly: the submission is already saved either way.
 Set up, once:
 
 1. **Verify the sending domain.** In Resend → Domains, add `rainypeaks.co.uk` and copy the
-   DKIM/SPF records into DNS. Sending as `hello@rainypeaks.co.uk` will fail until this is
-   done — that is the same DNS work as the MX records for receiving mail.
+   records it gives you into DNS — see [DNS for rainypeaks.co.uk](#dns-for-rainypeaksco.uk)
+   below, which covers how they sit alongside the site and mailbox records. Sending as
+   `hello@rainypeaks.co.uk` fails until the domain verifies.
 2. **Add the environment variables** in Netlify → Site configuration → Environment
    variables:
 
@@ -163,16 +164,46 @@ Forms submission is tagged with the channel/campaign that produced it.
 4. Repeat in [Bing Webmaster Tools](https://www.bing.com/webmasters) - it can import
    directly from Search Console.
 
+## DNS for rainypeaks.co.uk
+
+Three separate jobs share this zone. Netlify serves the site, a mailbox provider receives
+mail at `hello@`, and Resend sends the automatic replies. They do not conflict as long as
+each keeps to its own records.
+
+| Purpose | Record | Notes |
+| --- | --- | --- |
+| Site | `A` / `CNAME` on the root and `www` | Netlify gives you the exact values under Domain management. Easiest is to point the nameservers at Netlify DNS and let it manage the zone |
+| Receiving mail | `MX` on the **root** | From your mailbox provider (Google Workspace, Fastmail, Zoho…). This is what makes `hello@rainypeaks.co.uk` a real inbox |
+| Sending — DKIM | `TXT` at `resend._domainkey` | From Resend, signs the outgoing mail |
+| Sending — return path | `MX` and `TXT` (SPF) on a **`send.`** subdomain | Resend scopes these to a subdomain so the root `MX` stays free for your mailbox provider. Do not put Resend's `MX` on the root — it would break receiving |
+| Alignment | `TXT` at `_dmarc` | Optional but worth adding: start at `v=DMARC1; p=none; rua=mailto:hello@rainypeaks.co.uk` and tighten later |
+
+Copy the sending records from what Resend actually shows you when you add the domain —
+values differ by account region. Verification usually lands in minutes, occasionally an
+hour.
+
+Order that avoids dead ends:
+
+1. Add the mailbox provider's `MX` first, and confirm you can receive at `hello@`. The
+   automatic reply sets `Reply-To: hello@rainypeaks.co.uk`, so until that inbox exists,
+   any customer who replies gets a bounce. Set `REPLY_TO` to an inbox that already works
+   if there is a gap.
+2. Add the Resend records, verify the domain, then set `RESEND_API_KEY` in Netlify.
+3. Submit a real form on the live site and check Netlify → Functions →
+   `submission-created` and Resend → Emails.
+
+Until step 2 is done you can still test the whole chain by setting
+`REPLY_FROM=onboarding@resend.dev`, which sends from Resend's own verified domain.
+
 ## Before launch — replace these
 
-1. **Domain** — `src/data/site.ts`, `astro.config.mjs` and `public/robots.txt` now point
-   at `https://rainypeaks.co.uk`. Register it if you haven't, add it in Netlify under
+1. **Domain** — `rainypeaks.co.uk` is registered. `src/data/site.ts`, `astro.config.mjs`
+   and `public/robots.txt` all point at `https://rainypeaks.co.uk`. Add it in Netlify under
    Site → Domain management and set it as the **primary domain** so both `www.` and
    `aiiscurious.netlify.app` 301-redirect to it. Add a 301 from the previous domain
    `delveinai.co.uk` as well so any indexed URLs and existing ad links pass their equity
    across rather than dying. Then submit the sitemap in Search Console for the new domain,
-   and set up email (MX records) for `hello@rainypeaks.co.uk` so the contact address in
-   `src/data/site.ts` actually receives mail.
+   and work through the DNS records below.
 2. **Form notifications** — enable Netlify Forms email notifications (see above) so
    submissions reach your inbox.
 3. **Tracking IDs** — `metaPixelId`, `ga4MeasurementId`, `googleAdsId` and
