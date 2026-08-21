@@ -1,25 +1,32 @@
 ---
-import { site } from '../data/site';
-
+/**
+ * The short Website Review request form: name, how to reach you, and the
+ * website itself. Deliberately smaller than a booking flow — three required
+ * fields, no calendar, no scheduling questions.
+ *
+ * Submissions go to Netlify Forms (form name: "review"). Configure the
+ * notification email in Netlify: Site → Forms → Notifications.
+ */
 interface Props {
-  /** Hide the "choose a slot" link where the calendar is already embedded alongside. */
-  showCalendarLink?: boolean;
+  /** Heading rendered above the fields. Pass null to omit it. */
+  heading?: string | null;
+  submitLabel?: string;
 }
 
-const { showCalendarLink = true } = Astro.props;
+const { heading = 'Request your free review', submitLabel = 'Send my request' } = Astro.props;
 ---
 
 <form
-  class="booking-form"
-  name="booking"
+  class="review-form"
+  name="review"
   method="POST"
   action="/book/thanks/"
   data-netlify="true"
   netlify-honeypot="bot-field"
-  data-booking-form
+  data-review-form
   novalidate
 >
-  <input type="hidden" name="form-name" value="booking" />
+  <input type="hidden" name="form-name" value="review" />
   <!-- Populated from localStorage (see Base.astro) so each lead is tagged with its source. -->
   <input type="hidden" name="utm_source" data-attr="utm_source" />
   <input type="hidden" name="utm_medium" data-attr="utm_medium" />
@@ -29,44 +36,40 @@ const { showCalendarLink = true } = Astro.props;
   <input type="hidden" name="gclid" data-attr="gclid" />
   <input type="hidden" name="fbclid" data-attr="fbclid" />
   <input type="hidden" name="landing_page" data-attr="landing_page" />
+
+  {heading && <h2 class="review-form-title">{heading}</h2>}
+
   <div class="form-grid">
     <div class="field">
-      <label for="bf-name">Your name</label>
-      <input id="bf-name" name="name" type="text" autocomplete="name" required />
+      <label for="rf-name">Your name</label>
+      <input id="rf-name" name="name" type="text" autocomplete="name" required />
     </div>
     <div class="field">
-      <label for="bf-business">Business name</label>
-      <input id="bf-business" name="business" type="text" autocomplete="organization" required />
+      <label for="rf-email">Email address</label>
+      <input id="rf-email" name="email" type="email" autocomplete="email" required />
     </div>
     <div class="field">
-      <label for="bf-email">Email address</label>
-      <input id="bf-email" name="email" type="email" autocomplete="email" required />
+      <label for="rf-phone">Phone number <span class="opt">(optional)</span></label>
+      <input id="rf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" />
     </div>
     <div class="field">
-      <label for="bf-employees">Number of employees</label>
-      <select id="bf-employees" name="employees" required>
-        <option value="">Please choose…</option>
-        <option>Just me</option>
-        <option>2–5</option>
-        <option>6–15</option>
-        <option>16–50</option>
-        <option>50+</option>
-      </select>
+      <label for="rf-website">Your website</label>
+      <input
+        id="rf-website"
+        name="website"
+        type="text"
+        inputmode="url"
+        autocomplete="url"
+        placeholder="yourbusiness.co.uk"
+        aria-describedby="rf-website-hint"
+        required
+      />
+      <!-- Hint sits below the input so the two fields on this row stay aligned. -->
+      <span class="hint" id="rf-website-hint">No website yet? Put “none” and I’ll take it from there.</span>
     </div>
     <div class="field field--full">
-      <label for="bf-challenge">What takes up too much of your time right now?</label>
-      <span class="hint">A sentence or two is perfect: admin, quoting, emails, anything.</span>
-      <textarea id="bf-challenge" name="challenge" required></textarea>
-    </div>
-    <div class="field field--full">
-      <label for="bf-time">Preferred time for a call</label>
-      <select id="bf-time" name="preferred_time" required>
-        <option value="">Please choose…</option>
-        <option>Morning (9am–12pm)</option>
-        <option>Lunchtime (12pm–2pm)</option>
-        <option>Afternoon (2pm–5pm)</option>
-        <option>Early evening (5pm–7pm)</option>
-      </select>
+      <label for="rf-notes">Anything you'd like me to look at? <span class="opt">(optional)</span></label>
+      <textarea id="rf-notes" name="notes" rows="3"></textarea>
     </div>
   </div>
 
@@ -75,41 +78,33 @@ const { showCalendarLink = true } = Astro.props;
     <label>Leave this field empty <input type="text" name="bot-field" tabindex="-1" autocomplete="off" /></label>
   </p>
 
-  <button type="submit" class="btn btn--primary btn--lg form-submit">
-    Book my free 15-minute call
-  </button>
+  <button type="submit" class="btn btn--primary btn--lg form-submit">{submitLabel}</button>
+
   <p class="form-reassure">
-    I’ll be in touch personally to arrange a time — usually the same working day. Your details are
-    never shared or added to a mailing list.
+    I read every one personally and reply the same working day. Your details are never shared or
+    added to a mailing list.
   </p>
 
   <p class="form-status" role="status" aria-live="polite" data-form-status hidden></p>
 </form>
 
-{
-  showCalendarLink && (
-    <p class="calendly-alt">
-      Prefer to pick a time yourself?{' '}
-      <a href={site.calendlyUrl} rel="noopener noreferrer">
-        Choose a slot in the calendar
-      </a>
-      .
-    </p>
-  )
-}
-
 <style>
-  .booking-form {
+  .review-form {
     background: var(--surface);
     border: 1px solid var(--line-soft);
     border-radius: var(--radius-lg);
-    padding: clamp(1.5rem, 1.2rem + 2vw, 2.5rem);
+    padding: clamp(1.35rem, 1rem + 2vw, 2.5rem);
     box-shadow: var(--shadow-sm);
+  }
+
+  .review-form-title {
+    font-size: var(--text-xl);
+    margin-bottom: 1.25rem;
   }
 
   .form-grid {
     display: grid;
-    gap: 1.25rem;
+    gap: 1.1rem;
   }
 
   @media (min-width: 640px) {
@@ -122,12 +117,9 @@ const { showCalendarLink = true } = Astro.props;
     }
   }
 
-  .hp {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
+  .opt {
+    font-weight: 400;
+    color: var(--muted);
   }
 
   .form-submit {
@@ -136,7 +128,7 @@ const { showCalendarLink = true } = Astro.props;
   }
 
   .form-reassure {
-    margin-top: 0.85rem;
+    margin-top: 0.9rem;
     font-size: var(--text-xs);
     color: var(--muted);
     text-align: center;
@@ -144,31 +136,28 @@ const { showCalendarLink = true } = Astro.props;
 
   .form-status {
     margin-top: 1rem;
-    padding: 0.9rem 1.1rem;
+    padding: 0.75rem 1rem;
     border-radius: var(--radius-sm);
-    background: var(--accent-soft);
-    color: var(--accent-ink);
-    font-weight: 500;
-    text-align: center;
-  }
-
-  .form-status[data-state='error'] {
-    background: var(--accent-alt-soft);
-    color: var(--ink);
-  }
-
-  .calendly-alt {
-    margin-top: 1.25rem;
-    text-align: center;
     font-size: var(--text-sm);
-    color: var(--muted);
+    background: var(--accent-alt-soft);
+    color: var(--ink-soft);
+  }
+
+  /* Honeypot: hidden from people, visible to bots. */
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 </style>
 
 <script>
-  const form = document.querySelector<HTMLFormElement>('[data-booking-form]');
-  const status = document.querySelector<HTMLElement>('[data-form-status]');
+  const form = document.querySelector<HTMLFormElement>('[data-review-form]');
+  const status = form?.querySelector<HTMLElement>('[data-form-status]');
 
+  // Carry the first-touch campaign tags captured in Base.astro into the submission.
   try {
     const attribution = JSON.parse(localStorage.getItem('lead-attribution') ?? '{}');
     form?.querySelectorAll<HTMLInputElement>('[data-attr]').forEach((input) => {
@@ -189,6 +178,7 @@ const { showCalendarLink = true } = Astro.props;
 
     event.preventDefault();
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const label = button?.textContent ?? 'Send my request';
     if (button) {
       button.disabled = true;
       button.textContent = 'Sending…';
@@ -206,11 +196,10 @@ const { showCalendarLink = true } = Astro.props;
         if (value.trim() === '' && key !== 'bot-field') continue;
         params.append(key, value);
       }
-      const body = params.toString();
       const res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body,
+        body: params.toString(),
       });
       if (!res.ok) throw new Error(`Request failed: ${res.status}`);
       // The thank-you page confirms next steps and records the ad conversion.
@@ -219,14 +208,13 @@ const { showCalendarLink = true } = Astro.props;
     } catch {
       if (status) {
         status.hidden = false;
-        status.dataset.state = 'error';
         status.textContent =
           'Something went wrong sending the form. Please email hello@rainypeaks.co.uk instead and you’ll get a reply the same day.';
       }
     } finally {
       if (button) {
         button.disabled = false;
-        button.textContent = 'Book my free 15-minute call';
+        button.textContent = label;
       }
     }
   });

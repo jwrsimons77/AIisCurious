@@ -19,6 +19,8 @@ interface Props {
   noindex?: boolean;
   /** Landing-page mode: no nav, no footer links, no sticky CTA */
   minimal?: boolean;
+  /** Hide the footer's CTA block on pages that are themselves the CTA */
+  hideFooterCta?: boolean;
 }
 
 const {
@@ -29,6 +31,7 @@ const {
   ogImage = new URL('/og-default.png', site.url).href,
   noindex = false,
   minimal = false,
+  hideFooterCta = false,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 
@@ -164,7 +167,7 @@ const allSchema = [localBusiness, website, ...schema];
     <main id="main">
       <slot />
     </main>
-    {!minimal && <Footer />}
+    {!minimal && <Footer hideCta={hideFooterCta} />}
     {!minimal && <StickyCTA />}
     <ConsentPixel />
 

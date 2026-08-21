@@ -1,0 +1,117 @@
+---
+/**
+ * The main conversion page: a short form rather than a booking flow.
+ * Every "Get My Free Website Review" button on the site lands here.
+ */
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ReviewForm from '../../components/ReviewForm.astro';
+import { site } from '../../data/site';
+
+const included = [
+  'Your top 3–5 fixes, ranked by effort and payoff',
+  'Speed and mobile scores, explained in plain English',
+  'How you compare with two competitors ranking above you',
+  'An honest answer on rebuild versus repair, with indicative costs',
+  'A simple 90-day plan, yours to keep whatever you decide',
+];
+---
+
+<Base
+  title="Get Your Free Website Review | Rainy Peaks"
+  description="Tell me your name and your website address, and I'll send back a short, personalised review: what's holding your site back, what each fix involves, and what it would cost. Free, no obligation."
+  hideFooterCta={true}
+>
+  <section class="review-page">
+    <div class="container">
+      <Breadcrumbs crumbs={[{ label: 'Free Website Review' }]} />
+
+      <div class="review-layout">
+        <div class="review-intro">
+          <p class="eyebrow">Free · No obligation</p>
+          <h1>Get your free Website Review</h1>
+          <p class="review-lede">
+            Three boxes, then I'll take a proper look at your site and send back a short,
+            personalised review: what's costing you enquiries, what to fix first, and roughly what
+            it would cost.
+          </p>
+        </div>
+
+        <div class="review-form-col">
+          <ReviewForm />
+        </div>
+
+        <div class="review-detail">
+          <h2 class="review-sub">What you'll get back</h2>
+          <ul class="checklist">
+            {included.map((item) => <li>{item}</li>)}
+          </ul>
+
+          <p class="review-note">
+            No sales pitch and no automated scan — I write every review myself. If your site only
+            needs a few small fixes rather than a rebuild, it will say exactly that. Prefer to talk
+            it through first? <a href="/book/">Book a 15-minute call</a
+            > or email <a href={`mailto:${site.email}`}>{site.email}</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .review-page {
+    padding-block: clamp(1.25rem, 1rem + 2vw, 2.5rem) var(--space-section);
+  }
+
+  /* Mobile order: the pitch, then the form, then the supporting detail. */
+  .review-layout {
+    display: grid;
+    gap: clamp(1.75rem, 1.25rem + 2vw, 2.75rem);
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .review-layout {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-areas:
+        'intro form'
+        'detail form';
+      column-gap: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+      align-items: start;
+    }
+
+    .review-intro {
+      grid-area: intro;
+    }
+
+    .review-detail {
+      grid-area: detail;
+    }
+
+    .review-form-col {
+      grid-area: form;
+      position: sticky;
+      top: calc(var(--header-h) + 1.5rem);
+    }
+  }
+
+  .review-lede {
+    margin-top: 1.25rem;
+    font-size: var(--text-lg);
+    color: var(--muted);
+    max-width: 34rem;
+  }
+
+  .review-sub {
+    margin-bottom: 1rem;
+    font-size: var(--text-lg);
+  }
+
+  .review-note {
+    margin-top: 1.75rem;
+    font-size: var(--text-sm);
+    color: var(--muted);
+    max-width: 34rem;
+  }
+</style>

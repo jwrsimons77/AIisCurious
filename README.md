@@ -57,11 +57,60 @@ BreadcrumbList, Article and Person schema where relevant). Sitemap and robots.tx
 Node 22, immutable caching for hashed assets, and sensible security headers.
 Connect the repo in Netlify and it deploys with no further configuration.
 
-**Booking form**: the form uses **Netlify Forms** (form name `booking`) with a honeypot.
-Netlify detects it automatically on first deploy. To receive submissions by email, go to
-**Site configuration → Forms → Form notifications** and add an email notification. To send
-the visitor an automatic confirmation email, connect the form to your email tool via a
-Netlify Forms webhook or Zapier's Netlify integration.
+### Forms
+
+Two **Netlify Forms**, both with a honeypot (`bot-field`) and both redirecting to
+`/book/thanks/`, which fires the ad conversion events:
+
+| Form name | Component | Appears on |
+| --- | --- | --- |
+| `review` | `ReviewForm.astro` | `/website-review/` and `/free-website-review/` — every "Get My Free Website Review" button |
+| `booking` | `BookingForm.astro` | `/book/`, alongside the Calendly embed |
+
+Each form submits over `fetch` as `application/x-www-form-urlencoded` with its `form-name`
+in the body, and falls back to a native POST when JavaScript is unavailable. Netlify
+captures both.
+
+**After the first deploy, do these two things in the Netlify UI:**
+
+1. **Site configuration → Forms → Form detection.** Netlify does not scan for forms on new
+   sites unless this is enabled. Turn it on, then trigger a redeploy — detection happens at
+   deploy time, so an already-built deploy will not pick the forms up retroactively.
+2. **Site configuration → Forms → Form notifications.** Add an email notification *per
+   form* (`review` and `booking`); without this nothing lands in your inbox.
+
+Confirm both forms are listed under **Forms** in the Netlify dashboard before running ads
+at the page.
+
+### Automatic reply to the visitor
+
+Netlify's notifications email *you*. The visitor's confirmation comes from
+`netlify/functions/submission-created.mjs` — Netlify runs a function with that exact name
+on every non-spam submission, so there is nothing to wire up beyond the environment
+variables. It sends through [Resend](https://resend.com) and covers both forms, with
+slightly different wording for a call request. If the key is missing or the send fails it
+logs and returns cleanly: the submission is already saved either way.
+
+Set up, once:
+
+1. **Verify the sending domain.** In Resend → Domains, add `rainypeaks.co.uk` and copy the
+   records it gives you into DNS — see [DNS for rainypeaks.co.uk](#dns-for-rainypeaksco.uk)
+   below, which covers how they sit alongside the site and mailbox records. Sending as
+   `hello@rainypeaks.co.uk` fails until the domain verifies.
+2. **Add the environment variables** in Netlify → Site configuration → Environment
+   variables:
+
+   | Variable | Required | Notes |
+   | --- | --- | --- |
+   | `RESEND_API_KEY` | yes | From resend.com/api-keys |
+   | `REPLY_FROM` | no | Defaults to `Rainy Peaks <hello@rainypeaks.co.uk>`. Before the domain is verified, set it to `onboarding@resend.dev` to test end to end |
+   | `REPLY_TO` | no | Where replies land. Defaults to `hello@rainypeaks.co.uk` |
+
+3. **Test it** by submitting the real form on the deployed site, then check Netlify →
+   Functions → `submission-created` for the log line, and Resend → Emails for the send.
+
+To change the wording, edit the `REPLIES` object at the top of the function; the plain-text
+and HTML versions are both generated from it.
 
 ## Meta (Facebook/Instagram) ads
 
@@ -102,8 +151,8 @@ fires so any page can send its own conversion event.
 `src/layouts/Base.astro` captures `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`,
 `utm_term`, `gclid` and `fbclid` from the URL on first landing and stores them in
 `localStorage` (`lead-attribution`, first-touch, kept until a lead converts).
-`BookingForm.astro` injects them as hidden fields, so every Netlify Forms submission is
-tagged with the channel/campaign that produced it.
+`ReviewForm.astro` and `BookingForm.astro` inject them as hidden fields, so every Netlify
+Forms submission is tagged with the channel/campaign that produced it.
 
 ## Google Search Console (do this at launch)
 
@@ -115,16 +164,46 @@ tagged with the channel/campaign that produced it.
 4. Repeat in [Bing Webmaster Tools](https://www.bing.com/webmasters) - it can import
    directly from Search Console.
 
+## DNS for rainypeaks.co.uk
+
+Three separate jobs share this zone. Netlify serves the site, a mailbox provider receives
+mail at `hello@`, and Resend sends the automatic replies. They do not conflict as long as
+each keeps to its own records.
+
+| Purpose | Record | Notes |
+| --- | --- | --- |
+| Site | `A` / `CNAME` on the root and `www` | Netlify gives you the exact values under Domain management. Easiest is to point the nameservers at Netlify DNS and let it manage the zone |
+| Receiving mail | `MX` on the **root** | From your mailbox provider (Google Workspace, Fastmail, Zoho…). This is what makes `hello@rainypeaks.co.uk` a real inbox |
+| Sending — DKIM | `TXT` at `resend._domainkey` | From Resend, signs the outgoing mail |
+| Sending — return path | `MX` and `TXT` (SPF) on a **`send.`** subdomain | Resend scopes these to a subdomain so the root `MX` stays free for your mailbox provider. Do not put Resend's `MX` on the root — it would break receiving |
+| Alignment | `TXT` at `_dmarc` | Optional but worth adding: start at `v=DMARC1; p=none; rua=mailto:hello@rainypeaks.co.uk` and tighten later |
+
+Copy the sending records from what Resend actually shows you when you add the domain —
+values differ by account region. Verification usually lands in minutes, occasionally an
+hour.
+
+Order that avoids dead ends:
+
+1. Add the mailbox provider's `MX` first, and confirm you can receive at `hello@`. The
+   automatic reply sets `Reply-To: hello@rainypeaks.co.uk`, so until that inbox exists,
+   any customer who replies gets a bounce. Set `REPLY_TO` to an inbox that already works
+   if there is a gap.
+2. Add the Resend records, verify the domain, then set `RESEND_API_KEY` in Netlify.
+3. Submit a real form on the live site and check Netlify → Functions →
+   `submission-created` and Resend → Emails.
+
+Until step 2 is done you can still test the whole chain by setting
+`REPLY_FROM=onboarding@resend.dev`, which sends from Resend's own verified domain.
+
 ## Before launch — replace these
 
-1. **Domain** — `src/data/site.ts`, `astro.config.mjs` and `public/robots.txt` now point
-   at `https://rainypeaks.co.uk`. Register it if you haven't, add it in Netlify under
+1. **Domain** — `rainypeaks.co.uk` is registered. `src/data/site.ts`, `astro.config.mjs`
+   and `public/robots.txt` all point at `https://rainypeaks.co.uk`. Add it in Netlify under
    Site → Domain management and set it as the **primary domain** so both `www.` and
    `aiiscurious.netlify.app` 301-redirect to it. Add a 301 from the previous domain
    `delveinai.co.uk` as well so any indexed URLs and existing ad links pass their equity
    across rather than dying. Then submit the sitemap in Search Console for the new domain,
-   and set up email (MX records) for `hello@rainypeaks.co.uk` so the contact address in
-   `src/data/site.ts` actually receives mail.
+   and work through the DNS records below.
 2. **Form notifications** — enable Netlify Forms email notifications (see above) so
    submissions reach your inbox.
 3. **Tracking IDs** — `metaPixelId`, `ga4MeasurementId`, `googleAdsId` and
