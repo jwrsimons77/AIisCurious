@@ -247,18 +247,28 @@ Copy the sending records from what Resend actually shows you when you add the do
 values differ by account region. Verification usually lands in minutes, occasionally an
 hour.
 
+**Sending and receiving are independent jobs.** Resend sends *as* `hello@rainypeaks.co.uk`
+on the strength of the DKIM and SPF records alone: no mailbox has to exist for that address,
+and the auto-reply works fine without one. A mailbox is only what makes `hello@` able to
+*receive*. So the mailbox is never a blocker on getting the auto-reply live; it only decides
+where a customer's reply lands.
+
 Order that avoids dead ends:
 
-1. Add the mailbox provider's `MX` first, and confirm you can receive at `hello@`. The
-   automatic reply sets `Reply-To: hello@rainypeaks.co.uk`, so until that inbox exists,
-   any customer who replies gets a bounce. Set `REPLY_TO` to an inbox that already works
-   if there is a gap.
-2. Add the Resend records, verify the domain, then set `RESEND_API_KEY` in Netlify.
-3. Submit a real form on the live site and check Netlify → Functions →
+1. Add the Resend records, verify the domain, then set `RESEND_API_KEY` in Netlify. This
+   alone is enough for the auto-reply to send.
+2. Point `REPLY_TO` at an inbox you actually read. The auto-reply defaults to
+   `Reply-To: hello@rainypeaks.co.uk`, so if that address cannot receive yet, every customer
+   who hits reply gets a bounce. Setting `REPLY_TO` to any working address (a personal
+   inbox is fine, and costs nothing) closes that hole immediately.
+3. Set up `hello@` receiving when you are ready: a mailbox provider's `MX` on the root, or
+   free forwarding to an inbox you already have. Then drop the `REPLY_TO` override.
+4. Submit a real form on the live site and check Netlify → Functions →
    `submission-created` and Resend → Emails.
 
-Until step 2 is done you can still test the whole chain by setting
-`REPLY_FROM=onboarding@resend.dev`, which sends from Resend's own verified domain.
+Until step 1 is done you can still test the whole chain by setting
+`REPLY_FROM=onboarding@resend.dev`, which sends from Resend's own verified domain and needs
+no DNS at all.
 
 ## Before launch — replace these
 
