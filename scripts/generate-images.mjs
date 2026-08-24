@@ -23,30 +23,30 @@ const peaks = (x, y, scale, rain, ridge, width) => `
     </g>
   </g>`;
 
+/**
+ * Default social sharing card. Chat apps (Instagram, Messenger, WhatsApp) crop a
+ * 1200x630 card towards a square, so the composition is a centred logo lockup
+ * held inside the middle 630x630: a hard crop loses background, never the name.
+ */
 const og = `
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
   <defs>
-    <radialGradient id="glow1" cx="85%" cy="10%" r="70%">
-      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.28"/>
+    <radialGradient id="glow1" cx="82%" cy="12%" r="72%">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.5"/>
       <stop offset="100%" stop-color="#2563eb" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glow2" cx="8%" cy="95%" r="60%">
-      <stop offset="0%" stop-color="#7eb3e8" stop-opacity="0.45"/>
+    <radialGradient id="glow2" cx="12%" cy="92%" r="65%">
+      <stop offset="0%" stop-color="#7eb3e8" stop-opacity="0.22"/>
       <stop offset="100%" stop-color="#7eb3e8" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="mark" cx="32%" cy="30%" r="80%">
-      <stop offset="0%" stop-color="#7eb3e8"/>
-      <stop offset="100%" stop-color="#2563eb"/>
-    </radialGradient>
   </defs>
-  <rect width="1200" height="630" fill="#eff6ff"/>
+  <rect width="1200" height="630" fill="#0b1e33"/>
   <rect width="1200" height="630" fill="url(#glow1)"/>
   <rect width="1200" height="630" fill="url(#glow2)"/>
-  ${peaks(78, 88, 1.45, "#7eb3e8", "#1e3a5f", 2.2)}
-  <text x="186" y="148" font-family="Georgia, serif" font-size="44" fill="#0b1e33"><tspan font-style="italic">rainy</tspan><tspan font-weight="700">PEAKS</tspan></text>
-  <text x="100" y="330" font-family="Georgia, serif" font-size="76" font-weight="600" fill="#0b1e33" letter-spacing="-1">Websites that win</text>
-  <text x="100" y="420" font-family="Georgia, serif" font-size="76" font-weight="600" font-style="italic" fill="#1d4ed8" letter-spacing="-1">work.</text>
-  <text x="100" y="520" font-family="Helvetica, Arial, sans-serif" font-size="30" fill="#456080">A northern web design studio · Manchester &amp; the North West</text>
+  ${peaks(506, 146, 2.8, "#7eb3e8", "#eff6ff", 1.5)}
+  <text x="600" y="393" text-anchor="middle" font-family="Georgia, serif" font-size="72" fill="#eff6ff"><tspan font-style="italic">rainy</tspan><tspan font-weight="700">PEAKS</tspan></text>
+  <path d="M555 428h90" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+  <text x="602" y="471" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="600" letter-spacing="4.5" fill="#7eb3e8">WEB DESIGN &#183; MANCHESTER</text>
 </svg>`;
 
 const icon = `
